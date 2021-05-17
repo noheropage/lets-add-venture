@@ -1,0 +1,56 @@
+[
+    {
+        "user_name":"Tuan425",
+        "user_id":1,
+        "user_pronoun":"They/Them/Theirs",
+        "user_intensity":3,
+        "climbing_ability":11.3,
+        "bouldering_ability":3.2,
+        "past_climbs":"Exit 32, Frenchman Couler, Index"
+    },
+    {
+        "user_name":"Johanna512",
+        "user_id":2,
+        "user_pronoun":"She/Her/Hers",
+        "user_intensity":4,
+        "climbing_ability":12.3,
+        "bouldering_ability":5.2,
+        "past_climbs":"Seattle Bouldering Project, Vertical World"
+    },
+    {
+        "user_name":"Yordy89",
+        "user_id":3,
+        "user_pronoun":"She/Her/Hers",
+        "user_intensity":2,
+        "climbing_ability":10.1,
+        "bouldering_ability":1.2,
+        "past_climbs":"Stone Gardens"
+    },
+    {
+        "user_name":"AhmedT123",
+        "user_id":4,
+        "user_pronoun":"He/Him/His",
+        "user_intensity":3,
+        "climbing_ability":12.1,
+        "bouldering_ability":3.3,
+        "past_climbs":"Exit 32, Frenchman Couler, Index"
+    },
+    {
+        "user_name":"Sal563",
+        "user_id":5,
+        "user_pronoun":"They/Them/Theirs",
+        "user_intensity":2,
+        "climbing_ability":11.3,
+        "bouldering_ability":3.2,
+        "past_climbs":"Exit 32, Frenchman Couler, Index"
+    },
+    {
+        "user_name":"iLoveClimbing",
+        "user_id":6,
+        "user_pronoun":"She/Her/Hers",
+        "user_intensity":5,
+        "climbing_ability":12.4,
+        "bouldering_ability":9.2,
+        "past_climbs":"Joshua Tree, Smith Rock, Yosemite"
+    }
+]
