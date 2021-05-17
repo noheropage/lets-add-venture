@@ -1,0 +1,24 @@
+#home-jumbo {
+  background-image: url("../../images/dark-grey-terrazzo.png");
+  color: white;
+}
+
+#home-img {
+  margin-top: 25px;
+  height: 300px;
+  width: 300px;
+}
+
+#home-p {
+  margin: 20px;
+}
+
+.home-buttons {
+  margin: 5px;
+  width: 150px;
+  background: #295939;
+  color: white;
+  height: 35px;
+  font-family: revert;
+  margin-bottom: 55px;
+}
