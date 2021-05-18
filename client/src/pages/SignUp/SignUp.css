@@ -1,0 +1,16 @@
+#signup-jumbo {
+    background-color: #c2bebe;
+}
+
+body {
+    text-align: center;
+    background-color: #c2bebe;
+}
+
+form {
+    display: inline-block;
+}
+
+.form-control {
+    border-radius: 50px;
+}
