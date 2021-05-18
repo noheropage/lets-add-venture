@@ -4,7 +4,6 @@ import React from "react";
 // import GoogleLogin from 'react-google-login';
 import Home from "./pages/Home/Home";
 
-
 const showHome = () => {
   if (window.location.pathname === "/") {
     return <Home />;
