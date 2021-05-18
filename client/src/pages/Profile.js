@@ -1,7 +1,5 @@
 import React from "react";
-import { Jumbotron } from "react-bootstrap";
 import { Container } from "react-bootstrap";
-//import { Row } from "react-bootstrap";
 import '../components/css/Main.css';
 import sky from '../components/Images/sky.png';
 
@@ -27,16 +25,17 @@ function Profile() {
      
         <div>
             <div className="userImg">
-                <img className="photo" 
-                src= 'https://images.unsplash.com/photo-1500579886065-5a7705cbf1f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-                />
+                <Link to='https://images.unsplash.com/photo-1500579886065-5a7705cbf1f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'>
+                  <img className="photo" 
+                  src= 'https://images.unsplash.com/photo-1500579886065-5a7705cbf1f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                  />
+                </Link>
             </div>
           
 
             <div style={{
                     display: 'flex',
                     justifyContent: 'space-around',
-                    margin: '30px, 30px, 30px,30px'
                     }}>
                 <h4> user name here</h4>
             </div>
@@ -44,13 +43,12 @@ function Profile() {
             <div style={{
                     display: 'flex',
                     justifyContent: 'space-around',
-                    margin: '30px, 30px, 30px,30px'
-
                      }}>
                 <h5>Looks Like its Going To Be A Good Day</h5>
             </div>
             
-            <div style={{
+            <div 
+                  style={{
                   display: 'flex', 
                   justifyContent: 'space-around', 
                   width: '100%', 
