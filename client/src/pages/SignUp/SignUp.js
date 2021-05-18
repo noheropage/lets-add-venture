@@ -4,7 +4,7 @@ import Row from "../../components/Row/Row";
 import Container from "../../components/Container/Container";
 import "./SignUp.css";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
-import GoogleLogin from 'react-google-login'
+// import GoogleLogin from 'react-google-login'
 
 document.body.style = 'background: #E8E6E6;';
 
@@ -100,7 +100,7 @@ function Signup() {
 
 
                 </Container>
-                <GoogleLogin />
+                {/* <GoogleLogin /> */}
             </form>
         </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 import alaska from '../../images/alaska.jpeg';
 import './Home.css'
 import logoLettering from '../../images/logoLettering.svg';
@@ -14,8 +14,8 @@ function Home() {
                 <br/>
                 <img id="home-img" src={alaska}></img>
                 <p id="home-p">Connect with others to enjoy and explore the great outdoors!</p>
-                <button className="home-buttons">Log in</button>
-                <button className="home-buttons">Sign Up</button>
+                <Button className="home-buttons">Log in</Button>
+                <Button href='/signup' className="home-buttons">Sign Up</Button>
             </Jumbotron>
     </div>
     )
