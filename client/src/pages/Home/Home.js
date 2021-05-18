@@ -10,7 +10,8 @@ function Home() {
         <div>
             <Jumbotron id="home-jumbo">
                 <img src={logo} className="logo"/>
-                <img src={logoLettering}/>
+                <img id="logo-lettering" src={logoLettering} />
+                <br/>
                 <img id="home-img" src={alaska}></img>
                 <p id="home-p">Connect with others to enjoy and explore the great outdoors!</p>
                 <button className="home-buttons">Log in</button>
