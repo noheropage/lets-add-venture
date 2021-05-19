@@ -1,0 +1,31 @@
+.sky {
+    background-image: url(../Images/sky1.png);
+  }
+
+  .userImg {
+        display: flex;
+        justify-Content: center;
+        margin: auto;
+  }
+
+  .photo {
+        width: 160px;
+        height: 160px; 
+        border-radius: 80px;
+
+  }
+
+  h1, h4, h5 {
+      color: white;
+      text-align: center;
+  }
+
+  li {
+      list-style-type: none;
+      display: inline;
+      padding: 40px;
+      color: white
+      
+
+  }
+
