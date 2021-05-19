@@ -31,10 +31,10 @@ Profile.init(
             type: DataTypes.INTEGER
         },
         climbing_ability: {
-            type: DataTypes.DECIMAL(10, 2)
+            type: DataTypes.STRING
         },
         bouldering_ability: {
-            type: DataTypes.DECIMAL(10, 2)
+            type: DataTypes.STRING
         },
         past_climbs: {
             type: DataTypes.STRING
