@@ -13,4 +13,9 @@ form {
 
 .form-control {
     border-radius: 50px;
+    min-width: 350px !important;
+}
+
+.climb-history {
+    height: 90px !important;
 }
