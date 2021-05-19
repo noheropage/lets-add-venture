@@ -1,21 +1,6 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, ListGroup } from "react-bootstrap";
 import '../components/css/Main.css';
-import sky from '../components/Images/sky.png';
-
-// function backgroundImage() {
-//   return <img src={sky} alt='sky'/>;
-// }
-// var sectionStyle = {
-//     bacgroundImage: `url(${sky})`
-// }
-
-// class App extends Components {
-//     render() {
-//         return <img src={sky} alt='sky'/>
-//     }
-// }
-
 
 function Profile() {
   return (
@@ -25,11 +10,11 @@ function Profile() {
      
         <div>
             <div className="userImg">
-                <Link to='https://images.unsplash.com/photo-1500579886065-5a7705cbf1f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'>
+                <a href='#'>
                   <img className="photo" 
                   src= 'https://images.unsplash.com/photo-1500579886065-5a7705cbf1f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
                   />
-                </Link>
+                </a>
             </div>
           
 
@@ -53,6 +38,24 @@ function Profile() {
                   justifyContent: 'space-around', 
                   width: '100%', 
                   margin:'30px 30px 30px 30px' }}>
+              <ListGroup as='ul'>
+                <h5>Preferred Intensity</h5> 
+                <h5>Climbing Ability</h5> 
+                <h5>Bouldering Ability</h5>
+                <h5>Climbing History</h5> 
+              </ListGroup>
+            </div>
+        </div>
+      <Container style={{ marginTop: 30 }}>
+      
+      </Container>
+    </div>
+  );
+}
+
+export default Profile;
+
+
               <ul>
                 <li> <a href='#'>Preferred Intensity</a> 
                 </li> 
@@ -63,30 +66,3 @@ function Profile() {
                 <li> <a href='#'>Climbing History</a> 
                 </li>
               </ul>
-            </div>
-        </div>
-      <Container style={{ marginTop: 30 }}>
-        {/* <Row>
-          <Col size="md-12">
-            <h2>Ok! Lets Go.</h2>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-12">
-            <p>
-              placeholder- add in 
-            </p>
-            <p>
-              placeholder 
-            </p>
-            <p>
-              placeholder 
-            </p>
-          </Col>
-        </Row> */}
-      </Container>
-    </div>
-  );
-}
-
-export default Profile;
