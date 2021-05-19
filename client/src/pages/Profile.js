@@ -4,7 +4,7 @@ import '../components/css/Main.css';
 
 function Profile() {
   return (
-    <div className='Profile'>
+    <div className='Profile sky'>
       
         <h1>Lets+Venture</h1>
      

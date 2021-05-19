@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-
-import Profile from './pages/Profile';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Component} from 'react';
-import Navbar from './pages/Navbar';
-import './components/css/Main.css';
-
-
-class App extends Component {
-  render() {
-
-    return (
-      <div className="sky">
-        <Navbar />
-        <Profile/>
-      </div>
-    );
-  }
-
+  import './App.css';
+  import Signup from "./pages/SignUp/SignUp";
+  import React from "react";
+  import Home from './pages/Home/Home';
+  // import Upload from './components/Upload/upload'
+  import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+  import Profile from './pages/Profile';
   
+  
+  function App() {
+    return (
+      <Router>
+    <div className="App">
+      <Switch>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+        <Route exact path='/signup'>
+          <Signup />
+        </Route>
+        <Route exact path='/profile'>
+          <Profile />
+        </Route>
+      </Switch>
+    </div>
+    </Router>
+  );
 }
 
 export default App;

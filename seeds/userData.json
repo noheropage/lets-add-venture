@@ -1,0 +1,38 @@
+[
+    {
+        "first_name":"Tuan",
+        "last_name":"Nguyen",
+        "email":"tnguyen2@email.com",
+        "password":"password123"
+    },
+    {
+        "first_name":"Johanna",
+        "last_name":"Hernandez",
+        "email":"jhernandez@email.com",
+        "password":"password123"
+    },
+    {
+        "first_name":"Yordanos",
+        "last_name":"Berhe",
+        "email":"yberhe@email.com",
+        "password":"password123"
+    },
+    {
+        "first_name":"Ahmed",
+        "last_name":"Tunkara",
+        "email":"atunkara@email.com",
+        "password":"password123"
+    },
+    {
+        "first_name":"Salvador",
+        "last_name":"Fernandez",
+        "email":"salFernandez@email.com",
+        "password":"password123"
+    },
+    {
+        "first_name":"Xiao Ying",
+        "last_name":"Chen",
+        "email":"xychen@email.com",
+        "password":"password123"
+    }
+]
