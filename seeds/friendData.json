@@ -1,0 +1,22 @@
+[
+    {
+        "friend_one": 1,
+        "friend_two": 3,
+        "status":2
+    },
+    {
+        "friend_one": 4,
+        "friend_two": 2,
+        "status":2
+    },
+    {
+        "friend_one": 2,
+        "friend_two": 1,
+        "status":2
+    },
+    {
+        "friend_one": 5,
+        "friend_two": 2,
+        "status":2
+    }
+]
