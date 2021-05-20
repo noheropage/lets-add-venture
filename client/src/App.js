@@ -5,6 +5,7 @@
   // import Upload from './components/Upload/upload'
   import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
   import Profile from './pages/Profile';
+  import Map from "./pages/Map/Map";
   
   
   function App() {
@@ -20,6 +21,9 @@
         </Route>
         <Route exact path='/profile'>
           <Profile />
+        </Route>
+        <Route exact path='/map'>
+          <Map />
         </Route>
       </Switch>
     </div>
