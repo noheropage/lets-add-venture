@@ -6,7 +6,7 @@
   import Home from './pages/Home/Home';
   // import Upload from './components/Upload/upload'
   import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-  import Profile from './pages/Profile';
+  import Profile from './pages/Profile/Profile';
   import Map from "./pages/Map/Map";
   
   function App() {

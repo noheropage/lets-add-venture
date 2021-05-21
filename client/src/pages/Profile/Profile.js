@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, ListGroup } from "react-bootstrap";
-import '../components/css/Main.css';
+import './Profile.css';
 
 function Profile() {
   return (
@@ -54,15 +54,3 @@ function Profile() {
 }
 
 export default Profile;
-
-
-              <ul>
-                <li> <a href='#'>Preferred Intensity</a> 
-                </li> 
-                <li> <a href='#'>Climbing Ability</a> 
-                </li> 
-                <li> <a href='#'>Bouldering Ability</a> 
-                </li> 
-                <li> <a href='#'>Climbing History</a> 
-                </li>
-              </ul>
