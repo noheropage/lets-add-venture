@@ -1,0 +1,10 @@
+.profile-q-background {
+    background-color: #4f5363;
+    color: rgb(226, 224, 224);
+    min-width: 100%;
+    min-height: 100vh;
+}
+
+.radio-inline {
+    padding-left: 10px;
+}

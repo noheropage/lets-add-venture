@@ -1,4 +1,5 @@
   import './App.css';
+  import ProfileQuestions from "./pages/ProfileQuestions/ProfileQuestions";
   import Signup from "./pages/SignUp/SignUp";
   import React from "react";
   import Home from './pages/Home/Home';
@@ -24,6 +25,9 @@
         </Route>
         <Route exact path='/map'>
           <Map />
+        </Route>
+        <Route exact path='/questions'>
+          <ProfileQuestions />
         </Route>
       </Switch>
     </div>
