@@ -17,14 +17,13 @@ form {
 
 /* requires this css on a container wrapped around, in order not to take on the css of another page*/
 
-.signup-background {
+.login-background {
   background-color: #d6d5d5;
   min-height: 100vh;
   min-width: 100%;
 }
 
-.signup-button {
+.login-button {
   background-color: #295939 !important;
   border: none !important;
-  margin-bottom: 55px !important;
 }
