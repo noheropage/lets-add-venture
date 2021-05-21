@@ -5,6 +5,8 @@ import Row from "../../components/Row/Row";
 import Container from "../../components/Container/Container";
 import "./SignUp.css";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
+import Nav from "../../components/Nav";
+
 // import GoogleLogin from 'react-google-login'
 
 //set the state of each thing we will ask the user

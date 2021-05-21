@@ -3,12 +3,12 @@ body {
 }
 
 form {
-    display: inline-block;
+  display: inline-block;
 }
 
 .form-control {
-    border-radius: 50px;
-    min-width: 350px !important;
+  border-radius: 50px;
+  min-width: 350px !important;
 }
 
 .climb-history {

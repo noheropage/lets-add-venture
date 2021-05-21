@@ -1,6 +1,8 @@
 #home-jumbo {
   background-image: url("../../images/dark-grey-terrazzo.png");
   color: white;
+  min-width: 100%;
+  min-height: 100vh;
 }
 
 #home-img {
@@ -16,11 +18,6 @@
 .home-buttons {
   margin: 5px;
   width: 150px;
-  background: #295939;
-  color: white;
-  height: 35px;
-  font-family: revert;
-  margin-bottom: 55px;
 }
 
 .logo {
