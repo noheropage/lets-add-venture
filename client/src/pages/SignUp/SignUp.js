@@ -4,6 +4,8 @@ import Row from "../../components/Row/Row";
 import Container from "../../components/Container/Container";
 import "./SignUp.css";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
+import Nav from "../../components/Nav";
+
 // import GoogleLogin from 'react-google-login'
 
 document.body.style = 'background: #E8E6E6;';
@@ -52,6 +54,7 @@ function Signup() {
 
     return (
         <div>
+            <Nav/>
             <MtnLogo />
             <div className="mt-4">
                 <h2>Create an account to save your progress.</h2>
