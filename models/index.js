@@ -4,11 +4,14 @@ const Friend = require('./Friend')
 
 Profile.belongsTo(User, {
     foreignKey: 'user_id',
-    onDelete:'CASCADE'
+    onDelete: 'CASCADE'
 });
 
 
+
 // field friend_display is how we will display the friend, friend_connect is how the db knows who is connected. Each pair of friends will need two entries in the db, as each friend needs an id in friend_display
+
+
 
 User.belongsToMany(User, {
     through: Friend,

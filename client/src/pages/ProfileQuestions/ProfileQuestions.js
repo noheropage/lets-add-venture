@@ -14,6 +14,30 @@ function ProfileQuestions() {
     const [boulderAbility, setBoulderAbility] = useState();
     const [climbHistory, setClimbHistory] = useState();
 
+
+    //load all users and store them 
+    // useEffect(() => {
+    //     loadUsers()
+    // })
+
+    //
+    // function loadUsers() {
+    //     API.getUsers()
+    //         .then(res =>
+    //             setUsername(res.data))
+    //         .then(res =>
+    //             setPronoun(res.data))
+    //         .then(res =>
+    //             setPrefIntensity(res.data))
+    //         .then(res =>
+    //             setClimbAbility(res.data))
+    //         .then(res =>
+    //             setBoulderAbility(res.data))
+    //         .then(res =>
+    //             setClimbHistory(res.data))
+    //         .catch(err => console.log(err));
+    // };
+
     const handleSubmit = e => {
         e.preventDefault();
         console.log("username is " + username);
@@ -51,16 +75,16 @@ function ProfileQuestions() {
                     <Row className="form-group pb-4">
                         <Col size="12">
                             <h5 className="question-header">Please select your preferred pronoun:</h5>
-                            <label class="radio-inline">
-                                <input type="radio" checked name="he" />He
+                            <label className="radio-inline">
+                                <input type="radio" defaultChecked name="he" />He
                             </label>
-                            <label class="radio-inline">
+                            <label className="radio-inline">
                                 <input type="radio" name="her" />Her
                             </label>
-                            <label class="radio-inline">
+                            <label className="radio-inline">
                                 <input type="radio" name="they" />They
                             </label>
-                            <label class="radio-inline">
+                            <label className="radio-inline">
                                 <input type="radio" name="other" />Other/Prefer not to answer
                             </label>
                         </Col>
@@ -69,19 +93,19 @@ function ProfileQuestions() {
                     <Row className="form-group pb-4">
                         <Col size="12">
                             <h5 className="question-header">What is your preferred intensity?( 1-5 )</h5>
-                            <label class="radio-inline">
-                                <input type="radio" checked name="one" />1
+                            <label className="radio-inline">
+                                <input type="radio" defaultChecked name="one" />1
                             </label>
-                            <label class="radio-inline">
+                            <label className="radio-inline">
                                 <input type="radio" name="two" />2
                             </label>
-                            <label class="radio-inline">
+                            <label className="radio-inline">
                                 <input type="radio" name="three" />3
                             </label>
-                            <label class="radio-inline">
+                            <label className="radio-inline">
                                 <input type="radio" name="four" />4
                             </label>
-                            <label class="radio-inline">
+                            <label className="radio-inline">
                                 <input type="radio" name="five" />5
                             </label>
                         </Col>

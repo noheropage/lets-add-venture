@@ -6,36 +6,48 @@ import Container from "../../components/Container/Container";
 import "./SignUp.css";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
 import Nav from "../../components/Nav";
+import API from "../../utils/API";
 
 // import GoogleLogin from 'react-google-login'
 
 //set the state of each thing we will ask the user
 function Signup() {
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    //log it to the console to be sure it's going through
-    const handleSubmit = e => {
-        e.preventDefault();
-        console.log("firstName is " + firstName);
-        console.log("password is " + lastName);
-        console.log("email address is " + email);
-        console.log("password is " + password);
+    // const [user, SetUser] = useState([]);
+    const [formObject, setFormObject] = useState({});
+
+    // Handles updating component state when the user types into the input field
+    function handleInputChange(event) {
+        // console.log("we are inside of handleInputChange")
+        const { name, value } = event.target;
+        setFormObject({ ...formObject, [name]: value })
+        // console.log("Form Object:", formObject);
     };
 
-    // old google sign in button saving just in case
-
-    // const Google_signIn = (googleUser) => {
-    //     var profile = googleUser.getBasicProfile();
-    //     console.log('ID: ' + profile.getId());
-    //     console.log('Name: ' + profile.getName());
-    //     console.log('Image URL: ' + profile.getImageUrl());
-    //     console.log('Email: ' + profile.getEmail());
-
-    //     sessionStorage.setItem("loggedUser", profile.getEmail().toString());
-    //     document.location.href = 'home.html';
-    // };
+    // When the form is submitted, use the API.saveUser method to save the user data
+    // 
+    function handleFormSubmit(event) {
+        // console.log("we are inside of HandleFormSubmit")
+        // console.log("event:", event)
+        event.preventDefault();
+        if (formObject.firstName) {
+            console.log("we got the first name");
+        }
+        if (formObject.password) {
+            console.log("we got the password");
+        }
+        if (formObject.firstName && formObject.email && formObject.password) {
+            // console.log("firstName:", formObject.firstName);
+            API.saveUser({
+                firstName: formObject.firstName,
+                lastName: formObject.lastName,
+                email: formObject.email,
+                password: formObject.password
+            })
+                .then(document.location.replace("/questions")
+                )
+                .catch(err => console.log(err));
+        }
+    };
 
     return (
         <div className="signup-background">
@@ -43,7 +55,7 @@ function Signup() {
             <div className="mt-4">
                 <h2>Create an account to save your progress.</h2>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <Container className="mt-3 px-5">
 
                     <Row className="form-group pb-4">
@@ -52,8 +64,8 @@ function Signup() {
                                 className="form-control"
                                 type="text"
                                 placeholder="First Name"
-                                name="first-name"
-                                onChange={e => setFirstName(e.target.value)}
+                                name="firstName"
+                                onChange={handleInputChange}
                             />
                         </Col>
                     </Row>
@@ -64,8 +76,8 @@ function Signup() {
                                 className="form-control"
                                 type="text"
                                 placeholder="Last Name"
-                                name="last-name"
-                                onChange={e => setLastName(e.target.value)}
+                                name="lastName"
+                                onChange={handleInputChange}
                             />
                         </Col>
                     </Row>
@@ -76,7 +88,7 @@ function Signup() {
                                 type="text"
                                 placeholder="Email Address"
                                 name="email"
-                                onChange={e => setEmail(e.target.value)}
+                                onChange={handleInputChange}
                             />
                         </Col>
                     </Row>
@@ -85,16 +97,16 @@ function Signup() {
                         <Col size="12">
                             <input
                                 className="form-control"
-                                type="text"
+                                type="password"
                                 placeholder="Password"
                                 name="password"
-                                onChange={e => setPassword(e.target.value)}
+                                onChange={handleInputChange}
                             />
                         </Col>
                     </Row>
 
                     {/* submit button */}
-                    <Button href='/questions' className="signup-button">Submit</Button>
+                    <Button onClick={handleFormSubmit} type="submit" className=" signup-button">Submit</Button>
 
                     {/* old sign up w/ google button */}
                     {/* <div className="g-signin2" data-onsuccess="Google_signIn"></div> */}
