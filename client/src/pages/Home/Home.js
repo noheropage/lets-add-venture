@@ -15,10 +15,10 @@ function Home() {
                 <br/>
                 <img id="home-img" src={alaska}></img>
                 <p id="home-p">Connect with others to enjoy and explore the great outdoors!</p>
-                <Button className="home-buttons" style={{ backgroundColor: "#295939", border: "none", marginBottom: "55px" }}>Log in</Button>
+                <Button className="home-buttons" style={{ backgroundColor: "#295939", border: "none", marginBottom: "55px" }} href='/login'>Log in</Button>
                 <Button className="home-buttons" style={{ backgroundColor: "#295939", border: "none", marginBottom: "55px" }} href='/signup'>Sign Up</Button>
             </div>
-    </div>
+        </div>
     )
 }
 
