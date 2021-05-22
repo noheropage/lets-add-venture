@@ -1,26 +1,26 @@
 const User = require("./User");
 const Profile = require('./Profile');
-const Updates = require('./Updates');
+// const Updates = require('./Updates');
 const Friend = require('./Friend')
 
 Profile.belongsTo(User, {
     foreignKey: 'user_id',
-    onDelete:'CASCADE'
+    onDelete: 'CASCADE'
 });
 
 // updates allow users to become friends
-Updates.belongsTo(User, {
-    foreignKey:'user_id_fk',
-    onDelete: 'CASCADE',    
-});
+// Updates.belongsTo(User, {
+//     foreignKey:'user_id_fk',
+//     onDelete: 'CASCADE',    
+// });
 
 // friend belongs to users in two ways, either by being friend one or being friend two
 User.hasMany(Friend, {
-    as:"sender",
+    as: "sender",
     foreignKey: 'friend_one',
 })
 User.hasMany(Friend, {
-    as:'receiver',
+    as: 'receiver',
     foreignKey: 'friend_two',
 })
 
@@ -38,4 +38,9 @@ Friend.belongsTo(User, {
 
 
 
-module.exports = {User, Profile, Updates, Friend};
+module.exports = {
+    User,
+    Profile,
+    //   Updates,
+    Friend
+};
