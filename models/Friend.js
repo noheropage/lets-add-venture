@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 
 class Friend extends Model {}
 
+//
 Friend.init(
     {
         id:{
@@ -11,8 +12,8 @@ Friend.init(
             primaryKey: true,
             autoIncrement: true
         },
-       
-        friend_one: {
+       // this is the user id that will be displayed as a friend
+        friend_display: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -21,7 +22,8 @@ Friend.init(
                 unique: false
             }
         },
-        friend_two: {
+        //This is the user id that will reference the data
+        friend_connect: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
