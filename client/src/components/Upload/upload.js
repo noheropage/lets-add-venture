@@ -48,7 +48,7 @@ function Upload() {
                 <Button variant="success" type="submit" value="submit">Submit</Button>
             </Form>
             {previewSource && (
-                <Image src={previewSource} alt="picture to be uploaded" style={{ height: '300px' }} roundedCircle/>
+                <Image src={previewSource} alt="picture to be uploaded" style={{ height: '160px' }} roundedCircle/>
             )}
         </div>
     )

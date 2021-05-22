@@ -1,5 +1,7 @@
 .sky {
   background-image: url(../../components/Images/sky1.png);
+  min-height: 100vh;
+    min-width: 100%;
 }
 
 .userImg {
@@ -26,4 +28,9 @@ li {
   display: inline;
   padding: 40px;
   color: white;
+}
+
+ListGroup.Item {
+    list-style-type:none;
+    justify-content: center;
 }
