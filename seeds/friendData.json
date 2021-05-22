@@ -1,22 +1,42 @@
 [
     {
-        "friend_one": 1,
-        "friend_two": 3,
+        "friend_display": 1,
+        "friend_connect": 3,
         "status":2
     },
     {
-        "friend_one": 4,
-        "friend_two": 2,
+        "friend_display": 3,
+        "friend_connect": 1,
         "status":2
     },
     {
-        "friend_one": 2,
-        "friend_two": 1,
+        "friend_display": 4,
+        "friend_connect": 2,
         "status":2
     },
     {
-        "friend_one": 5,
-        "friend_two": 2,
+        "friend_display": 2,
+        "friend_connect": 4,
+        "status":2
+    },
+    {
+        "friend_display": 2,
+        "friend_connect": 1,
+        "status":2
+    },
+    {
+        "friend_display": 1,
+        "friend_connect": 2,
+        "status":2
+    },
+    {
+        "friend_display": 5,
+        "friend_connect": 2,
+        "status":2
+    },
+    {
+        "friend_display": 2,
+        "friend_connect": 5,
         "status":2
     }
 ]

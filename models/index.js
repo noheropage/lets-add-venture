@@ -8,27 +8,42 @@ Profile.belongsTo(User, {
 });
 
 
-// friend belongs to users in two ways, either by being friend one or being friend two
-User.hasMany(Friend, {
-    as: "sender",
-    foreignKey: 'friend_one',
-})
-User.hasMany(Friend, {
-    as: 'receiver',
-    foreignKey: 'friend_two',
-})
 
-Friend.belongsTo(User, {
-    as: 'sender',
-    foreignKey: 'friend_one',
+// field friend_display is how we will display the friend, friend_connect is how the db knows who is connected. Each pair of friends will need two entries in the db, as each friend needs an id in friend_display
 
+
+
+User.belongsToMany(User, {
+    through: Friend,
+    as: 'friends',
+    foreignKey: 'friend_display'
+});
+User.belongsToMany(User, {
+    through: Friend,
+    as: 'friend_connect',
+    foreignKey: 'friend_connect'
 });
 
-Friend.belongsTo(User, {
-    as: 'receiver',
-    foreignKey: 'friend_two',
+// User.hasMany(Friend, {
+//     as:"sender",
+//     foreignKey: 'friend_one',
+// })
+// User.hasMany(Friend, {
+//     as:'receiver',
+//     foreignKey: 'friend_two',
+// })
 
-});
+// Friend.belongsTo(User, {
+//     as: 'sender',
+//     foreignKey: 'friend_one',
+
+// });
+
+// Friend.belongsTo(User, {
+//     as: 'receiver',
+//     foreignKey: 'friend_two',
+
+// });
 
 
 

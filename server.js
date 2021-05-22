@@ -22,7 +22,11 @@ app.use(routes);
 //   process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist"
 // );
 
+sequelize.sync({force: false}).then(() => {
+  app.listen(PORT, function () {
+    console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  });
+})
+
 // Start the API server
-app.listen(PORT, function () {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
+
