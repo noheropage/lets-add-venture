@@ -6,6 +6,7 @@ import Container from "../../components/Container/Container";
 import "./SignUp.css";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
 import Nav from "../../components/Nav";
+import API from "../../utils/API";
 
 // import GoogleLogin from 'react-google-login'
 
@@ -16,15 +17,26 @@ function Signup() {
 
     // Handles updating component state when the user types into the input field
     function handleInputChange(event) {
+        // console.log("we are inside of handleInputChange")
         const { name, value } = event.target;
         setFormObject({ ...formObject, [name]: value })
+        // console.log("Form Object:", formObject);
     };
 
     // When the form is submitted, use the API.saveUser method to save the user data
     // 
     function handleFormSubmit(event) {
+        // console.log("we are inside of HandleFormSubmit")
+        // console.log("event:", event)
         event.preventDefault();
+        if (formObject.firstName) {
+            console.log("we got the first name");
+        }
+        if (formObject.password) {
+            console.log("we got the password");
+        }
         if (formObject.firstName && formObject.email && formObject.password) {
+            // console.log("firstName:", formObject.firstName);
             API.saveUser({
                 firstName: formObject.firstName,
                 lastName: formObject.lastName,
@@ -52,7 +64,7 @@ function Signup() {
                                 className="form-control"
                                 type="text"
                                 placeholder="First Name"
-                                name="first-name"
+                                name="firstName"
                                 onChange={handleInputChange}
                             />
                         </Col>
@@ -64,7 +76,7 @@ function Signup() {
                                 className="form-control"
                                 type="text"
                                 placeholder="Last Name"
-                                name="last-name"
+                                name="lastName"
                                 onChange={handleInputChange}
                             />
                         </Col>
@@ -85,7 +97,7 @@ function Signup() {
                         <Col size="12">
                             <input
                                 className="form-control"
-                                type="text"
+                                type="password"
                                 placeholder="Password"
                                 name="password"
                                 onChange={handleInputChange}
