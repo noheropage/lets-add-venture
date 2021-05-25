@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Container, ListGroup, Button, Form, Image } from "react-bootstrap";
+import { ListGroup, Button, Form, Image } from "react-bootstrap";
 import placeholder from "../../images/profile_placeholder.png";
 import "./Profile.css";
 import Nav from "../../components/Nav";
 import API from '../../utils/API'
 
+// establish state for profile image and user files
 function Profile() {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
@@ -12,12 +13,15 @@ function Profile() {
 
   const [user, setUser] = useState({})
   
+  // hardcode id: will need to be changed when we have access control
   const id = 1;
+  // retrieve profile info from api and set it to user object
   useEffect(() => {
     API.getUser(id)
     .then(res => {
       console.log(res.data);
       setUser(res.data.profile)
+      // finds the last photo of the array and displays it
       const photoLength = res.data.photos.length
       setPreviewSource(res.data.photos[photoLength - 1].url)
     })
@@ -53,13 +57,13 @@ function Profile() {
 
   const uploadImage = async (base64EncodedImage) => {
     try {
-      // await fetch("/api/images/upload", {
-      //   method: "POST",
-      //   body: JSON.stringify({ data: base64EncodedImage }),
-      //   headers: { "Content-type": "application/json" },
-      // });
+      await fetch("/api/images/upload", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-type": "application/json" },
+      });
       setFileInputState("");
-      // setPreviewSource("");
+      
     } catch (error) {
       console.error(error);
     }
@@ -68,7 +72,6 @@ function Profile() {
   return (
     <div className="sky">
       <Nav />
-      <h1>Lets+Venture</h1>
       <div>
         <div>
           <Form>
@@ -82,7 +85,7 @@ function Profile() {
               className="form-input"
             ></input>
           </Form>
-
+          <div className='userImg'>
           {previewSource && (
             <Image
               onClick={handleClick}
@@ -92,6 +95,7 @@ function Profile() {
               roundedCircle
             />
           )}
+          </div>
           <div>
             <Button
               hidden={!fileInputState}
@@ -104,14 +108,9 @@ function Profile() {
             </Button>
           </div>
         </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-          }}
-        >
-          <h4> {user.user_name} </h4>
+            <div className='username'>
+          <h1> {user.user_name} </h1>
+          <h6> {user.user_pronoun} </h6>
         </div>
         <div className='list'>
         <ListGroup variant="flush" >
