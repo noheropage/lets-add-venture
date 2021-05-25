@@ -7,17 +7,18 @@ Profile.belongsTo(User, {
     onDelete: 'CASCADE'
 });
 
-
+User.hasOne(Profile, {
+    foreignKey: 'user_id'
+})
 
 // field friend_display is how we will display the friend, friend_connect is how the db knows who is connected. Each pair of friends will need two entries in the db, as each friend needs an id in friend_display
-
-
 
 User.belongsToMany(User, {
     through: Friend,
     as: 'friends',
     foreignKey: 'friend_display'
 });
+
 User.belongsToMany(User, {
     through: Friend,
     as: 'friend_connect',
@@ -44,7 +45,5 @@ User.belongsToMany(User, {
 //     foreignKey: 'friend_two',
 
 // });
-
-
 
 module.exports = {User, Profile, Friend};

@@ -3,17 +3,32 @@ import { Container, ListGroup, Button, Form, Image } from "react-bootstrap";
 import placeholder from "../../images/profile_placeholder.png";
 import "./Profile.css";
 import Nav from "../../components/Nav";
+import API from '../../utils/API'
 
 function Profile() {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState(placeholder);
 
-  const fileUploader = useRef(null)
+  const [user, setUser] = useState({})
+  // const [profile, setProfile] = useState({})
+  const id = 1;
+  useEffect(() => {
+    API.getUser(id)
+    .then(res => {
+      console.log(res.data.profile);
+      setUser((res.data.profile))
+    })
+    .catch(err => console.log(err));
+  }, []);
+
+  // setProfile(user.profile)
+
+  const fileUploader = useRef(null);
 
   const handleClick = (e) => {
-    fileUploader.current.click()
-  }
+    fileUploader.current.click();
+  };
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -38,29 +53,28 @@ function Profile() {
 
   const uploadImage = async (base64EncodedImage) => {
     try {
-      await fetch("/api/images/upload", {
-        method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
-        headers: { "Content-type": "application/json" },
-      });
+      // await fetch("/api/images/upload", {
+      //   method: "POST",
+      //   body: JSON.stringify({ data: base64EncodedImage }),
+      //   headers: { "Content-type": "application/json" },
+      // });
       setFileInputState("");
-      setPreviewSource("");
+      // setPreviewSource("");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="Profile sky">
+    <div className="sky">
       <Nav />
       <h1>Lets+Venture</h1>
       <div>
         <div>
-          <Form onSubmit={handleSubmitFile}>
+          <Form>
             <input
-              // ref={imageRef}
               type="file"
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               ref={fileUploader}
               name="image"
               onChange={handleFileInputChange}
@@ -68,7 +82,7 @@ function Profile() {
               className="form-input"
             ></input>
           </Form>
-          
+
           {previewSource && (
             <Image
               onClick={handleClick}
@@ -79,7 +93,15 @@ function Profile() {
             />
           )}
           <div>
-          <Button hidden={!(fileInputState)} variant="success" type="submit" value="submit">Submit</Button>
+            <Button
+              hidden={!fileInputState}
+              variant="success"
+              type="submit"
+              value="submit"
+              onClick={handleSubmitFile}
+            >
+              Submit
+            </Button>
           </div>
         </div>
 
@@ -89,35 +111,17 @@ function Profile() {
             justifyContent: "space-around",
           }}
         >
-          <h4> user name here</h4>
+          <h4> {user.user_name} </h4>
         </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-          }}
-        >
-          <h5>Looks Like its Going To Be A Good Day</h5>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            width: "100%",
-            margin: "30px 30px 30px 30px",
-          }}
-        >
-          <ListGroup>
-            <ListGroup.Item>Preferred Intensity</ListGroup.Item>
-            <ListGroup.Item>Climbing Ability</ListGroup.Item>
-            <ListGroup.Item>Bouldering Ability</ListGroup.Item>
-            <ListGroup.Item>Climbing History</ListGroup.Item>
-          </ListGroup>
+        <div className='list'>
+        <ListGroup variant="flush" >
+          <ListGroup.Item>Preferred Intensity: {user.user_intensity}</ListGroup.Item>
+          <ListGroup.Item>Climbing Ability: {user.climbing_ability}</ListGroup.Item>
+          <ListGroup.Item>Bouldering Ability: {user.bouldering_ability}</ListGroup.Item>
+          <ListGroup.Item>Climbing History: {user.past_climbs}</ListGroup.Item>
+        </ListGroup>
         </div>
       </div>
-      <Container style={{ marginTop: 30 }}></Container>
     </div>
   );
 }

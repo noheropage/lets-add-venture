@@ -1,5 +1,5 @@
 .sky {
-  background-image: url(../../components/Images/sky1.png);
+  background-image: linear-gradient(rgb(3, 3, 95), rgb(62, 62, 143), rgb(167, 230, 230));
   min-height: 100vh;
     min-width: 100%;
 }
@@ -23,14 +23,13 @@ h5 {
   text-align: center;
 }
 
-li {
-  list-style-type: none;
-  display: inline;
-  padding: 40px;
-  color: white;
+.list-group-item {
+    background-color: inherit !important;
+    color: white !important;
+    text-align: left;
+    margin-top: 4px;
 }
 
-ListGroup.Item {
-    list-style-type:none;
-    justify-content: center;
+.list {
+    margin-top: 10px;
 }
