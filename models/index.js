@@ -47,11 +47,11 @@ User.belongsToMany(User, {
 
 // });
 User.hasMany(Photo, {
-    foreignKey: 'user_id'
+    foreignKey: 'uploader_id'
 })
 
 Photo.belongsTo(User, {
-    foreignKey: 'user_id'
+    foreignKey: 'uploader_id'
 })
 
 module.exports = {User, Profile, Friend, Photo};

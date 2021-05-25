@@ -11,18 +11,18 @@ function Profile() {
   const [previewSource, setPreviewSource] = useState(placeholder);
 
   const [user, setUser] = useState({})
-  // const [profile, setProfile] = useState({})
+  
   const id = 1;
   useEffect(() => {
     API.getUser(id)
     .then(res => {
-      console.log(res.data.profile);
-      setUser((res.data.profile))
+      console.log(res.data);
+      setUser(res.data.profile)
+      const photoLength = res.data.photos.length
+      setPreviewSource(res.data.photos[photoLength - 1].url)
     })
     .catch(err => console.log(err));
   }, []);
-
-  // setProfile(user.profile)
 
   const fileUploader = useRef(null);
 
