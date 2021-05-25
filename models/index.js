@@ -1,6 +1,7 @@
 const User = require("./User");
 const Profile = require('./Profile');
 const Friend = require('./Friend')
+const Photo = require('./Photo')
 
 Profile.belongsTo(User, {
     foreignKey: 'user_id',
@@ -45,5 +46,12 @@ User.belongsToMany(User, {
 //     foreignKey: 'friend_two',
 
 // });
+User.hasMany(Photo, {
+    foreignKey: 'user_id'
+})
 
-module.exports = {User, Profile, Friend};
+Photo.belongsTo(User, {
+    foreignKey: 'user_id'
+})
+
+module.exports = {User, Profile, Friend, Photo};
