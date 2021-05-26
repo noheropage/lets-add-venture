@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Friend } = require('../../models');
+const { User, Friend, Profile, Photo } = require('../../models');
 
 //get all users --> Delete when no longer needed <--
 router.get('/', async (req, res) => {
@@ -15,12 +15,20 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try{
         const singleUser = await User.findByPk(req.params.id, {
-            include: {
+            include: [
+            {
                 model: User,
                 through: Friend,
                 //the alias for this field is friends
                 as: 'friends'
+            },
+            {
+                model: Profile
+            },
+            {
+                model: Photo
             }
+        ]
         });
         
         if(!singleUser) {

@@ -1,0 +1,18 @@
+[
+    {
+        "owner_id": 1,
+        "owner_type":"user",
+        "uploader_id":1,
+        "url":"https://res.cloudinary.com/lets-add-venture/image/upload/v1621651073/dev_setups/jk7jfjil4set7tf2tgdh.jpg",
+        "title":"Wolverine Climb",
+        "description":"At Seattle Bouldering Project"
+    },
+    {
+        "owner_id": 1,
+        "owner_type":"user",
+        "uploader_id":1,
+        "url":"https://res.cloudinary.com/lets-add-venture/image/upload/v1621290761/dev_setups/vwtl6lucrx9vyiectws8.jpg",
+        "title":"Tesla Truck 'n Me",
+        "description":"making our way downtown"
+    }
+]

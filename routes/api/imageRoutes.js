@@ -1,7 +1,9 @@
 const { cloudinary } = require("../../config/cloudinary");
 const router = require("express").Router();
+const { User, Profile, Photo } = require('../../models');
 
-// picture uploads to dev_setups folder
+// picture uploads to cloudinary dev_setups folder
+// which then creates a reference in image table
 router.post("/upload", async (req, res) => {
   try {
     const fileStr = req.body.data;
@@ -9,7 +11,18 @@ router.post("/upload", async (req, res) => {
       upload_preset: "dev_setups",
     });
     console.log(uploadedResponse);
-    res.json({ msg: "Yay!" });
+
+    // values will need to be adjusted once access control established
+    const imageData = await Photo.create({
+      owner_id: 1,
+      owner_type: 'user',
+      uploader_id: 1,
+      url: uploadedResponse.url,
+    })
+
+    console.log(imageData);
+    res.json(uploadedResponse + imageData);
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ err: "Something is wrong" });
