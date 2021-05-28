@@ -12,6 +12,7 @@ function Map() {
 
     const [climbData, setClimbData] = useState([]);
     const [query, setQuery] = useState('')
+    const [filterYSP, setFilterYSP] = useState('')
 
 function searchHandler (e) {
     console.log(query)
