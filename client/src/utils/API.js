@@ -16,7 +16,7 @@ export default {
         return axios.post("/api/users", userData);
     },
 
-    // getClimb: function () {
-    //     return axios.get('https://climb-api.openbeta.io/geocode/v1/climbs?latlng=47.027231%2C-119.963876&radius=3')
-    // }
+    getClimb: function () {
+        return axios.get('https://climb-api.openbeta.io/geocode/v1/climbs?latlng=47.027231%2C-119.963876&radius=3')
+    }
 }
