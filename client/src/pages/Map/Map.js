@@ -15,6 +15,12 @@ function Map() {
 
 function searchHandler (e) {
     console.log(query)
+    API.getClimb(query)
+        .then(response => setClimbData(response.data))
+
+    console.log(climbData)
+
+
 }
 
     return (
@@ -29,6 +35,19 @@ function searchHandler (e) {
                 <input type='text' onChange= {event => setQuery(event.target.value)} />
                 <Button onClick= { searchHandler }> Search </Button>
                 </div>
+
+                {climbData.length ? (
+                    <div> 
+                    <ClimbCard
+                        climbTitle= {climbData[0].name}
+                        FrAsc = {climbData[0].fa}
+                        difficulty = {climbData[0].yds}
+                        crag= {climbData[0].meta_parent_sector}
+                    />     
+                    </div>
+                ) : (<h4>Search for a climb!</h4>)
+                
+                }
             </div>
         </div >
     )

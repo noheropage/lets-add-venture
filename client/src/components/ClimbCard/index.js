@@ -6,9 +6,12 @@ export default function ClimbCard(props) {
         <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={props.image} />
         <Card.Body>
-          <Card.Title>{props.climb}, {props.difficulty}</Card.Title>
+          <Card.Title>Name: {props.climbTitle} Rating: {props.difficulty}
+          <br/>
+          Crag: {props.crag}
+          </Card.Title>
           <Card.Text>
-            {props.FrAsc}
+            First Ascent: {props.FrAsc}
             <br/>
             {props.description}
           </Card.Text>
