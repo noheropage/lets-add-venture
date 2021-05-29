@@ -8,8 +8,17 @@
   import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
   import Profile from './pages/Profile/Profile';
   import Map from "./pages/Map/Map";
+  import { useAuth0 } from '@auth0/auth0-react'
+  import Loading from './components/loading'
+  import ProtectedRoute from './auth/protected-route'
   
   function App() {
+    const { isLoading } = useAuth0;
+
+    if (isLoading) {
+      return <Loading />
+    }
+
     return (
       <Router>
     <div className="App">
@@ -23,15 +32,15 @@
         <Route exact path='/login'>
           <LogIn />
         </Route>
-        <Route exact path='/profile'>
+        <ProtectedRoute exact path='/profile'>
           <Profile />
-        </Route>
-        <Route exact path='/map'>
+        </ProtectedRoute>
+        <ProtectedRoute exact path='/map'>
           <Map />
-        </Route>
-        <Route exact path='/questions'>
+        </ProtectedRoute>
+        <ProtectedRoute exact path='/questions'>
           <ProfileQuestions />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </div>
     </Router>

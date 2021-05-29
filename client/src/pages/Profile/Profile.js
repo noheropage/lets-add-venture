@@ -4,9 +4,14 @@ import placeholder from "../../images/profile_placeholder.png";
 import "./Profile.css";
 import Nav from "../../components/Nav";
 import API from '../../utils/API'
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "../../components/loading";
 
 // establish state for profile image and user files
 function Profile() {
+  const { authProfile } = useAuth0;
+  const { name, picture, email } = authProfile;
+
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState(placeholder);
@@ -73,6 +78,7 @@ function Profile() {
     <div className="sky">
       <Nav />
       <div>
+        <h1>{name} {picture} {email}</h1>
         <div>
           <Form>
             <input
