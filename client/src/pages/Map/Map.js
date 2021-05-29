@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./Map.css"
 import { FaMapMarkerAlt } from "react-icons/fa"
-import SearchBar from "../../components/SearchBar/SearchBar";
-import ResultsBar from "../../components/ResultsBar/ResultsBar";
 import ClimbCard from "../../components/ClimbCard";
 import Button from 'react-bootstrap/Button'
 import API from '../../utils/API'
@@ -14,14 +12,17 @@ function Map() {
 
     const [climbData, setClimbData] = useState([]);
     const [query, setQuery] = useState('')
+    const [filterYSP, setFilterYSP] = useState('')
 
     function searchHandler(e) {
         console.log(query)
         API.getClimb(query)
             .then(response => setClimbData(response.data))
-
         console.log(climbData)
+    }
 
+    function searchHandlerFilter(e) {
+        console.log('filter this shit!', filterYSP)
 
     }
 
@@ -43,21 +44,43 @@ function Map() {
                 </div>
 
                 {climbData.length ? (
-                    <div className="container row">
-                        {
-                            climbData.map((climb) => (
-                                <ClimbCard
-                                    climbTitle={climb.name}
-                                    FrAsc={climb.fa}
-                                    difficulty={climb.yds}
-                                    crag={climb.meta_parent_sector}
-                                />
-                            ))
-                        }
-                    </div>
-                ) : (<h4></h4>)
+                    <div>
+                        <div className="justify-content-center search-bar pt-4 row">
+                            <Col xs={8} sm={8} md={6}>
+                                <input className="ml-5 form-control" type='text' placeholder="Filter climb by difficulty" onChange={event => setFilterYSP(event.target.value)} />
+                            </Col>
+                        </div>
 
-                }
+                        {filterYSP.length  ? (
+                            <div className="container row">
+                                { climbData.filter((newClimbs)=>(newClimbs.yds === filterYSP))
+                                    .map((climb) => (
+                                        <ClimbCard
+                                            key= {climb.meta_mp_route_id}
+                                            climbTitle={climb.name}
+                                            FrAsc={climb.fa}
+                                            difficulty={climb.yds}
+                                            crag={climb.meta_parent_sector}
+                                        />
+                                    ))
+                                }
+                            </div>) : (
+                            <div className="container row">
+                                {climbData.map((climb) => (
+                                        <ClimbCard
+                                            key= {climb.meta_mp_route_id}
+                                            climbTitle={climb.name}
+                                            FrAsc={climb.fa}
+                                            difficulty={climb.yds}
+                                            crag={climb.meta_parent_sector}
+                                        />
+                                    ))
+                                }
+                            </div>
+                        )}
+                    </div> ) : 
+                    (<h4></h4>)
+                    }
             </div>
         </div >
     )
