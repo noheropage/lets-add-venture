@@ -4,13 +4,11 @@ import placeholder from "../../images/profile_placeholder.png";
 import "./Profile.css";
 import Nav from "../../components/Nav";
 import API from '../../utils/API'
-import { useAuth0 } from "@auth0/auth0-react";
-import Loading from "../../components/loading";
+import ExternalApi from '../../utils/external-api'
 
 // establish state for profile image and user files
 function Profile() {
-  const { authProfile } = useAuth0;
-  const { name, picture, email } = authProfile;
+  
 
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
@@ -22,15 +20,19 @@ function Profile() {
   const id = 1;
   // retrieve profile info from api and set it to user object
   useEffect(() => {
-    API.getUser(id)
-    .then(res => {
-      console.log(res.data);
-      setUser(res.data.profile)
-      // finds the last photo of the array and displays it
-      const photoLength = res.data.photos.length
-      setPreviewSource(res.data.photos[photoLength - 1].url)
-    })
-    .catch(err => console.log(err));
+    console.log(ExternalApi);
+    
+
+
+    // API.getUser(id)
+    // .then(res => {
+    //   console.log(res.data);
+    //   setUser(res.data.profile)
+    //   // finds the last photo of the array and displays it
+    //   const photoLength = res.data.photos.length
+    //   setPreviewSource(res.data.photos[photoLength - 1].url)
+    // })
+    // .catch(err => console.log(err));
   }, []);
 
   const fileUploader = useRef(null);
@@ -78,7 +80,7 @@ function Profile() {
     <div className="sky">
       <Nav />
       <div>
-        <h1>{name} {picture} {email}</h1>
+        {/* <h1>{name} {picture} {email}</h1> */}
         <div>
           <Form>
             <input

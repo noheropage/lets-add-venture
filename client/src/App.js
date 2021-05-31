@@ -1,48 +1,52 @@
-  import './App.css';
-  import ProfileQuestions from "./pages/ProfileQuestions/ProfileQuestions";
-  import Signup from "./pages/SignUp/SignUp";
-  import LogIn from "./pages/LogIn/LogIn";
-  import React from "react";
-  import Home from './pages/Home/Home';
-  // import Upload from './components/Upload/upload'
-  import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-  import Profile from './pages/Profile/Profile';
-  import Map from "./pages/Map/Map";
-  import { useAuth0 } from '@auth0/auth0-react'
-  import Loading from './components/loading'
-  import ProtectedRoute from './auth/protected-route'
-  
-  function App() {
-    const { isLoading } = useAuth0;
+import "./App.css";
+import ProfileQuestions from "./pages/ProfileQuestions/ProfileQuestions";
+import Signup from "./pages/SignUp/SignUp";
+import LogIn from "./pages/LogIn/LogIn";
+import React from "react";
+import Home from "./pages/Home/Home";
+// import Upload from './components/Upload/upload'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Profile from "./pages/Profile/Profile";
+import Map from "./pages/Map/Map";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "./components/loading";
+import ProtectedRoute from "./auth/protected-route";
+import ExternalApi from './utils/external-api'
 
-    if (isLoading) {
-      return <Loading />
-    }
+function App() {
+  const { isLoading } = useAuth0;
 
-    return (
-      <Router>
-    <div className="App">
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <Route exact path='/signup'>
-          <Signup />
-        </Route>
-        <Route exact path='/login'>
-          <LogIn />
-        </Route>
-        <ProtectedRoute exact path='/profile'>
-          <Profile />
-        </ProtectedRoute>
-        <ProtectedRoute exact path='/map'>
-          <Map />
-        </ProtectedRoute>
-        <ProtectedRoute exact path='/questions'>
-          <ProfileQuestions />
-        </ProtectedRoute>
-      </Switch>
-    </div>
+  if (isLoading) {
+    return <Loading />
+  }
+
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/login">
+            <LogIn />
+          </Route>
+          <Route exact path='/external-api'>
+            <ExternalApi />
+          </Route>
+          <ProtectedRoute exact path="/profile">
+            <Profile />
+          </ProtectedRoute>
+          <Route exact path="/map">
+            <Map />
+          </Route>
+          <Route exact path="/questions">
+            <ProfileQuestions />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 }

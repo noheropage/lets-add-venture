@@ -3,9 +3,9 @@ import { Route } from "react-router-dom";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "../components/loading";
 
-const ProtectedRoute = ({ component, ...args }) => (
+const ProtectedRoute = ({ comp, ...args }) => (
   <Route
-    component={withAuthenticationRequired(component, {
+    comp={withAuthenticationRequired(comp, {
       onRedirecting: () => <Loading />,
     })}
     {...args}

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Friend, Profile, Photo } = require('../../models');
+const jwtCheck = require('../../utils/jwt')
 
 //get all users --> Delete when no longer needed <--
 router.get('/', async (req, res) => {
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 })
 //get a single user by the id
-router.get('/:id', async (req, res) => {
+router.get('/:id', jwtCheck, async (req, res) => {
     try{
         const singleUser = await User.findByPk(req.params.id, {
             include: [

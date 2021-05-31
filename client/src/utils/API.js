@@ -1,4 +1,6 @@
 import axios from "axios";
+// import { useAuth0 } from "@auth0/auth0-react";
+// import getToken from './APIconfig'
 
 export default {
     //get users
@@ -7,8 +9,8 @@ export default {
     },
 
     //get single user
-    getUser: function (id) {
-        return axios.get("/api/users/" + id);
+    getUser: function (id) {        
+        return axios.get("/api/users/" + id)
     },
 
     //saving user data
