@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Friend, Profile, Photo } = require('../../models');
+const { User, Friend, Profile, Photo, PastClimbs } = require('../../models');
 
 //get all users --> Delete when no longer needed <--
 router.get('/', async (req, res) => {
@@ -27,6 +27,9 @@ router.get('/:id', async (req, res) => {
             },
             {
                 model: Photo
+            },
+            {
+                model: PastClimbs
             }
         ]
         });

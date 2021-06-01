@@ -2,6 +2,7 @@ const User = require("./User");
 const Profile = require('./Profile');
 const Friend = require('./Friend')
 const Photo = require('./Photo')
+const PastClimbs = require('./PastClimbs')
 
 Profile.belongsTo(User, {
     foreignKey: 'user_id',
@@ -26,26 +27,15 @@ User.belongsToMany(User, {
     foreignKey: 'friend_connect'
 });
 
-// User.hasMany(Friend, {
-//     as:"sender",
-//     foreignKey: 'friend_one',
-// })
-// User.hasMany(Friend, {
-//     as:'receiver',
-//     foreignKey: 'friend_two',
-// })
+User.hasMany(PastClimbs, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+})
+PastClimbs.belongsTo(User,{
+    foreignKey: 'user_id'
 
-// Friend.belongsTo(User, {
-//     as: 'sender',
-//     foreignKey: 'friend_one',
+})
 
-// });
-
-// Friend.belongsTo(User, {
-//     as: 'receiver',
-//     foreignKey: 'friend_two',
-
-// });
 User.hasMany(Photo, {
     foreignKey: 'uploader_id'
 })
@@ -54,4 +44,4 @@ Photo.belongsTo(User, {
     foreignKey: 'uploader_id'
 })
 
-module.exports = {User, Profile, Friend, Photo};
+module.exports = {User, Profile, Friend, Photo, PastClimbs};
