@@ -27,7 +27,24 @@ router.get('/:id', async (req, res) => {
             },
             {
                 model: Photo
-            },
+            }
+        ]
+        });
+        
+        if(!singleUser) {
+            res.status(400).json({message: 'there is no user with that ID'})
+        }
+        res.status(200).json(singleUser);
+    } catch(err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+
+router.get('/pastClimbs/:id', async (req, res) => {
+    try{
+        const singleUser = await User.findByPk(req.params.id, {
+            include: [     
             {
                 model: PastClimbs
             }
