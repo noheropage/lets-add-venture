@@ -17,7 +17,7 @@ function Profile() {
   const id = 1;
   // retrieve profile info from api and set it to user object
   useEffect(() => {
-    API.getUser(id)
+    API.getProfile(id)
     .then(res => {
       console.log(res.data);
       setUser(res.data.profile)
