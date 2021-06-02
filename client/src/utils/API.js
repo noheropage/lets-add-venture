@@ -1,8 +1,10 @@
 import axios from "axios";
-// import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 // import getToken from './APIconfig'
 
+
 export default {
+        
     //get users
     getUsers: function () {
         return axios.get("/api/users");

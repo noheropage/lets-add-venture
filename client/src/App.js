@@ -36,12 +36,10 @@ function App() {
           <Route exact path='/external-api'>
             <ExternalApi />
           </Route>
-          <ProtectedRoute exact path="/profile">
-            <Profile />
+          <ProtectedRoute exact path="/profile" component={Profile}>
           </ProtectedRoute>
-          <Route exact path="/map">
-            <Map />
-          </Route>
+          <ProtectedRoute exact path="/map" component={Map}>
+          </ProtectedRoute>
           <Route exact path="/questions">
             <ProfileQuestions />
           </Route>

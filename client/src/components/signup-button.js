@@ -1,15 +1,26 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from 'react-bootstrap/Button'
+import { useHistory } from "react-router-dom";
+import Button from 'react-bootstrap/Button'
+import '../pages/Home/Home.css'
 
 const SignupButton = () => {
   const { loginWithRedirect } = useAuth0();
+
+  const history = useHistory();
+  const onRedirectCallback = (appState) => {
+    history.push(appState?.returnTo || window.location.pathname);
+  };
+
   return (
     <Button
-      className="btn btn-primary btn-block"
+      className="home-buttons"
+      href='/questions'
       onClick={() =>
         loginWithRedirect({
-          screen_hint: "signup",
+            redirectUri:'http://localhost:3000/questions',
+            onRedirectCallback: {onRedirectCallback},
+            screen_hint: "signup",
         })
       }
     >
