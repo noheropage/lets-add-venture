@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const { User, Friend, Profile, Photo } = require('../../models');
+const jwtCheck = require("../../utils/jwt");
 
 // /api/profiles ->
 
 //creates a profile for a user
 router.post('/', async (req, res) => {
     try{
-        // will need to attach current logged_in user to profile's user_id field here
         const profileData = await Profile.findOne({
             where: {
                 user_id: req.body.user_id
