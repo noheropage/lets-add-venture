@@ -24,8 +24,8 @@ export default {
         return axios.get('/api/users/friends/' + id)
     },
 
-    getClimb: function () {
-        return axios.get('https://climb-api.openbeta.io/geocode/v1/climbs?latlng=47.027231%2C-119.963876&radius=3')
+    getClimb: function (lat, lng) {
+        return axios.get(`https://climb-api.openbeta.io/geocode/v1/climbs?latlng=${lat}%2C${lng}&radius=3`)
     },
 
     //gets one past climb by the pastClimb id
