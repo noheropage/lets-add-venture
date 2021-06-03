@@ -16,9 +16,9 @@ router.get("/", async (req, res) => {
 router.get("/profile/:id", jwtCheck, async (req, res) => {
   try {
     const singleUser = await User.findOne({
-        where: {
-          auth0_id: req.params.id,
-        },
+      where: {
+        auth0_id: req.params.id,
+      },
       include: [
         {
           model: Profile,
@@ -68,9 +68,9 @@ router.get("/friends/:id", async (req, res) => {
 router.get("/pastClimbs/:id", async (req, res) => {
   try {
     const singleUser = await User.findOne({
-        where: {
-          auth0_id: req.params.id,
-        },
+      where: {
+        auth0_id: req.params.id,
+      },
       include: [
         {
           model: PastClimbs,

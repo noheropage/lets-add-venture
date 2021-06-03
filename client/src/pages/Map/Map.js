@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Geocode from "react-geocode";
 import "./Map.css";
+require("dotenv").config();
 
 // coordinates : 47.026822, -119.964855
 
@@ -15,7 +16,7 @@ function Map() {
   const [query, setQuery] = useState("");
   const [filterYSP, setFilterYSP] = useState("");
 
-  Geocode.setApiKey("");
+  Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
   Geocode.setLanguage("en");
   Geocode.setRegion("usa");
 
