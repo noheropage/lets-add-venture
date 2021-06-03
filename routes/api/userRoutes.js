@@ -67,7 +67,10 @@ router.get("/friends/:id", async (req, res) => {
 //gets a single users' past climbs by the user id
 router.get("/pastClimbs/:id", async (req, res) => {
   try {
-    const singleUser = await User.findByPk(req.params.id, {
+    const singleUser = await User.findOne({
+        where: {
+          auth0_id: req.params.id,
+        },
       include: [
         {
           model: PastClimbs,
@@ -106,28 +109,28 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
-  try {
-    const updateData = await User.update(
-      {
-        nameFirst: req.body.nameFirst,
-        nameLast: req.body.nameLast,
-        email: req.body.email,
-        password: req.body.password,
-      },
-      {
-        individualHooks: true,
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    console.log("updated data", updateData);
+// router.put("/:id", async (req, res) => {
+//   try {
+//     const updateData = await User.update(
+//       {
+//         nameFirst: req.body.nameFirst,
+//         nameLast: req.body.nameLast,
+//         email: req.body.email,
+//         password: req.body.password,
+//       },
+//       {
+//         individualHooks: true,
+//         where: {
+//           id: req.params.id,
+//         },
+//       }
+//     );
+//     console.log("updated data", updateData);
 
-    res.status(200).json(updateData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.status(200).json(updateData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 module.exports = router;
