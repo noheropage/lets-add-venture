@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import { FaMapMarkerAlt } from "react-icons/fa"
 import ClimbCard from "../../components/ClimbCard";
 import API from '../../utils/API'
 import Button from 'react-bootstrap/Button'
+
 import Col from "react-bootstrap/Col";
 import Geocode from 'react-geocode';
 import "./Map.css"
@@ -10,6 +12,10 @@ import "./Map.css"
 // coordinates : 47.026822, -119.964855
 
 function Map() {
+  const [climbData, setClimbData] = useState([]);
+  const [query, setQuery] = useState("");
+  const [filterYSP, setFilterYSP] = useState("");
+
 
     const [climbData, setClimbData] = useState([]);
     const [query, setQuery] = useState('')
@@ -125,8 +131,41 @@ function Map() {
                     (<h4></h4>)
                     }
             </div>
-        </div >
-    )
+
+            {filterYSP.length ? (
+              <div className="container row">
+                {climbData
+                  .filter((newClimbs) => newClimbs.yds === filterYSP)
+                  .map((climb) => (
+                    <ClimbCard
+                      key={climb.meta_mp_route_id}
+                      climbTitle={climb.name}
+                      FrAsc={climb.fa}
+                      difficulty={climb.yds}
+                      crag={climb.meta_parent_sector}
+                    />
+                  ))}
+              </div>
+            ) : (
+              <div className="container row">
+                {climbData.map((climb) => (
+                  <ClimbCard
+                    key={climb.meta_mp_route_id}
+                    climbTitle={climb.name}
+                    FrAsc={climb.fa}
+                    difficulty={climb.yds}
+                    crag={climb.meta_parent_sector}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <h4></h4>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Map;
