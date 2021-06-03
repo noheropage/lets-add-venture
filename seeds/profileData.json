@@ -5,7 +5,7 @@
         "user_pronoun":"They/Them/Theirs",
         "user_intensity":3,
         "climbing_ability":"5.11a",
-        "bouldering_ability":"V3"    
+        "bouldering_ability":"V3"
     },
     {
         "user_name":"Johanna512",
@@ -22,14 +22,14 @@
         "user_intensity":2,
         "climbing_ability":"5.10a",
         "bouldering_ability":"V1"
-        },
+    },
     {
         "user_name":"AhmedT123",
         "user_id":4,
         "user_pronoun":"He/Him/His",
         "user_intensity":3,
         "climbing_ability":"5.12a",
-        "bouldering_ability":"V3+"    
+        "bouldering_ability":"V3+"
     },
     {
         "user_name":"Sal563",
@@ -38,7 +38,6 @@
         "user_intensity":2,
         "climbing_ability":"5.11c",
         "bouldering_ability":"V3-"
-    
     },
     {
         "user_name":"iLoveClimbing",
