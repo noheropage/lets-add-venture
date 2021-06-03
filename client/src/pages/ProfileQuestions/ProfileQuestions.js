@@ -1,5 +1,5 @@
 import "./ProfileQuestions.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
 import { Button, Form, Col, Row, Container } from "react-bootstrap";
 import axios from 'axios'
@@ -43,8 +43,15 @@ useEffect(() => {
 
         });
         console.log(res.data);
+        // setUsername(res.data.profile.user_name);
         
         setProfile(res.data[0]);
+        setUsername(res.data[0].profile.user_name);
+        setPronoun(res.data[0].profile.user_pronoun)
+        setIntensity(res.data[0].profile.user_intensity)
+        setClimbAbility(res.data[0].profile.climbing_ability)
+        setBoulderAbility(res.data[0].profile.bouldering_ability)
+        
         console.log(profile);
         // console.log(accessToken);
         
@@ -58,42 +65,32 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("username is " + username);
-    console.log("pronoun is " + pronoun);
-    console.log("Preferred Intensity is " + intensity);
-    console.log("Climbing Ability is " + climbAbility);
-    console.log("Bouldering Ability is " + boulderAbility);
-    // console.log("Climbing History is " + climbHistory);
+    
     // will need way to assign the logged_in user's user_id to the profile
     try {
       const accessToken = await getAccessTokenSilently({
         audience: `${domain}`,
       });
 
-      const url = "http://localhost:3001/api/users/";
+      const url = "http://localhost:3001/api/profiles/";
 
       const res = await axios.post(url, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        auth0_id: auth0id,
-        email: user.email
-
-      });
-      
-    } catch (error) {
-      
-    }
-    API.saveProfile({
         user_name: username,
         user_pronoun: pronoun,
         user_intensity: intensity,
         climbing_ability: climbAbility,
         bouldering_ability: boulderAbility,
-        // past_climbs: climbHistory
-    }).then(res => {
-        console.log(res.data);
-    }).catch(err => console.log(err))
+        user_id: profile.id
+      });
+      
+    } catch (error) {
+      console.error(error)
+    }
+
+    document.location='/profile'
   };
 
 //   if fields are filled out, submit button should post this data to the API which will use ?user?profile route to save the data in the profile table. Will need user_id of the logged_in user to make sure it is saving correctly
@@ -117,6 +114,7 @@ useEffect(() => {
                 placeholder="Pick a username"
                 name="user-name"
                 onChange={(e) => setUsername(e.target.value)}
+                defaultValue={username}
               />
             </Col>
           </Row>
@@ -128,6 +126,7 @@ useEffect(() => {
               <div
                 className="mb-2"
                 onChange={(e) => setPronoun(e.target.value)}
+                checked={pronoun}
               >
                 <Form.Check
                   value="He/Him/His"
@@ -135,6 +134,7 @@ useEffect(() => {
                   name="pronouns"
                   type="radio"
                   id="masculine_pronouns"
+                  checked={"He/Him/His" === pronoun}
                 />
                 <Form.Check
                   value="She/Her/Hers"
@@ -142,6 +142,7 @@ useEffect(() => {
                   name="pronouns"
                   type="radio"
                   id="feminine_pronouns"
+                  checked={"She/Her/Hers" === pronoun}
                 />
                 <Form.Check
                   value="They/Them/Theirs"
@@ -149,6 +150,7 @@ useEffect(() => {
                   name="pronouns"
                   type="radio"
                   id="neutral_pronouns"
+                  checked={"They/Them/Theirs" === pronoun}
                 />
                 <Form.Check
                   value="Prefer not to disclose"
@@ -156,6 +158,7 @@ useEffect(() => {
                   name="pronouns"
                   type="radio"
                   id="na_pronouns"
+                  checked={"Prefer not to disclose" === pronoun}
                 />
               </div>
             </Col>
@@ -178,6 +181,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="lowest_intensity"
+                  checked={1 === intensity}
                 />
                 <Form.Check
                   inline
@@ -186,6 +190,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="low_intensity"
+                  checked={2 === intensity}
                 />
                 <Form.Check
                   inline
@@ -194,6 +199,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="mid_intensity"
+                  checked={3 === intensity}
                 />
                 <Form.Check
                   inline
@@ -202,6 +208,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="high_intensity"
+                  checked={4 === intensity}
                 />
                 <Form.Check
                   inline
@@ -210,6 +217,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="highest_intensity"
+                  checked={5 === intensity}
                 />
               </div>
             </Col>
@@ -223,6 +231,7 @@ useEffect(() => {
                 placeholder="Climbing Ability (<5.9 - 5.13+)"
                 name="climb-ability"
                 onChange={(e) => setClimbAbility(e.target.value)}
+                defaultValue={climbAbility}
               />
             </Col>
           </Row>
@@ -234,6 +243,7 @@ useEffect(() => {
                 placeholder="Bouldering Ability (V0 - V10+)"
                 name="boulder-ability"
                 onChange={(e) => setBoulderAbility(e.target.value)}
+                defaultValue={boulderAbility}
               />
             </Col>
           </Row>
