@@ -8,7 +8,7 @@ import API from "../../utils/API";
 export default function ClimbCard(props) {
   const [climb, setClimb] = useState({
     image: " ",
-    name: " ",
+    climb_name: " ",
     rating: " ",
     crag: " ",
     firstAscent: " ",
@@ -31,14 +31,15 @@ export default function ClimbCard(props) {
   function handleClick(e) {
     setClimb({
       ...climb,
-      climbInfo,
+      name: props.climbTitle,
+      rating: props.difficulty,
     });
     console.log(climbInfo);
     postToApi();
   }
 
   function postToApi() {
-    API.saveClimb({
+    API.saveToPastClimb({
       climbInfo,
     }).catch((err) => console.log(err));
   }

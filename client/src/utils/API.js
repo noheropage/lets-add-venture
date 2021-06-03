@@ -34,6 +34,7 @@ export default {
 
   //save climb
   saveToPastClimb: function (climbData) {
+    console.log(climbData);
     return axios.post("/api/pastClimbs", climbData);
   },
 
