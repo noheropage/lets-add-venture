@@ -40,9 +40,8 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute exact path="/map" component={Map}>
           </ProtectedRoute>
-          <Route exact path="/questions">
-            <ProfileQuestions />
-          </Route>
+          <ProtectedRoute exact path="/questions" component={ProfileQuestions}>
+          </ProtectedRoute>
         </Switch>
       </div>
     </Router>

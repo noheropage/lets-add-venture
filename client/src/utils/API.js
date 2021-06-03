@@ -7,7 +7,7 @@ export default {
         
     //get users
     getUsers: function () {
-        return axios.get("/api/users");
+        return axios.get("https://dev-dwofmg2f.us.auth0.com/api/v2/users");
     },
 
     //get single user
@@ -23,4 +23,6 @@ export default {
     getClimb: function () {
         return axios.get('https://climb-api.openbeta.io/geocode/v1/climbs?latlng=47.027231%2C-119.963876&radius=3')
     }
+
+    
 }

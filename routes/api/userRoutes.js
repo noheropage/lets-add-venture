@@ -45,7 +45,16 @@ router.get('/:id', jwtCheck, async (req, res) => {
 //creates a user
 router.post('/', async (req, res) => {
     try{
-        const userData = await User.create(req.body);
+        const userData = await User.findOrCreate({
+        where: {
+            email: req.body.email,
+            auth0_id: req.body.auth0_id
+        },
+        include: [
+            {
+                model: Profile
+            }
+        ]});
         console.log(userData)
         res.status(200).json(userData)
     } catch (err) {

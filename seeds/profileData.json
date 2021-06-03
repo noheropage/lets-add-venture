@@ -5,8 +5,7 @@
         "user_pronoun":"They/Them/Theirs",
         "user_intensity":3,
         "climbing_ability":"5.11a",
-        "bouldering_ability":"V3",
-        "past_climbs":"Exit 32, Frenchman Couler, Index"
+        "bouldering_ability":"V3"
     },
     {
         "user_name":"Johanna512",
@@ -14,8 +13,7 @@
         "user_pronoun":"She/Her/Hers",
         "user_intensity":4,
         "climbing_ability":"5.12c",
-        "bouldering_ability":"V5+",
-        "past_climbs":"Seattle Bouldering Project, Vertical World"
+        "bouldering_ability":"V5+"
     },
     {
         "user_name":"Yordy89",
@@ -23,8 +21,7 @@
         "user_pronoun":"She/Her/Hers",
         "user_intensity":2,
         "climbing_ability":"5.10a",
-        "bouldering_ability":"V1",
-        "past_climbs":"Stone Gardens"
+        "bouldering_ability":"V1"
     },
     {
         "user_name":"AhmedT123",
@@ -32,8 +29,7 @@
         "user_pronoun":"He/Him/His",
         "user_intensity":3,
         "climbing_ability":"5.12a",
-        "bouldering_ability":"V3+",
-        "past_climbs":"Exit 32, Frenchman Couler, Index"
+        "bouldering_ability":"V3+"
     },
     {
         "user_name":"Sal563",
@@ -41,8 +37,7 @@
         "user_pronoun":"They/Them/Theirs",
         "user_intensity":2,
         "climbing_ability":"5.11c",
-        "bouldering_ability":"V3-",
-        "past_climbs":"Exit 32, Frenchman Couler, Index"
+        "bouldering_ability":"V3-"
     },
     {
         "user_name":"iLoveClimbing",
@@ -50,7 +45,6 @@
         "user_pronoun":"She/Her/Hers",
         "user_intensity":5,
         "climbing_ability":"5.12d",
-        "bouldering_ability":"V9+",
-        "past_climbs":"Joshua Tree, Smith Rock, Yosemite"
+        "bouldering_ability":"V9+"
     }
 ]
