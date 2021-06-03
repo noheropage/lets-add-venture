@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User, Friend, Profile, Photo } = require('../../models');
-require('dotenv').config();
 const jwtCheck = require("../../utils/jwt");
 
 // /api/profiles ->

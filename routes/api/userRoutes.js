@@ -3,7 +3,7 @@ const { User, Friend, Profile, Photo, PastClimbs } = require("../../models");
 const jwtCheck = require("../../utils/jwt");
 
 //get all users --> Delete when no longer needed <--
-router.get("/", jwtCheck, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll();
     console.log("get user data-------");
@@ -13,7 +13,7 @@ router.get("/", jwtCheck, async (req, res) => {
   }
 });
 //get a single user's profile information by the id
-router.get("/profile/:id", async (req, res) => {
+router.get("/profile/:id", jwtCheck, async (req, res) => {
   try {
     const singleUser = await User.findOne({
         where: {

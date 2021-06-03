@@ -130,8 +130,10 @@ const Profile = () => {
             <Button
               hidden={!fileInputState}
               variant="success"
+              className='mt-2'
               type="submit"
               value="submit"
+              size='sm'
               onClick={handleSubmitFile}
             >
               Submit
@@ -141,7 +143,7 @@ const Profile = () => {
         <div className="username">
           <h1> {profile.user_name}</h1>
           <h6> {profile.user_pronoun} </h6>
-          <Button href='/questions'>
+          <Button href='/questions' variant='outline-info' size='sm'>
             Edit Profile
           </Button>
         </div>

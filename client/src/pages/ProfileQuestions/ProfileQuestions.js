@@ -44,7 +44,7 @@ useEffect(() => {
 
         });
         console.log(res.data);
-        // setUsername(res.data.profile.user_name);
+        
         
         setProfile(res.data[0]);
         setUsername(res.data[0].profile.user_name);
