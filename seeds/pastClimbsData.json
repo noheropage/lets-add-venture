@@ -1,0 +1,37 @@
+[
+    {
+        "climb_name":"A good climb",
+        "user_id":1,
+        "rating":"5.11a"
+    },
+    {
+        "climb_name":"ham and eggs",
+        "user_id":2,
+        "rating":"5.10b"
+    },
+    {
+        "climb_name":"a ripple",
+        "user_id":4,
+        "rating":"5.9"
+    },
+    {
+        "climb_name":"sunshine buttress",
+        "user_id":3,
+        "rating":"11.a"
+    },
+    {
+        "climb_name":"Narlux",
+        "user_id":6,
+        "rating":"5.10c"
+    },
+    {
+        "climb_name":"Boschido",
+        "user_id":1,
+        "rating":"5.10c"
+    },
+    {
+        "climb_name":"red M&M's",
+        "user_id":2,
+        "rating":"5.12a"
+    }
+]

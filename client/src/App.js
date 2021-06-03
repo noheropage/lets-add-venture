@@ -1,6 +1,7 @@
 import "./App.css";
 import ProfileQuestions from "./pages/ProfileQuestions/ProfileQuestions";
 import Signup from "./pages/SignUp/SignUp";
+import MapTester from "./pages/MapTest/MapTest";
 import LogIn from "./pages/LogIn/LogIn";
 import React from "react";
 import Home from "./pages/Home/Home";
@@ -12,6 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./components/loading";
 import ProtectedRoute from "./auth/protected-route";
 import ExternalApi from './utils/external-api'
+import SimpleMap from './components/SimpleMap/SimpleMap';
 
 function App() {
   const { isLoading } = useAuth0;
@@ -42,6 +44,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute exact path="/questions" component={ProfileQuestions}>
           </ProtectedRoute>
+          <Route exact path='/testmap'>
+            <MapTester />
+          </Route>
         </Switch>
       </div>
     </Router>
