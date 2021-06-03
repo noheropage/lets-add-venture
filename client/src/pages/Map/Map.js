@@ -16,7 +16,7 @@ function Map() {
     const [filterYSP, setFilterYSP] = useState('')
     
 
-    Geocode.setApiKey("AIzaSyDrxtAZWs9eENCjWHEOSK4dnGcDuc1NTY0");
+    Geocode.setApiKey("");
     Geocode.setLanguage('en');
     Geocode.setRegion('usa')
     
