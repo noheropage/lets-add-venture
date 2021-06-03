@@ -2,7 +2,7 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 // import getToken from './APIconfig'
 
-const baseUrl = "http://localhost:3001/";
+const baseUrl = "http://localhost:3001";
 
 export default {
   //get users
@@ -50,6 +50,7 @@ export default {
 
   //save climb
   saveToPastClimb: function (climbData) {
+    console.log(climbData);
     return axios.post(baseUrl + "/api/pastClimbs", climbData);
   },
 

@@ -29,6 +29,7 @@ export default function ClimbCard(props) {
   };
 
   function handleClick(e) {
+    console.log("This is the map search button!");
     setClimb({
       ...climb,
       climbData,
@@ -40,9 +41,8 @@ export default function ClimbCard(props) {
   function postToApi() {
     API.saveToPastClimb({
       // climbData,
-      id: "9",
-      name: props.climbTitle,
-      user_id: "1",
+      climb_name: props.climbTitle,
+      user_id: 1,
       rating: props.difficulty,
     }).catch((err) => console.log(err));
   }
