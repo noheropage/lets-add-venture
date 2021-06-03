@@ -9,10 +9,10 @@ var jwtCheck = jwt({
       jwksRequestsPerMinute: 5,
       jwksUri: 'https://dev-dwofmg2f.us.auth0.com/.well-known/jwks.json',
     }),
-    audience: 'http://localhost:3000/',
+    audience: 'https://dev-dwofmg2f.us.auth0.com/api/v2/',
     issuer: 'https://dev-dwofmg2f.us.auth0.com/',
     algorithms: ["RS256"],
-    clientOrigins: ['http://localhost:3000'],
+    clientOrigins: ['http://localhost:3000/'],
   });
 
 module.exports = jwtCheck;

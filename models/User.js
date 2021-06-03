@@ -33,7 +33,7 @@ User.init(
                 isEmail: true
             }
         },
-        //password must be at leaste 8 characters long
+        
         auth0_id: {
             type: DataTypes.STRING,
             allowNull:false,
