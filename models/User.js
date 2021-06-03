@@ -16,14 +16,14 @@ User.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        first_name: {
-            type:DataTypes.STRING,
-            allowNull: false
-        },
-        last_name: {
-            type:DataTypes.STRING,
-            allowNull: false
-        },
+        // first_name: {
+        //     type:DataTypes.STRING,
+        //     allowNull: false
+        // },
+        // last_name: {
+        //     type:DataTypes.STRING,
+        //     allowNull: false
+        // },
         //emails must be unique
         email: {
             type:DataTypes.STRING,
@@ -34,25 +34,23 @@ User.init(
             }
         },
         //password must be at leaste 8 characters long
-        password: {
+        auth0_id: {
             type: DataTypes.STRING,
             allowNull:false,
-            validate: {
-                len:[8],
-            },
+            unique: true
         }
     },
     {
-        hooks: {
-            beforeCreate: async (newUserData) => {
-                newUserData.password = await bcrypt.hash(newUserData.password, 10);
-                return newUserData
-            },
-            beforeUpdate: async (updateUserData) => {
-                updateUserData.password = await bcrypt.hash(updateUserData.password, 10);
-                return updateUserData;
-            }
-        },
+        // hooks: {
+        //     beforeCreate: async (newUserData) => {
+        //         newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        //         return newUserData
+        //     },
+        //     beforeUpdate: async (updateUserData) => {
+        //         updateUserData.password = await bcrypt.hash(updateUserData.password, 10);
+        //         return updateUserData;
+        //     }
+        // },
         sequelize,
         timestamps: false,
         freezeTableName: true,

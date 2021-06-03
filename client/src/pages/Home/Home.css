@@ -17,7 +17,10 @@
 
 .home-buttons {
   margin: 5px;
-  width: 150px;
+  width: 150px !important;
+  background-color: #295939 !important;
+  border: none !important;
+  margin-bottom: 55px;
 }
 
 .logo {
