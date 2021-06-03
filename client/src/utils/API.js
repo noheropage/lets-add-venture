@@ -29,8 +29,8 @@ export default {
         return axios.get(baseUrl + '/api/users/friends/' + id)
     },
 
-    getClimb: async function (lat, lng) {
-        return axios.get(`https://climb-api.openbeta.io/geocode/v1/climbs?latlng=${lat}%2C${lng}&radius=1`)
+    getClimb: function (lat, lng) {
+        return axios.get(`https://climb-api.openbeta.io/geocode/v1/climbs?latlng=${lat}%2C${lng}&radius=3`)
     },
 
     saveProfile: function (profileData) {
