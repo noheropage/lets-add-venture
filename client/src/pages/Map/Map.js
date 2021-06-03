@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import "./Map.css"
 import { FaMapMarkerAlt } from "react-icons/fa"
 import ClimbCard from "../../components/ClimbCard";
-import Button from 'react-bootstrap/Button'
 import API from '../../utils/API'
+import Button from 'react-bootstrap/Button'
 import Col from "react-bootstrap/Col";
+import Geocode from 'react-geocode';
+import "./Map.css"
 
 // coordinates : 47.026822, -119.964855
 
@@ -13,18 +14,60 @@ function Map() {
     const [climbData, setClimbData] = useState([]);
     const [query, setQuery] = useState('')
     const [filterYSP, setFilterYSP] = useState('')
+    
 
-    function searchHandler(e) {
-        console.log(query)
-        API.getClimb(query)
-            .then(response => setClimbData(response.data))
-        console.log(climbData)
+    Geocode.setApiKey("AIzaSyDrxtAZWs9eENCjWHEOSK4dnGcDuc1NTY0");
+    Geocode.setLanguage('en');
+    Geocode.setRegion('usa')
+    
+  
+    //     API.getClimb(geoCodeCoord)
+    //         .then((response) => {
+    //             console.log(response)
+    //             setClimbData(response.data)
+    //         })
+    //         .catch(err => console.error(err))
+    //     console.log(climbData)
+    const climbByLocation = async () => {
+        const locationInput = await Geocode.fromAddress(query)
+        let { lat, lng } = locationInput.results[0].geometry.location;
+        const climbAPIData = await API.getClimb(`${lat}`, `${lng}`)
+        console.log(lat, lng, 'this is the lattitude and longitude?')
+        console.log(climbAPIData.data, 'this is the climb data')
+
+        setClimbData(climbAPIData.data)
     }
 
-    function searchHandlerFilter(e) {
-        console.log('filter this shit!', filterYSP)
+    // function placeToCoord(e) {
+        // Geocode.setApiKey("AIzaSyDrxtAZWs9eENCjWHEOSK4dnGcDuc1NTY0");
+        // Geocode.setLanguage('en');
 
-    }
+        // Geocode.setRegion('usa')
+        // console.log(query)
+
+    //     Geocode.fromAddress(query).then(
+    //         (response) => {
+    //             const { lat, lng } = response.results[0].geometry.location;
+    //             console.log(response)
+    //             setGeoCodeCoord(`${lat}, ${lng}`);
+    //             console.log(geoCodeCoord, 'these are the geocode coords for, ', query)
+    //         },
+    //         (error) => {
+    //         console.error(error)
+    //         }
+    //     )
+    // }
+
+    // function renderClimbs() {
+        
+    //     API.getClimb(geoCodeCoord)
+    //         .then((response) => {
+    //             console.log(response)
+    //             setClimbData(response.data)
+    //         })
+    //         .catch(err => console.error(err))
+    //     console.log(climbData)
+    // }
 
     return (
         <div className="container map-background">
@@ -36,10 +79,10 @@ function Map() {
                 </div>
                 <div className="justify-content-center search-bar pt-4 row">
                     <Col xs={8} sm={8} md={6}>
-                        <input className="ml-5 form-control" type='text' placeholder="Search for a climb by coordinates.." onChange={event => setQuery(event.target.value)} />
+                        <input className="ml-5 form-control" type='text' placeholder="Search for a climb!" onChange={event => setQuery(event.target.value)} />
                     </Col>
                     <Col xs={2} sm={2} md={2}>
-                        <Button onClick={searchHandler}> Search </Button>
+                        <Button onClick={climbByLocation}> Search </Button>
                     </Col>
                 </div>
 
