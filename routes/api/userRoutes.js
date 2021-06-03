@@ -11,8 +11,32 @@ router.get('/', async (req, res) => {
         res.status(500).json(err)
     }
 })
-//get a single user by the id
-router.get('/:id', async (req, res) => {
+//get a single user's profile information by the id
+router.get('/profile/:id', async (req, res) => {
+    try{
+        const singleUser = await User.findByPk(req.params.id, {
+            include: [
+
+            {
+                model: Profile
+            },
+            {
+                model: Photo
+            }
+        ]
+        });
+        
+        if(!singleUser) {
+            res.status(400).json({message: 'there is no user with that ID'})
+        }
+        res.status(200).json(singleUser);
+    } catch(err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+//gets single user's friends by the user id
+router.get('/friends/:id', async (req,res) => {
     try{
         const singleUser = await User.findByPk(req.params.id, {
             include: [
@@ -22,12 +46,23 @@ router.get('/:id', async (req, res) => {
                 //the alias for this field is friends
                 as: 'friends'
             },
-            {
-                model: Profile
-            },
-            {
-                model: Photo
-            },
+        ]
+        });
+        
+        if(!singleUser) {
+            res.status(400).json({message: 'there is no user with that ID'})
+        }
+        res.status(200).json(singleUser);
+    } catch(err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+//gets a single users' past climbs by the user id
+router.get('/pastClimbs/:id', async (req, res) => {
+    try{
+        const singleUser = await User.findByPk(req.params.id, {
+            include: [     
             {
                 model: PastClimbs
             }
