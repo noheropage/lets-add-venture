@@ -5,10 +5,11 @@ import { Button, Form, Col, Row, Container } from "react-bootstrap";
 import axios from 'axios'
 import API from '../../utils/API'
 import { useAuth0 } from '@auth0/auth0-react'
+require('dotenv').config();
 
 function ProfileQuestions() {
     const { getAccessTokenSilently, user } = useAuth0();
-    const domain = "https://dev-dwofmg2f.us.auth0.com/api/v2/";
+    const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
     
 
   const [username, setUsername] = useState();
@@ -29,7 +30,7 @@ useEffect(() => {
 
       try {
         const accessToken = await getAccessTokenSilently({
-          audience: `${domain}`,
+          audience: `${audience}`,
         });
 
         const url = "http://localhost:3001/api/users/";
@@ -69,7 +70,7 @@ useEffect(() => {
     // will need way to assign the logged_in user's user_id to the profile
     try {
       const accessToken = await getAccessTokenSilently({
-        audience: `${domain}`,
+        audience: `${audience}`,
       });
 
       const url = "http://localhost:3001/api/profiles/";
@@ -126,7 +127,6 @@ useEffect(() => {
               <div
                 className="mb-2"
                 onChange={(e) => setPronoun(e.target.value)}
-                checked={pronoun}
               >
                 <Form.Check
                   value="He/Him/His"
@@ -181,7 +181,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="lowest_intensity"
-                  checked={1 === intensity}
+                  checked={'1' == intensity}
                 />
                 <Form.Check
                   inline
@@ -190,7 +190,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="low_intensity"
-                  checked={2 === intensity}
+                  checked={'2' == intensity}
                 />
                 <Form.Check
                   inline
@@ -199,7 +199,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="mid_intensity"
-                  checked={3 === intensity}
+                  checked={'3' == intensity}
                 />
                 <Form.Check
                   inline
@@ -208,7 +208,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="high_intensity"
-                  checked={4 === intensity}
+                  checked={'4' == intensity}
                 />
                 <Form.Check
                   inline
@@ -217,7 +217,7 @@ useEffect(() => {
                   name="intensity"
                   type="radio"
                   id="highest_intensity"
-                  checked={5 === intensity}
+                  checked={'5' == intensity}
                 />
               </div>
             </Col>

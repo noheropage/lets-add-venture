@@ -14,9 +14,9 @@ router.post("/upload", async (req, res) => {
 
     // values will need to be adjusted once access control established
     const imageData = await Photo.create({
-      owner_id: 1,
+      owner_id: req.body.user_id,
       owner_type: 'user',
-      uploader_id: 1,
+      uploader_id: req.body.user_id,
       url: uploadedResponse.url,
     })
 

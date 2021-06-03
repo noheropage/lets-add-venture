@@ -9,27 +9,29 @@ import ExternalApi from "../../utils/external-api";
 import { useApi } from "../../utils/tokenHook";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+require('dotenv').config();
 
 // establish state for profile image and user files
 const Profile = () => {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, user } = useAuth0();
+  const auth0id = user.sub.split('|', 2)[1]
 
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState(placeholder);
 
-  const [user, setUser] = useState({});
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
     const getUser = async () => {
-      const domain = "http://localhost:3000/";
+      const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
       try {
         const accessToken = await getAccessTokenSilently({
-          audience: `${domain}`,
+          audience: `${audience}`,
         });
 
-        const url = "http://localhost:3001/api/users/1";
+        const url = `http://localhost:3001/api/users/${auth0id}`;
 
         const res = await axios.get(url, {
           headers: {
@@ -38,10 +40,12 @@ const Profile = () => {
         });
         // console.log(res.data.profile);
         
-        setUser(res.data.profile);
-        // console.log(accessToken);
+        setProfile(res.data.profile);
+        console.log(res.data);
         const photoLength = res.data.photos.length
-        setPreviewSource(res.data.photos[photoLength -1].url)
+        if (photoLength) {
+          setPreviewSource(res.data.photos[photoLength -1].url)
+        }
       } catch (error) {
         console.log(error.message);
       }
@@ -81,7 +85,10 @@ const Profile = () => {
     try {
       await fetch("http://localhost:3001/api/images/upload", {
         method: "POST",
-        body: JSON.stringify({ data: base64EncodedImage }),
+        body: JSON.stringify({ 
+          data: base64EncodedImage,
+          user_id: profile.user_id
+         }),
         headers: { "Content-type": "application/json" },
       });
       setFileInputState("");
@@ -130,15 +137,18 @@ const Profile = () => {
           </div>
         </div>
         <div className="username">
-          <h1> {user.user_name}</h1>
-          <h6> {user.user_pronoun} </h6>
+          <h1> {profile.user_name}</h1>
+          <h6> {profile.user_pronoun} </h6>
+          <Button href='/questions'>
+            Edit Profile
+          </Button>
         </div>
         <div className="list">
           <ListGroup variant="flush">
-            <ListGroup.Item>Preferred Intensity: {user.user_intensity}</ListGroup.Item>
-            <ListGroup.Item>Climbing Ability: {user.climbing_ability}</ListGroup.Item>
-            <ListGroup.Item>Bouldering Ability: {user.bouldering_ability}</ListGroup.Item>
-          <ListGroup.Item>Climbing History: {user.past_climbs}</ListGroup.Item>
+            <ListGroup.Item>Preferred Intensity: {profile.user_intensity}</ListGroup.Item>
+            <ListGroup.Item>Climbing Ability: {profile.climbing_ability}</ListGroup.Item>
+            <ListGroup.Item>Bouldering Ability: {profile.bouldering_ability}</ListGroup.Item>
+          <ListGroup.Item>Climbing History: {profile.past_climbs}</ListGroup.Item>
           </ListGroup>
         </div>
       </div>

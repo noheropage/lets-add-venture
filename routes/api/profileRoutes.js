@@ -13,7 +13,11 @@ router.post('/', async (req, res) => {
             }
         }).then((obj) => {
             if (obj) {
-                return obj.update(req.body)
+                return Profile.update(req.body, {
+                    where: {
+                        user_id: req.body.user_id
+                    }
+                })
             } else {
                 return Profile.create(req.body)
             }

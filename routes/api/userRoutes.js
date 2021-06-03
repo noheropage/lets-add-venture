@@ -13,9 +13,12 @@ router.get('/', async (req, res) => {
     }
 })
 //get a single user by the id
-router.get('/:id', jwtCheck, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try{
-        const singleUser = await User.findByPk(req.params.id, {
+        const singleUser = await User.findOne({
+            where: {
+                auth0_id: req.params.id
+            },
             include: [
             {
                 model: User,
