@@ -19,7 +19,7 @@ export default function ClimbCard(props) {
   //   API.saveClimb.then
   // })
 
-  const climbInfo = {
+  const climbData = {
     image: props.image,
     name: props.climbTitle,
     rating: props.difficulty,
@@ -31,16 +31,19 @@ export default function ClimbCard(props) {
   function handleClick(e) {
     setClimb({
       ...climb,
-      name: props.climbTitle,
-      rating: props.difficulty,
+      climbData,
     });
-    console.log(climbInfo);
+    console.log(climbData);
     postToApi();
   }
 
   function postToApi() {
     API.saveToPastClimb({
-      climbInfo,
+      // climbData,
+      id: "9",
+      name: props.climbTitle,
+      user_id: "1",
+      rating: props.difficulty,
     }).catch((err) => console.log(err));
   }
 
