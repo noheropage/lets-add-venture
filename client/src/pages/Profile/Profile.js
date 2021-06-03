@@ -4,9 +4,6 @@ import placeholder from "../../images/profile_placeholder.png";
 import "./Profile.css";
 import Nav from "../../components/Nav";
 import API from "../../utils/API";
-import ExternalApi from "../../utils/external-api";
-// import CallApi from '../../utils/tokenHook'
-import { useApi } from "../../utils/tokenHook";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 require('dotenv').config();
@@ -31,21 +28,26 @@ const Profile = () => {
           audience: `${audience}`,
         });
 
-        const url = `http://localhost:3001/api/users/${auth0id}`;
+        const url = `http://localhost:3001/api/users/profile/${auth0id}`;
 
         const res = await axios.get(url, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        // console.log(res.data.profile);
         
+        if (!res.data.profile) {
+          document.location='/questions'
+          return; 
+        }
+
         setProfile(res.data.profile);
-        console.log(res.data);
+        console.log(res.data.profile);
         const photoLength = res.data.photos.length
         if (photoLength) {
           setPreviewSource(res.data.photos[photoLength -1].url)
         }
+
       } catch (error) {
         console.log(error.message);
       }

@@ -94,7 +94,6 @@ useEffect(() => {
     document.location='/profile'
   };
 
-//   if fields are filled out, submit button should post this data to the API which will use ?user?profile route to save the data in the profile table. Will need user_id of the logged_in user to make sure it is saving correctly
 
   return (
     <div className="profile-q-background">
@@ -112,7 +111,7 @@ useEffect(() => {
               <input
                 className="form-control"
                 type="text"
-                placeholder="Pick a username"
+                placeholder="Pick a username (required)"
                 name="user-name"
                 onChange={(e) => setUsername(e.target.value)}
                 defaultValue={username}
@@ -259,7 +258,7 @@ useEffect(() => {
             </Col>
           </Row> */}
 
-          <Button type="submit" className="home-buttons">
+          <Button type="submit" className="home-buttons" disabled={!username}>
             Submit
           </Button>
         </Container>
