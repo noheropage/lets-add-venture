@@ -9,3 +9,47 @@
   border: none !important;
   margin-bottom: 55px;
 }
+
+
+.climb-title-map {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #281414;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+.search {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  z-index: 10;
+
+.wrap-pagination{
+  display:table;
+  padding: 10px 20px;
+  width: 90%
+}
+
+.pagination{
+  margin-top: 15px;
+  display:table;
+  list-style-position: inside;
+}
+
+.page-item {
+  margin:0 4px 4px 0;
+  display: inline-block;
+  width: 70px;
+  height: 50px;
+  list-style: none;
+}
+.page-item:nth-child(7){
+  margin-right: 0px;
+
+}
