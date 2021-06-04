@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import ClimbCard from "../../components/ClimbCard";
+import PaginationList from "../../components/Pagniation";
 import API from "../../utils/API";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -16,61 +17,47 @@ function Map() {
   const [climbData, setClimbData] = useState([]);
   const [query, setQuery] = useState("");
   const [distance, setDistance] = useState(3);
+  const [geoCode, setGeocode] = useState({});
   const [filterYSP, setFilterYSP] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(20);
+
+  useEffect(() => {
+    const  fetchPosts = async () => {
+      setLoading(true);
+      const climbAPIData = await API.getClimb(`${geoCode.lat}`, `${geoCode.lng}`, `${distance}`);
+      console.log(geoCode.lattt, geoCode.long, "this is the lattitude and longitude?");
+      console.log(climbAPIData.data, "this is the climb data");
+  
+      setClimbData(climbAPIData.data);
+      setLoading(false)
+    }
+    fetchPosts()
+  },[geoCode])
 
   Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
   Geocode.setLanguage("en");
   Geocode.setRegion("usa");
 
-  //     API.getClimb(geoCodeCoord)
-  //         .then((response) => {
-  //             console.log(response)
-  //             setClimbData(response.data)
-  //         })
-  //         .catch(err => console.error(err))
-  //     console.log(climbData)
   const climbByLocation = async () => {
-    console.log(distance, ' is the distance you have searched')
-
+    
     const locationInput = await Geocode.fromAddress(query);
     let { lat, lng } = locationInput.results[0].geometry.location;
-    const climbAPIData = await API.getClimb(`${lat}`, `${lng}`, `${distance}`);
-    console.log(lat, lng, "this is the lattitude and longitude?");
-    console.log(climbAPIData.data, "this is the climb data");
 
-    setClimbData(climbAPIData.data);
+    setGeocode({lat: lat, lng: lng})
+    console.log(geoCode.lat, geoCode.lng)
+
   };
 
-  // function placeToCoord(e) {
-  // Geocode.setApiKey("AIzaSyDrxtAZWs9eENCjWHEOSK4dnGcDuc1NTY0");
-  // Geocode.setLanguage('en');
+  //get current posts
+  const indexOfLastPost = currentPage *postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = climbData.slice(indexOfFirstPost, indexOfLastPost)
 
-  // Geocode.setRegion('usa')
-  // console.log(query)
-
-  //     Geocode.fromAddress(query).then(
-  //         (response) => {
-  //             const { lat, lng } = response.results[0].geometry.location;
-  //             console.log(response)
-  //             setGeoCodeCoord(`${lat}, ${lng}`);
-  //             console.log(geoCodeCoord, 'these are the geocode coords for, ', query)
-  //         },
-  //         (error) => {
-  //         console.error(error)
-  //         }
-  //     )
-  // }
-
-  // function renderClimbs() {
-
-  //     API.getClimb(geoCodeCoord)
-  //         .then((response) => {
-  //             console.log(response)
-  //             setClimbData(response.data)
-  //         })
-  //         .catch(err => console.error(err))
-  //     console.log(climbData)
-  // }
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div className="container map-background">
@@ -129,7 +116,7 @@ function Map() {
 
             {filterYSP.length ? (
               <div className="container row" loading="lazy">
-                {climbData
+                {currentPosts
                   .filter((newClimbs) => newClimbs.yds === filterYSP)
                   .map((climb) => (
                     <ClimbCard
@@ -143,7 +130,7 @@ function Map() {
               </div>
             ) : (
               <div className="container row" loading="lazy">
-                {climbData.map((climb) => (
+                {currentPosts.map((climb) => (
                   <ClimbCard
                     key={climb.meta_mp_route_id}
                     climbTitle={climb.name}
@@ -162,7 +149,7 @@ function Map() {
 
       {filterYSP.length ? (
         <div className="container row" loading="lazy">
-          {climbData
+          {currentPosts
             .filter((newClimbs) => newClimbs.yds === filterYSP)
             .map((climb) => (
               <ClimbCard
@@ -173,10 +160,11 @@ function Map() {
                 wall={climb.meta_parent_sector}
               />
             ))}
+          <PaginationList className="pr-2" postsPerPage ={postsPerPage} totalPosts={climbData.length} paginate={paginate} />
         </div>
       ) : (
         <div className="container row" loading="lazy">
-          {climbData.map((climb) => (
+          {currentPosts.map((climb) => (
             <ClimbCard
               key={climb.meta_mp_route_id}
               climbTitle={climb.name}
@@ -185,6 +173,7 @@ function Map() {
               wall={climb.meta_parent_sector}
             />
           ))}
+          <PaginationList postsPerPage ={postsPerPage} totalPosts={climbData.length} paginate={paginate}/>
         </div>
       )}
     </div>
