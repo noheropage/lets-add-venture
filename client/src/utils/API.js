@@ -2,7 +2,7 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 // import getToken from './APIconfig'
 
-const baseUrl = "http://localhost:3001/";
+const baseUrl = "http://localhost:3001";
 
 export default {
   //get users
@@ -14,12 +14,6 @@ export default {
   getUser: function (id) {
     return axios.get(baseUrl + "/api/users/" + id);
   },
-  // ========================================================
-  //   //get single user by name
-  //   getUser: function (name) {
-  //     return axios.get(baseUrl + "/api/users/" + name);
-  //   },
-  // ========================================================
   //saving user data
   saveUser: function (userData) {
     return axios.post(baseUrl + "/api/users", userData);
@@ -33,9 +27,9 @@ export default {
     return axios.get(baseUrl + "/api/users/friends/" + id);
   },
 
-  getClimb: function (lat, lng) {
+  getClimb: function (lat, lng, dist) {
     return axios.get(
-      `https://climb-api.openbeta.io/geocode/v1/climbs?latlng=${lat}%2C${lng}&radius=3`
+      `https://climb-api.openbeta.io/geocode/v1/climbs?latlng=${lat}%2C${lng}&radius=${dist}`
     );
   },
 
@@ -55,6 +49,7 @@ export default {
 
   //save climb
   saveToPastClimb: function (climbData) {
+    console.log(climbData);
     return axios.post(baseUrl + "/api/pastClimbs", climbData);
   },
 
