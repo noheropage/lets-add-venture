@@ -14,7 +14,23 @@ require("dotenv").config();
 function Map() {
   const [climbData, setClimbData] = useState([]);
   const [query, setQuery] = useState("");
+  const [geoCode, setGeocode] = useState({});
   const [filterYSP, setFilterYSP] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [postsPerPage, setPostsPerPage] = useState(25);
+
+  useEffect(() => {
+    const  fetchPosts = async () => {
+      setLoading(true);
+      const climbAPIData = await API.getClimb(`${geoCode.lat}`, `${geoCode.lng}`);
+      console.log(geoCode.lattt, geoCode.long, "this is the lattitude and longitude?");
+      console.log(climbAPIData.data, "this is the climb data");
+  
+      setClimbData(climbAPIData.data);
+      setLoading(false)
+    }
+    fetchPosts()
+  },[geoCode])
 
   Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
   Geocode.setLanguage("en");
@@ -30,43 +46,11 @@ function Map() {
   const climbByLocation = async () => {
     const locationInput = await Geocode.fromAddress(query);
     let { lat, lng } = locationInput.results[0].geometry.location;
-    const climbAPIData = await API.getClimb(`${lat}`, `${lng}`);
-    console.log(lat, lng, "this is the lattitude and longitude?");
-    console.log(climbAPIData.data, "this is the climb data");
-
-    setClimbData(climbAPIData.data);
+    setGeocode({lat: lat, lng: lng})
+    console.log(geoCode.lat, geoCode.lng)
   };
 
-  // function placeToCoord(e) {
-  // Geocode.setApiKey("AIzaSyDrxtAZWs9eENCjWHEOSK4dnGcDuc1NTY0");
-  // Geocode.setLanguage('en');
 
-  // Geocode.setRegion('usa')
-  // console.log(query)
-
-  //     Geocode.fromAddress(query).then(
-  //         (response) => {
-  //             const { lat, lng } = response.results[0].geometry.location;
-  //             console.log(response)
-  //             setGeoCodeCoord(`${lat}, ${lng}`);
-  //             console.log(geoCodeCoord, 'these are the geocode coords for, ', query)
-  //         },
-  //         (error) => {
-  //         console.error(error)
-  //         }
-  //     )
-  // }
-
-  // function renderClimbs() {
-
-  //     API.getClimb(geoCodeCoord)
-  //         .then((response) => {
-  //             console.log(response)
-  //             setClimbData(response.data)
-  //         })
-  //         .catch(err => console.error(err))
-  //     console.log(climbData)
-  // }
 
   return (
     <div className="container map-background">
