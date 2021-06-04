@@ -5,51 +5,34 @@ import AuthNav from "../auth-nav";
 import API from "../../utils/API";
 
 function Nav() {
-  const [search, setSearch] = useState({});
+  const [find, setFind] = useState("");
 
   function handleInputChange(event) {
-    console.log("This is the search input!");
-    const { name, value } = event.target;
-    setSearch({ ...search, [name]: value });
-    console.log(event.target);
+    setFind(event.target.value);
   }
 
-  function handleFormSubmit(event) {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("This is the search button!");
-    // API.getUser({ ...search, [name]: value })
-    // API.getUser(search)
-    //   .then(document.location.replace("/profile/:id"))
-    //   .catch((err) => console.log(err));
-  }
-
-  /*
-    if(res) {
-      document.location.replace("/profile" + id)
-    } else {
-      console.log("We could not find that profile")
-    }
-  */
+    console.log(find);
+    const query = { first_name: find };
+    const searchResult = await API.postUsers(query);
+    console.log(searchResult.data[0].id);
+    const userId = searchResult.data[0].id;
+    document.location.replace("/profile/" + userId);
+  };
 
   return (
     <div>
       <Navbar id="navbar">
-        <form>
-          <input
-            id="nav-searchbar"
-            type="text"
-            name="user-search"
-            placeholder="Search users"
-            onChange={handleInputChange}
-          ></input>
-          <button
-            id="nav-search-button"
-            type="submit"
-            onClick={handleFormSubmit}
-          >
-            Search
-          </button>
-        </form>
+        {/* <form> */}
+        <input
+          type="text"
+          // name="userSearch"
+          placeholder="Search users"
+          onChange={(event) => setFind(event.target.value)}
+        ></input>
+        <button onClick={handleFormSubmit}>Search</button>
+        {/* </form> */}
       </Navbar>
       <Navbar id="navbar">
         <button id="nav-profile-button">Profile</button>
