@@ -8,18 +8,28 @@ function Nav() {
   const [search, setSearch] = useState({});
 
   function handleInputChange(event) {
-    // console.log("This is the search bar!");
-
+    console.log("This is the search input!");
     const { name, value } = event.target;
     setSearch({ ...search, [name]: value });
-    console.log(search);
+    console.log(event.target);
   }
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    // console.log("This is the search button!");
-    //   API.getUser({})
+    console.log("This is the search button!");
+    // API.getUser({ ...search, [name]: value })
+    // API.getUser(search)
+    //   .then(document.location.replace("/profile/:id"))
+    //   .catch((err) => console.log(err));
   }
+
+  /*
+    if(res) {
+      document.location.replace("/profile" + id)
+    } else {
+      console.log("We could not find that profile")
+    }
+  */
 
   return (
     <div>

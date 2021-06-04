@@ -16,9 +16,9 @@ router.get("/", async (req, res) => {
 router.get("/profile/:id", jwtCheck, async (req, res) => {
   try {
     const singleUser = await User.findOne({
-        where: {
-          auth0_id: req.params.id,
-        },
+      where: {
+        auth0_id: req.params.id,
+      },
       include: [
         {
           model: Profile,
@@ -38,6 +38,34 @@ router.get("/profile/:id", jwtCheck, async (req, res) => {
     res.status(500).json(err);
   }
 });
+// =======================================================================
+// //get a single user's profile information by their name
+// router.get("/profile/:name", jwtCheck, async (req, res) => {
+//   try {
+//     const singleUser = await User.findOne({
+//       where: {
+//         auth0_id: req.params.user_name,
+//       },
+//       include: [
+//         {
+//           model: Profile,
+//         },
+//         {
+//           model: Photo,
+//         },
+//       ],
+//     });
+
+//     if (!singleUser) {
+//       res.status(400).json({ message: "there is no user with that name" });
+//     }
+//     res.status(200).json(singleUser);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
+// ==============================================================================
 //gets single user's friends by the user id
 router.get("/friends/:id", async (req, res) => {
   try {
@@ -68,9 +96,9 @@ router.get("/friends/:id", async (req, res) => {
 router.get("/pastClimbs/:id", async (req, res) => {
   try {
     const singleUser = await User.findOne({
-        where: {
-          auth0_id: req.params.id,
-        },
+      where: {
+        auth0_id: req.params.id,
+      },
       include: [
         {
           model: PastClimbs,

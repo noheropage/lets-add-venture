@@ -6,12 +6,12 @@ import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-require('dotenv').config();
+require("dotenv").config();
 
 // establish state for profile image and user files
 const Profile = () => {
   const { getAccessTokenSilently, user } = useAuth0();
-  const auth0id = user.sub.split('|', 2)[1]
+  const auth0id = user.sub.split("|", 2)[1];
 
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
@@ -35,19 +35,18 @@ const Profile = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        
+
         if (!res.data.profile) {
-          document.location='/questions'
-          return; 
+          document.location = "/questions";
+          return;
         }
 
         setProfile(res.data.profile);
-        console.log(res.data.profile);
-        const photoLength = res.data.photos.length
+        // console.log(res.data.profile);
+        const photoLength = res.data.photos.length;
         if (photoLength) {
-          setPreviewSource(res.data.photos[photoLength -1].url)
+          setPreviewSource(res.data.photos[photoLength - 1].url);
         }
-
       } catch (error) {
         console.log(error.message);
       }
@@ -87,10 +86,10 @@ const Profile = () => {
     try {
       await fetch("http://localhost:3001/api/images/upload", {
         method: "POST",
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           data: base64EncodedImage,
-          user_id: profile.user_id
-         }),
+          user_id: profile.user_id,
+        }),
         headers: { "Content-type": "application/json" },
       });
       setFileInputState("");
@@ -130,10 +129,10 @@ const Profile = () => {
             <Button
               hidden={!fileInputState}
               variant="success"
-              className='mt-2'
+              className="mt-2"
               type="submit"
               value="submit"
-              size='sm'
+              size="sm"
               onClick={handleSubmitFile}
             >
               Submit
@@ -143,16 +142,24 @@ const Profile = () => {
         <div className="username">
           <h1> {profile.user_name}</h1>
           <h6> {profile.user_pronoun} </h6>
-          <Button href='/questions' variant='outline-info' size='sm'>
+          <Button href="/questions" variant="outline-info" size="sm">
             Edit Profile
           </Button>
         </div>
         <div className="list">
           <ListGroup variant="flush">
-            <ListGroup.Item>Preferred Intensity: {profile.user_intensity}</ListGroup.Item>
-            <ListGroup.Item>Climbing Ability: {profile.climbing_ability}</ListGroup.Item>
-            <ListGroup.Item>Bouldering Ability: {profile.bouldering_ability}</ListGroup.Item>
-          <ListGroup.Item>Climbing History: {profile.past_climbs}</ListGroup.Item>
+            <ListGroup.Item>
+              Preferred Intensity: {profile.user_intensity}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Climbing Ability: {profile.climbing_ability}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Bouldering Ability: {profile.bouldering_ability}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Climbing History: {profile.past_climbs}
+            </ListGroup.Item>
           </ListGroup>
         </div>
       </div>
