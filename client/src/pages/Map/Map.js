@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import ClimbCard from "../../components/ClimbCard";
 import PaginationList from "../../components/Pagniation";
+import Loading from '../../components/loading.js'
 import API from "../../utils/API";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
 import Col from "react-bootstrap/Col";
 import Geocode from "react-geocode";
 import "./Map.css";
@@ -19,19 +19,19 @@ function Map() {
   const [distance, setDistance] = useState(3);
   const [geoCode, setGeocode] = useState({});
   const [filterYSP, setFilterYSP] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loadingClimbs, setLoadingClimbs] = useState(false);
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setPostsPerPage] = useState(20);
 
   useEffect(() => {
     const  fetchPosts = async () => {
-      setLoading(true);
+      setLoadingClimbs(true);
       const climbAPIData = await API.getClimb(`${geoCode.lat}`, `${geoCode.lng}`, `${distance}`);
       console.log(geoCode.lattt, geoCode.long, "this is the lattitude and longitude?");
       console.log(climbAPIData.data, "this is the climb data");
   
       setClimbData(climbAPIData.data);
-      setLoading(false)
+      setLoadingClimbs(false)
     }
     fetchPosts()
   },[geoCode])
@@ -50,10 +50,11 @@ function Map() {
 
   };
 
-  //get current posts
+  //get current posts for pagination
   const indexOfLastPost = currentPage *postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = climbData.slice(indexOfFirstPost, indexOfLastPost)
+
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -77,6 +78,7 @@ function Map() {
             loading="lazy"
           ></iframe>
         </div>
+        {/* forms */}
         <div className="justify-content-center search-bar pt-4 row">
           <Col xs={8} sm={8} md={6}>
             <input
@@ -86,8 +88,8 @@ function Map() {
               onChange={(event) => setQuery(event.target.value)}
             />
               <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>With a search area of... km</Form.Label>
-                <Form.Control as="select" onChange={(event) => setDistance(event.target.value)}>
+                <Form.Label></Form.Label>
+                <Form.Control placeholder= "search with a radius of... km" as="select" onChange={(event) => setDistance(event.target.value)}>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -100,7 +102,7 @@ function Map() {
             <Button onClick={climbByLocation}> Search </Button>
           </Col>
         </div>
-
+        {/* mapping */}
         {climbData.length ? (
           <div>
             <div className="search-bar pt-4 row">
@@ -116,7 +118,7 @@ function Map() {
 
             {filterYSP.length ? (
               <div className="container row" loading="lazy">
-                {currentPosts
+                {climbData
                   .filter((newClimbs) => newClimbs.yds === filterYSP)
                   .map((climb) => (
                     <ClimbCard
@@ -129,53 +131,36 @@ function Map() {
                   ))}
               </div>
             ) : (
-              <div className="container row" loading="lazy">
-                {currentPosts.map((climb) => (
-                  <ClimbCard
-                    key={climb.meta_mp_route_id}
-                    climbTitle={climb.name}
-                    FrAsc={climb.fa}
-                    difficulty={climb.yds}
-                    wall={climb.meta_parent_sector}
-                  />
-                ))}
-              </div>
+                <div>
+                  {loadingClimbs ? (Loading()): (
+                    <div className="container row" loading="lazy">                
+                        {currentPosts.map((climb) => (
+                          <ClimbCard
+                            key={climb.meta_mp_route_id}
+                            climbTitle={climb.name}
+                            FrAsc={climb.fa}
+                            difficulty={climb.yds}
+                            wall={climb.meta_parent_sector}
+                          />
+                        ))}
+                        <PaginationList postsPerPage ={postsPerPage} totalPosts={climbData.length} paginate={paginate}/>
+                      </div>
+                  )} 
+                </div>
             )}
-          </div>
-        ) : (
-          <h4></h4>
+        </div>) : (
+        <h4></h4>
         )}
-      </div>
-
-      {filterYSP.length ? (
-        <div className="container row" loading="lazy">
-          {currentPosts
-            .filter((newClimbs) => newClimbs.yds === filterYSP)
-            .map((climb) => (
-              <ClimbCard
-                key={climb.meta_mp_route_id}
-                climbTitle={climb.name}
-                FrAsc={climb.fa}
-                difficulty={climb.yds}
-                wall={climb.meta_parent_sector}
-              />
-            ))}
-          <PaginationList className="pr-2" postsPerPage ={postsPerPage} totalPosts={climbData.length} paginate={paginate} />
         </div>
-      ) : (
-        <div className="container row" loading="lazy">
-          {currentPosts.map((climb) => (
-            <ClimbCard
-              key={climb.meta_mp_route_id}
-              climbTitle={climb.name}
-              FrAsc={climb.fa}
-              difficulty={climb.yds}
-              wall={climb.meta_parent_sector}
-            />
-          ))}
-          <PaginationList postsPerPage ={postsPerPage} totalPosts={climbData.length} paginate={paginate}/>
-        </div>
-      )}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
     </div>
   );
 }
