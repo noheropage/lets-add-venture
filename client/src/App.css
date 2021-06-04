@@ -9,3 +9,13 @@
   border: none !important;
   margin-bottom: 55px;
 }
+
+.climb-title-map {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #281414;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
