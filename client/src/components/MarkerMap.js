@@ -2,6 +2,7 @@ import React from 'react'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { useState, useEffect } from 'react'
 import { formatRelative } from "date-fns";
+import "@reach/combobox/styles.css";
 
 import usePlacesAutoComplete, { getGeoCode, getLatLng } from "use-places-autocomplete";
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
@@ -18,7 +19,7 @@ const mapContainerStyle = {
     height: "80vh",
 };
 
-function MarkerMap() {
+function MarkerMap(props) {
     const [currentPosition, setCurrentPosition] = useState({});
 
     //when the page loads, land on your current position
@@ -62,13 +63,13 @@ function MarkerMap() {
     const [selected, setSelected] = React.useState(null);
 
     //when you click on the map, places a climb svg
-    const onMapClick = React.useCallback((event) => {
-        setMarkers(current => [...current, {
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng(),
-            time: new Date(),
-        }]);
-    }, []);
+    // const onMapClick = React.useCallback((event) => {
+    //     setMarkers(current => [...current, {
+    //         lat: event.latLng.lat(),
+    //         lng: event.latLng.lng(),
+    //         time: new Date(),
+    //     }]);
+    // }, []);
 
     // passed in when the map loads, gives us the map that we can assign to the ref for use later without causing re-renders
     const mapRef = React.useRef();
@@ -88,12 +89,13 @@ function MarkerMap() {
                 zoom={10}
                 center={currentPosition}
                 options={options}
-                onClick={onMapClick}
+                // onClick={onMapClick}
                 onLoad={onMapLoad}>
 
                 {markers.map((marker) => (
                     <Marker key={marker.time.toISOString()}
-                        position={{ lat: marker.lat, lng: marker.lng }}
+                        position={{ lat: props.lat, lng: props.lng }}
+                        // position={{ lat: marker.lat, lng: marker.lng }}
                         icon={{
                             url: '/climbing.svg',
                             scaledSize: new window.google.maps.Size(32, 32),
@@ -126,12 +128,16 @@ function MarkerMap() {
 
 //Can we make this to the lat/lng of user?
 function Search() {
-    const { ready, value, suggestions: { status, data },
-        setValue, clearSuggestion,
+    const {
+        ready,
+        value,
+        suggestions: { status, data },
+        setValue,
+        clearSuggestion,
     } = usePlacesAutoComplete({
         requestOptions: {
             location: { lat: () => 61.24677, lng: () => -149.92566 },
-            raduis: 200 * 1000,
+            radius: 200 * 1000,
         },
     });
 
@@ -139,21 +145,26 @@ function Search() {
         <div className="search">
             <Combobox onSelect={(address) => {
                 console.log(address);
-            }}>
-                <ComboboxInput value={value} onChange={(e) => {
-                    setValue(e.target.value)
-                }}
+            }}
+            >
+                <ComboboxInput
+                    value={value}
+                    onChange={(e) => {
+                        setValue(e.target.value)
+                    }}
                     disabled={!ready}
-                    placeHolder="Enter an address"
+                    placeholder="Enter an address"
                 />
                 <ComboboxPopover>
-                    {status === "ok" && data.map(({ id, description }) => (
-                        <ComboboxOption key={id} value={description} />
+                    {status === "OK" && data.map(({ id, description }) => (
+                        <ComboboxOption key={id}
+                            value={description}
+                        />
                     ))}
                 </ComboboxPopover>
             </Combobox>
         </div>
-    )
+    );
 }
 
 export default MarkerMap
