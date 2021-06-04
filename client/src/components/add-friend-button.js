@@ -4,24 +4,42 @@ import Button from "react-bootstrap/Button";
 
 function AddFriendButton(props) {
     const isHome = props.ownProfile
-    console.log(isHome);
-    const [button, setButton] = useState()
+    
+    const [button, setButton] = useState({
+        variant: 'primary',
+        text: 'Add Friend',
+    })
+    const [friend, setFriend] = useState({
+        auth0_id: props.auth0_id,
+        receiver: props.receiver,
+        status: 1,
+    })
 
-    const handleClick = () => {
-        // change look of button...? set state?
-        setButton({
-            value: 'Pending',
-            variant: "success",
+    useEffect(() => {
+
+    })
+
+    const handleClick = (e) => {
+        console.log('Add friend clicked');
+        handleAPI()
+        setButton(e.target = {
+            text: 'Pending',
+            variant: 'success',
             disabled: true
         })
-        handleAPI()
     }
 
-    const handleAPI = () => {
-        API.sendFriendRequest({
-            auth0_id: props.auth0_id,
-            receiver: props.id,
-            status: 1
+    const handleAPI = async () => {
+        console.log(friend);
+        await API.sendFriendRequest(friend).then(res => {
+            console.log(res.data);
+            setButton({
+                    text: 'Pending...',
+                    variant: "success",
+                    disabled: true
+                })
+        }).catch(err => {
+            console.log(err)
         })
     }
 
@@ -29,9 +47,10 @@ function AddFriendButton(props) {
         <Button
         hidden={isHome}
         onClick={handleClick}
-        variant='primary'
+        variant={button.variant}
+        disabled= {button.disabled}
         >
-            Add friend
+            {button.text}
         </Button>
     )
 }

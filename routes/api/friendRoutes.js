@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     try {
         const singleUser = await User.findOne({
             where: {
-              auth0_id: req.params.id,
+              auth0_id: req.body.auth0_id,
             },
           })
           console.log(singleUser);

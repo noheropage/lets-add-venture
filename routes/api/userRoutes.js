@@ -21,7 +21,6 @@ router.get("/profile/:id", jwtCheck, async (req, res) => {
             [Op.or]: [
               { auth0_id: req.params.id },
               { id: req.params.id },
-              { email: req.params.id }
             ]
         },
       include: [

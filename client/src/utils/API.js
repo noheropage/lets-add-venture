@@ -29,7 +29,7 @@ export default {
   },
 
   sendFriendRequest: function (friend) {
-      return axios.post(baseUrl + 'api/friends', friend)
+      return axios.post(baseUrl + '/api/friend', friend)
   },
 
   getClimb: function (lat, lng) {

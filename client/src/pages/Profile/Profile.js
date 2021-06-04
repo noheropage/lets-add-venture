@@ -185,10 +185,12 @@ const Profile = () => {
           </Button>
 
           <AddFriendButton
+          onClick={handleClick}
           ownProfile={isHome}
           auth0_id={auth0id}
           receiver={profile.user_id}
           ></AddFriendButton>
+
         </div>
         <div className="list">
           <ListGroup variant="flush">
