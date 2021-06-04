@@ -28,9 +28,9 @@ export default {
     return axios.get(baseUrl + "/api/users/friends/" + id);
   },
 
-  getClimb: function (lat, lng) {
+  getClimb: function (lat, lng, dist) {
     return axios.get(
-      `https://climb-api.openbeta.io/geocode/v1/climbs?latlng=${lat}%2C${lng}&radius=3`
+      `https://climb-api.openbeta.io/geocode/v1/climbs?latlng=${lat}%2C${lng}&radius=${dist}`
     );
   },
 
