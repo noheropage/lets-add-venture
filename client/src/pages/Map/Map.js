@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import ClimbCard from "../../components/ClimbCard";
+import PaginationList from "../../components/Pagniation";
 import API from "../../utils/API";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -17,9 +18,10 @@ function Map() {
   const [query, setQuery] = useState("");
   const [distance, setDistance] = useState(3);
   const [geoCode, setGeocode] = useState({});
-  const  [filterYSP, setFilterYSP] = useState("");
+  const [filterYSP, setFilterYSP] = useState("");
   const [loading, setLoading] = useState(false);
-  const [postsPerPage, setPostsPerPage] = useState(25);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(20);
 
   useEffect(() => {
     const  fetchPosts = async () => {
@@ -48,7 +50,14 @@ function Map() {
 
   };
 
+  //get current posts
+  const indexOfLastPost = currentPage *postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = climbData.slice(indexOfFirstPost, indexOfLastPost)
 
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div className="container map-background">
@@ -107,7 +116,7 @@ function Map() {
 
             {filterYSP.length ? (
               <div className="container row" loading="lazy">
-                {climbData
+                {currentPosts
                   .filter((newClimbs) => newClimbs.yds === filterYSP)
                   .map((climb) => (
                     <ClimbCard
@@ -121,7 +130,7 @@ function Map() {
               </div>
             ) : (
               <div className="container row" loading="lazy">
-                {climbData.map((climb) => (
+                {currentPosts.map((climb) => (
                   <ClimbCard
                     key={climb.meta_mp_route_id}
                     climbTitle={climb.name}
@@ -140,7 +149,7 @@ function Map() {
 
       {filterYSP.length ? (
         <div className="container row" loading="lazy">
-          {climbData
+          {currentPosts
             .filter((newClimbs) => newClimbs.yds === filterYSP)
             .map((climb) => (
               <ClimbCard
@@ -151,10 +160,11 @@ function Map() {
                 wall={climb.meta_parent_sector}
               />
             ))}
+          <PaginationList className="pr-2" postsPerPage ={postsPerPage} totalPosts={climbData.length} paginate={paginate} />
         </div>
       ) : (
         <div className="container row" loading="lazy">
-          {climbData.map((climb) => (
+          {currentPosts.map((climb) => (
             <ClimbCard
               key={climb.meta_mp_route_id}
               climbTitle={climb.name}
@@ -163,6 +173,7 @@ function Map() {
               wall={climb.meta_parent_sector}
             />
           ))}
+          <PaginationList postsPerPage ={postsPerPage} totalPosts={climbData.length} paginate={paginate}/>
         </div>
       )}
     </div>
