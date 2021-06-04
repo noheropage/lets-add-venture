@@ -124,6 +124,7 @@ function Map() {
                       FrAsc={climb.fa}
                       difficulty={climb.yds}
                       crag={climb.meta_parent_sector}
+                      api_id={climb.meta_mp_route_id}
                     />
                   ))}
               </div>
@@ -136,6 +137,7 @@ function Map() {
                     FrAsc={climb.fa}
                     difficulty={climb.yds}
                     crag={climb.meta_parent_sector}
+                    api_id={climb.meta_mp_route_id}
                   />
                 ))}
               </div>
@@ -157,6 +159,7 @@ function Map() {
                 FrAsc={climb.fa}
                 difficulty={climb.yds}
                 crag={climb.meta_parent_sector}
+                api_id={climb.meta_mp_route_id}
               />
             ))}
         </div>
@@ -169,6 +172,7 @@ function Map() {
               FrAsc={climb.fa}
               difficulty={climb.yds}
               crag={climb.meta_parent_sector}
+              api_id={climb.meta_mp_route_id}
             />
           ))}
         </div>

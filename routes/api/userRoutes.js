@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User, Friend, Profile, Photo, PastClimbs } = require("../../models");
 const jwtCheck = require("../../utils/jwt");
+const { Op } = require('sequelize')
 
 //get all users --> Delete when no longer needed <--
 router.get("/", async (req, res) => {
@@ -16,9 +17,13 @@ router.get("/", async (req, res) => {
 router.get("/profile/:id", jwtCheck, async (req, res) => {
   try {
     const singleUser = await User.findOne({
-      where: {
-        auth0_id: req.params.id,
-      },
+        where: {
+            [Op.or]: [
+              { auth0_id: req.params.id },
+              { id: req.params.id },
+              { email: req.params.id }
+            ]
+        },
       include: [
         {
           model: Profile,
@@ -32,6 +37,7 @@ router.get("/profile/:id", jwtCheck, async (req, res) => {
     if (!singleUser) {
       res.status(400).json({ message: "there is no user with that ID" });
     }
+    console.log(singleUser);
     res.status(200).json(singleUser);
   } catch (err) {
     console.log(err);
@@ -102,7 +108,7 @@ router.post("/", async (req, res) => {
         },
       ],
     });
-
+    console.log(userData);
     res.status(200).json(userData);
   } catch (err) {
     res.status(400).json(err);

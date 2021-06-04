@@ -6,10 +6,23 @@ import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+import AddFriendButton from '../../components/add-friend-button'
+import { propTypes } from "react-bootstrap/esm/Image";
 require('dotenv').config();
+import { useParams, useLocation, Link, Redirect } from 'react-router-dom'
 
 // establish state for profile image and user files
 const Profile = () => {
+  
+  const location = useLocation()
+  const testUrl = location.pathname.split('/')
+      // const urlArrayLength = testUrl.pathname.split('/')
+      let id = parseInt(testUrl[2]) || 0
+      console.log(id);
+      
+      // console.log(urlArrayLength);
+  
+
   const { getAccessTokenSilently, user } = useAuth0();
   const auth0id = user.sub.split('|', 2)[1]
 
@@ -18,17 +31,26 @@ const Profile = () => {
   const [previewSource, setPreviewSource] = useState(placeholder);
 
   const [profile, setProfile] = useState({});
+  const [isHome, setIsHome] = useState(false)
 
   useEffect(() => {
     const getUser = async () => {
+      
+
       const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
+      if (!id) {
+        id = auth0id
+        setIsHome(true)
+        console.log('No id, you home: ' + id);
+      } 
+      
 
       try {
         const accessToken = await getAccessTokenSilently({
           audience: `${audience}`,
         });
 
-        const url = `http://localhost:3001/api/users/profile/${auth0id}`;
+        const url = `http://localhost:3001/api/users/profile/${id}`;
 
         const res = await axios.get(url, {
           headers: {
@@ -36,13 +58,24 @@ const Profile = () => {
           },
         });
         
-        if (!res.data.profile) {
-          document.location='/questions'
-          return; 
+        if (!res.data) {
+          return <Redirect to='/questions'></Redirect>; 
         }
 
         setProfile(res.data.profile);
         console.log(res.data.profile);
+
+
+        if (id === auth0id) {
+        } else if (res.data.auth0_id === auth0id) {
+          console.log('you are looking at your own id, weirdo');
+          setIsHome(true)
+        } else {
+          console.log('Not your profile');
+          setIsHome(false)
+        }
+
+        
         const photoLength = res.data.photos.length
         if (photoLength) {
           setPreviewSource(res.data.photos[photoLength -1].url)
@@ -59,6 +92,9 @@ const Profile = () => {
   const fileUploader = useRef(null);
 
   const handleClick = (e) => {
+    if (!isHome) {
+      return;
+    }
     fileUploader.current.click();
   };
 
@@ -143,9 +179,16 @@ const Profile = () => {
         <div className="username">
           <h1> {profile.user_name}</h1>
           <h6> {profile.user_pronoun} </h6>
-          <Button href='/questions' variant='outline-info' size='sm'>
+
+          <Button href='/questions' variant='outline-info' size='sm' hidden={!isHome}>
             Edit Profile
           </Button>
+
+          <AddFriendButton
+          ownProfile={isHome}
+          auth0_id={auth0id}
+          receiver={profile.user_id}
+          ></AddFriendButton>
         </div>
         <div className="list">
           <ListGroup variant="flush">

@@ -38,8 +38,7 @@ function App() {
           <Route exact path='/external-api'>
             <ExternalApi />
           </Route>
-          <ProtectedRoute exact path="/profile" component={Profile}>
-          </ProtectedRoute>
+          <ProtectedRoute path={["/profile", "/profile/:id"]} component={Profile} />
           <ProtectedRoute exact path="/map" component={Map}>
           </ProtectedRoute>
           <ProtectedRoute exact path="/questions" component={ProfileQuestions}>

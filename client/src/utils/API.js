@@ -17,7 +17,7 @@ export default {
 
   //saving user data
   saveUser: function (userData) {
-    return axios.post(baseUrl + "/api/users", userData);
+    return axios.post(baseUrl + "/api/users/", userData);
   },
   // this gets the profile data for a specific user
   getProfile: function (id) {
@@ -26,6 +26,10 @@ export default {
   //this gets a users friends by the user id
   getFriend: function (id) {
     return axios.get(baseUrl + "/api/users/friends/" + id);
+  },
+
+  sendFriendRequest: function (friend) {
+      return axios.post(baseUrl + 'api/friends', friend)
   },
 
   getClimb: function (lat, lng) {

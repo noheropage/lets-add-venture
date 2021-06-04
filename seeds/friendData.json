@@ -1,42 +1,42 @@
 [
     {
-        "friend_display": 1,
-        "friend_connect": 3,
+        "sender": 1,
+        "receiver": 3,
         "status":2
     },
     {
-        "friend_display": 3,
-        "friend_connect": 1,
+        "sender": 3,
+        "receiver": 1,
         "status":2
     },
     {
-        "friend_display": 4,
-        "friend_connect": 2,
+        "sender": 4,
+        "receiver": 2,
         "status":2
     },
     {
-        "friend_display": 2,
-        "friend_connect": 4,
+        "sender": 2,
+        "receiver": 4,
         "status":2
     },
     {
-        "friend_display": 2,
-        "friend_connect": 1,
+        "sender": 2,
+        "receiver": 1,
         "status":2
     },
     {
-        "friend_display": 1,
-        "friend_connect": 2,
+        "sender": 1,
+        "receiver": 2,
         "status":2
     },
     {
-        "friend_display": 5,
-        "friend_connect": 2,
+        "sender": 5,
+        "receiver": 2,
         "status":2
     },
     {
-        "friend_display": 2,
-        "friend_connect": 5,
+        "sender": 2,
+        "receiver": 5,
         "status":2
     }
 ]
