@@ -13,7 +13,6 @@ import { useParams, useLocation, Link, Redirect } from 'react-router-dom'
 
 // establish state for profile image and user files
 const Profile = () => {
-  
   const location = useLocation()
   const testUrl = location.pathname.split('/')
       // const urlArrayLength = testUrl.pathname.split('/')
@@ -30,64 +29,80 @@ const Profile = () => {
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState(placeholder);
 
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState({
+    // user_name: '',
+    // user_pronoun: '',
+    // user_intensity: '',
+    // climbing_ability: '',
+    // bouldering_ability: '',
+    // past_climbs: '',
+    // user_id: ''
+  });
   const [isHome, setIsHome] = useState(false)
 
   useEffect(() => {
-    const getUser = async () => {
-      
-
-      const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
-      if (!id) {
-        id = auth0id
-        setIsHome(true)
-        console.log('No id, you home: ' + id);
-      } 
-      
-
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `${audience}`,
-        });
-
-        const url = `http://localhost:3001/api/users/profile/${id}`;
-
-        const res = await axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        
-        if (!res.data) {
-          return <Redirect to='/questions'></Redirect>; 
-        }
-
-        setProfile(res.data.profile);
-        console.log(res.data.profile);
-
-
-        if (id === auth0id) {
-        } else if (res.data.auth0_id === auth0id) {
-          console.log('you are looking at your own id, weirdo');
-          setIsHome(true)
-        } else {
-          console.log('Not your profile');
-          setIsHome(false)
-        }
-
-        
-        const photoLength = res.data.photos.length
-        if (photoLength) {
-          setPreviewSource(res.data.photos[photoLength -1].url)
-        }
-
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
     getUser();
   }, []);
+
+  const getUser = async () => {
+    const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
+    if (!id) {
+      id = auth0id
+      setIsHome(true)
+      console.log('No id, you home: ' + id);
+    } 
+    
+
+    try {
+      const accessToken = await getAccessTokenSilently({
+        audience: `${audience}`,
+      });
+
+      const url = `http://localhost:3001/api/users/profile/${id}`;
+
+      const res = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      
+      if (!res.data) {
+        return <Redirect to='/questions'></Redirect>; 
+      }
+
+      setProfile({
+        user_name: res.data.profile.user_name,
+        user_pronoun: res.data.profile.user_pronoun,
+        user_intensity: res.data.profile.user_intensity,
+        climbing_ability: res.data.profile.climbing_ability,
+        bouldering_ability: res.data.profile.bouldering_ability,
+        past_climbs: res.data.profile.past_climbs,
+        user_id: res.data.profile.user_id
+      });
+      
+      console.log(res.data.profile);
+
+
+      if (id === auth0id) {
+      } else if (res.data.auth0_id === auth0id) {
+        console.log('you are looking at your own id, weirdo');
+        setIsHome(true)
+      } else {
+        console.log('Not your profile');
+        setIsHome(false)
+      }
+
+      
+      const photoLength = res.data.photos.length
+      if (photoLength) {
+        setPreviewSource(res.data.photos[photoLength -1].url)
+      }
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 
   const fileUploader = useRef(null);
 
@@ -185,10 +200,10 @@ const Profile = () => {
           </Button>
 
           <AddFriendButton
-          onClick={handleClick}
+          
+          receiver={profile.user_id}
           ownProfile={isHome}
           auth0_id={auth0id}
-          receiver={profile.user_id}
           ></AddFriendButton>
 
         </div>

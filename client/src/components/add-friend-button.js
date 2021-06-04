@@ -9,18 +9,27 @@ function AddFriendButton(props) {
         variant: 'primary',
         text: 'Add Friend',
     })
-    const [friend, setFriend] = useState({
+    const [friend, setFriend] = useState(
+        {
         auth0_id: props.auth0_id,
         receiver: props.receiver,
         status: 1,
-    })
+    }
+    )
 
     useEffect(() => {
+        setFriend({
+            auth0_id:props.auth0_id,
+            receiver:props.receiver,
+            status:1
+        })
+    } ,[props])
 
-    })
+    
 
     const handleClick = (e) => {
         console.log('Add friend clicked');
+        
         handleAPI()
         setButton(e.target = {
             text: 'Pending',
@@ -29,9 +38,9 @@ function AddFriendButton(props) {
         })
     }
 
-    const handleAPI = async () => {
+    const handleAPI = () => {
         console.log(friend);
-        await API.sendFriendRequest(friend).then(res => {
+        API.sendFriendRequest(friend).then(res => {
             console.log(res.data);
             setButton({
                     text: 'Pending...',
