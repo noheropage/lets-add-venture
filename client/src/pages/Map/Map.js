@@ -3,6 +3,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import ClimbCard from "../../components/ClimbCard";
 import API from "../../utils/API";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import Col from "react-bootstrap/Col";
 import Geocode from "react-geocode";
@@ -14,6 +15,7 @@ require("dotenv").config();
 function Map() {
   const [climbData, setClimbData] = useState([]);
   const [query, setQuery] = useState("");
+  const [distance, setDistance] = useState(3);
   const [filterYSP, setFilterYSP] = useState("");
 
   Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
@@ -28,9 +30,11 @@ function Map() {
   //         .catch(err => console.error(err))
   //     console.log(climbData)
   const climbByLocation = async () => {
+    console.log(distance, ' is the distance you have searched')
+
     const locationInput = await Geocode.fromAddress(query);
     let { lat, lng } = locationInput.results[0].geometry.location;
-    const climbAPIData = await API.getClimb(`${lat}`, `${lng}`);
+    const climbAPIData = await API.getClimb(`${lat}`, `${lng}`, `${distance}`);
     console.log(lat, lng, "this is the lattitude and longitude?");
     console.log(climbAPIData.data, "this is the climb data");
 
@@ -94,6 +98,16 @@ function Map() {
               placeholder="Search for a climb!"
               onChange={(event) => setQuery(event.target.value)}
             />
+              <Form.Group controlId="exampleForm.ControlSelect1">
+                <Form.Label>With a search area of... km</Form.Label>
+                <Form.Control as="select" onChange={(event) => setDistance(event.target.value)}>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </Form.Control>
+              </Form.Group>
           </Col>
           <Col xs={2} sm={2} md={2}>
             <Button onClick={climbByLocation}> Search </Button>
@@ -102,7 +116,7 @@ function Map() {
 
         {climbData.length ? (
           <div>
-            <div className="justify-content-center search-bar pt-4 row">
+            <div className="search-bar pt-4 row">
               <Col xs={8} sm={8} md={6}>
                 <input
                   className="ml-5 form-control"
@@ -114,7 +128,7 @@ function Map() {
             </div>
 
             {filterYSP.length ? (
-              <div className="container row">
+              <div className="container row" loading="lazy">
                 {climbData
                   .filter((newClimbs) => newClimbs.yds === filterYSP)
                   .map((climb) => (
@@ -123,19 +137,19 @@ function Map() {
                       climbTitle={climb.name}
                       FrAsc={climb.fa}
                       difficulty={climb.yds}
-                      crag={climb.meta_parent_sector}
+                      wall={climb.meta_parent_sector}
                     />
                   ))}
               </div>
             ) : (
-              <div className="container row">
+              <div className="container row" loading="lazy">
                 {climbData.map((climb) => (
                   <ClimbCard
                     key={climb.meta_mp_route_id}
                     climbTitle={climb.name}
                     FrAsc={climb.fa}
                     difficulty={climb.yds}
-                    crag={climb.meta_parent_sector}
+                    wall={climb.meta_parent_sector}
                   />
                 ))}
               </div>
@@ -147,7 +161,7 @@ function Map() {
       </div>
 
       {filterYSP.length ? (
-        <div className="container row">
+        <div className="container row" loading="lazy">
           {climbData
             .filter((newClimbs) => newClimbs.yds === filterYSP)
             .map((climb) => (
@@ -156,19 +170,19 @@ function Map() {
                 climbTitle={climb.name}
                 FrAsc={climb.fa}
                 difficulty={climb.yds}
-                crag={climb.meta_parent_sector}
+                wall={climb.meta_parent_sector}
               />
             ))}
         </div>
       ) : (
-        <div className="container row">
+        <div className="container row" loading="lazy">
           {climbData.map((climb) => (
             <ClimbCard
               key={climb.meta_mp_route_id}
               climbTitle={climb.name}
               FrAsc={climb.fa}
               difficulty={climb.yds}
-              crag={climb.meta_parent_sector}
+              wall={climb.meta_parent_sector}
             />
           ))}
         </div>
