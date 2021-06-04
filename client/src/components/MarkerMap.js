@@ -20,30 +20,35 @@ const mapContainerStyle = {
 };
 
 function MarkerMap(props) {
-    const [currentPosition, setCurrentPosition] = useState({});
+    const [currentPosition, setCurrentPosition] = useState({lat:37.8651 , lng:-119.5383 });
+    const [loading, setLoading] = useState(false);
+    const [markers, setMarkers] = React.useState([]);
+    const [selected, setSelected] = React.useState(null);
 
     //when the page loads, land on your current position
-    const success = position => {
-        const currentPosition = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
+    const setMapLocation = (lat, lng) => {
+        const newPosition = {
+            lat: lat,
+            lng: lng
         }
-        setCurrentPosition(currentPosition);
+        console.log(newPosition, 'inside success function lat and lng')
+        setCurrentPosition(newPosition);
     };
+   
+    // useEffect(() => {
+        
+    //     const setLocation = async () => {
 
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition
-            (success);
-        console.log(currentPosition)
-        axios.get("https://climb-api.openbeta.io/geocode/v1/climbs?latlng=36.135626%2C-115.428135")
-            // axios.get(`https://climb-api.openbeta.io/geocode/v1/sectors?latlng=${currentPosition.lat}${currentPosition.lng}?radius=100`)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    })
+    //         setLoading(true)
+           
+
+    //         setLoading(false)
+    //     }
+    //     setLocation()
+       
+    //     console.log(currentPosition)
+        
+    // },[currentPosition])
 
     const options = {
         //separate js file - avocado snazzy map
@@ -59,8 +64,7 @@ function MarkerMap(props) {
         libraries,
     });
 
-    const [markers, setMarkers] = React.useState([]);
-    const [selected, setSelected] = React.useState(null);
+
 
     //when you click on the map, places a climb svg
     // const onMapClick = React.useCallback((event) => {
@@ -86,8 +90,9 @@ function MarkerMap(props) {
             <Search />
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
-                zoom={10}
-                center={currentPosition}
+                zoom={12}
+                center={{lat: props.mapLat, lng: props.mapLng} || {lat: 37.8651, lng: -119.5383} }
+                disableDefaultUI= {false}
                 options={options}
                 // onClick={onMapClick}
                 onLoad={onMapLoad}>
