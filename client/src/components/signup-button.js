@@ -18,13 +18,13 @@ const SignupButton = () => {
       href='/questions'
       onClick={() =>
         loginWithRedirect({
-            redirectUri:'http://localhost:3000/questions',
-            onRedirectCallback: {onRedirectCallback},
-            screen_hint: "signup",
+          redirectUri: 'http://localhost:3000/questions',
+          onRedirectCallback: { onRedirectCallback },
+          screen_hint: "signup",
         })
       }
     >
-      Sign Up
+      <b>Sign Up</b>
     </Button>
   );
 };
