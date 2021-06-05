@@ -48,7 +48,7 @@ function MarkerMap(props) {
     }
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBRcAglui0WEbZB4Gc1UAFNkc5-VyGACVQ',
+        googleMapsApiKey: '',
         libraries,
     });
 

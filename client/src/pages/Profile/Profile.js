@@ -19,7 +19,6 @@ const Profile = () => {
   const testUrl = location.pathname.split('/')
       // const urlArrayLength = testUrl.pathname.split('/')
       let id = parseInt(testUrl[2]) || 0
-      console.log(id);
       
       // console.log(urlArrayLength);
   
@@ -58,7 +57,7 @@ const Profile = () => {
         audience: `${audience}`,
       });
 
-      const url = `http://localhost:3001/api/users/profile/${id}`;
+      const url = `https://lets-add-venture.herokuapp.com/api/users/profile/${id}`;
 
       const res = await axios.get(url, {
         headers: {
@@ -72,7 +71,7 @@ const Profile = () => {
 
       let loggedInData;
       if (!isHome) {
-        const authUrl = `http://localhost:3001/api/users/profile/${auth0id}`
+        const authUrl = `https://lets-add-venture.herokuapp.com/api/users/profile/${auth0id}`
         loggedInData = await axios.get(authUrl, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -93,8 +92,6 @@ const Profile = () => {
         userId: res.data.id
       });
       
-      console.log(res.data);
-
       setClimbArray(res.data.pastClimbs);
       // console.log(climbArray);
 
@@ -122,7 +119,6 @@ const Profile = () => {
             setIsPending(true)
           }
        } else {
-         console.log("you're not friends");
          setFriendStatusId('add friend')
        }
       }
@@ -152,7 +148,6 @@ const Profile = () => {
 
   const getFriends = (data) => {
     const friendsList = data.sender.concat(data.receiver)
-    console.log(friendsList);
     return friendsList
   }
 
@@ -188,7 +183,7 @@ const Profile = () => {
 
   const uploadImage = async (base64EncodedImage) => {
     try {
-      await fetch("http://localhost:3001/api/images/upload", {
+      await fetch("https://lets-add-venture.herokuapp.com/api/images/upload", {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,

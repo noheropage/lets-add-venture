@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = "https://lets-add-venture.herokuapp.com/";
 
 export default {
   //get users
