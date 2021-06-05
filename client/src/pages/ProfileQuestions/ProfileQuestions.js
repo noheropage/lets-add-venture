@@ -69,7 +69,7 @@ function ProfileQuestions() {
         audience: `${audience}`,
       });
 
-      const url = "http://localhost:3001/api/profiles/";
+      const url = "https://lets-add-venture.herokuapp.com/api/profiles/";
 
       const res = await axios.post(url, {
         headers: {
@@ -122,7 +122,7 @@ function ProfileQuestions() {
             >
               <label className="labels" for="pronouns">Preferred Pronoun:</label>
               <Form.Check
-                value="He / Him / His"
+                value="He/Him/His"
                 label="He | Him | His"
                 name="pronouns"
                 type="radio"

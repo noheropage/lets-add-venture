@@ -12,7 +12,7 @@ var jwtCheck = jwt({
     audience: 'https://dev-dwofmg2f.us.auth0.com/api/v2/',
     issuer: 'https://dev-dwofmg2f.us.auth0.com/',
     algorithms: ["RS256"],
-    clientOrigins: ['http://localhost:3000/'],
+    clientOrigins: ['https://lets-add-venture.netlify.app/'],
   });
 
 module.exports = jwtCheck;
