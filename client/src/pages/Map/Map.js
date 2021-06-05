@@ -139,6 +139,7 @@ function Map() {
                             FrAsc={climb.fa}
                             difficulty={climb.yds}
                             wall={climb.meta_parent_sector}
+                            api_id={climb.meta_mp_route_id}
                           />
                         ))}
                         <PaginationList postsPerPage ={postsPerPage} totalPosts={climbData.length} paginate={paginate}/>

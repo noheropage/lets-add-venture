@@ -11,6 +11,7 @@ import AcceptFriendButton from '../../components/accept-friend-request-btn'
 import { propTypes } from "react-bootstrap/esm/Image";
 require('dotenv').config();
 import { useParams, useLocation, Link, Redirect } from 'react-router-dom'
+import SavedClimbs from '../../components/saved-climbs'
 
 // establish state for profile image and user files
 const Profile = () => {
@@ -35,12 +36,14 @@ const Profile = () => {
   const [friendStatusId, setFriendStatusId] = useState('0')
   const [isFriend, setIsFriend] = useState(false)
   const [isPending, setIsPending] = useState(false)
+  const [climbArray, setClimbArray] = useState([])
 
   useEffect(() => {
     getUser();
   }, []);
 
   let loggedIn;
+
 
   const getUser = async () => {
     const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
@@ -86,11 +89,14 @@ const Profile = () => {
         intensity: res.data.profile.user_intensity,
         climbingAbility: res.data.profile.climbing_ability,
         boulderingAbility: res.data.profile.bouldering_ability,
-        pastClimbs: res.data.profile.past_climbs,
+        pastClimbs: res.data.pastClimbs,
         userId: res.data.id
       });
       
-      // console.log(res.data);
+      console.log(res.data);
+
+      setClimbArray(res.data.pastClimbs);
+      // console.log(climbArray);
 
 
       if (res.data.auth0_id === auth0id && !isHome) {
@@ -268,7 +274,15 @@ const Profile = () => {
             <ListGroup.Item>Preferred Intensity: {profile.intensity}</ListGroup.Item>
             <ListGroup.Item>Climbing Ability: {profile.climbingAbility}</ListGroup.Item>
             <ListGroup.Item>Bouldering Ability: {profile.boulderingAbility}</ListGroup.Item>
-          <ListGroup.Item>Saved Climbs: {profile.past_climbs}</ListGroup.Item>
+          <ListGroup.Item>Saved Climbs: {climbArray.map((climb) => (
+            <SavedClimbs
+              key={climb.api_id}
+              climbTitle={climb.climb_name}
+              difficulty={climb.rating}
+            >
+
+            </SavedClimbs>
+          ))}</ListGroup.Item>
           </ListGroup>
         </div>
       </div>
