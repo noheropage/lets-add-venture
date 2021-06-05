@@ -67,7 +67,7 @@ const Profile = () => {
       });
       // console.log(res.data);
       if (!res.data && isHome) {
-        return <Redirect to='/questions'></Redirect>; 
+        document.location = '/questions'; 
       }
 
       let loggedInData;

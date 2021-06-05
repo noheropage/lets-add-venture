@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Navbar } from "react-bootstrap";
+// import { Navbar } from "react-bootstrap";
 import "./style.css";
-import AuthNav from "../auth-nav";
+// import AuthNav from "../auth-nav";
 import API from "../../utils/API";
+// import { Navbar, Form, FormControl, Button } from "react-bootstrap";
 
 function Nav() {
   const [find, setFind] = useState("");
@@ -17,34 +18,125 @@ function Nav() {
     const query = { user_name: find };
     const searchResult = await API.postUsers(query);
     let userId;
-    if (!searchResult) {
-      userId=-1
-    } else {
-      console.log(searchResult.data.id);
+    if (searchResult.data) {
+      console.log(searchResult.data);
       userId = searchResult.data.id;
+    } else {
+      userId = -1;
     }
-    
+
     document.location.replace("/profile/" + userId);
   };
 
+  // return (
+  //   <div>
+  //     <Navbar id="navbar">
+  //       <input
+  //         type="text"
+  //         placeholder="Search users"
+  //         onChange={(event) => setFind(event.target.value)}
+  //       ></input>
+  //       <button onClick={handleFormSubmit}>Search</button>
+  //     </Navbar>
+  //     <Navbar id="navbar">
+  //       <button id="nav-profile-button">Profile</button>
+  //       <button id="nav-map-button">Map</button>
+  //       <AuthNav />
+  //     </Navbar>
+  //   </div>
+  // );
+
   return (
     <div>
-      <Navbar id="navbar">
-        {/* <form> */}
-        <input
-          type="text"
-          // name="userSearch"
-          placeholder="Search users"
-          onChange={(event) => setFind(event.target.value)}
-        ></input>
-        <button onClick={handleFormSubmit}>Search</button>
-        {/* </form> */}
-      </Navbar>
-      <Navbar id="navbar">
-        <button id="nav-profile-button">Profile</button>
-        <button id="nav-map-button">Map</button>
-        <AuthNav />
-      </Navbar>
+      {/* <Navbar bg="dark" variant="dark">
+                <a class="navbar-brand" href="#home">Lets+Venture</a>
+                <div className="mr-auto">
+                    <a className="nav-link" href="#home">Profile</a>
+                    <a className="nav-link" href="#features">Map</a>
+                </div> */}
+      {/* <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-info">Search Users</Button>
+                </Form> */}
+      {/* </Navbar> */}
+
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark"
+        bg="dark"
+        variant="dark"
+        id="navbar"
+      >
+        <a class="ml-5 navbar-brand" href="/">
+          Lets+Venture
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/map">
+                Map
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">
+                Profile
+              </a>
+            </li>
+          </ul>
+          <form
+            className="search-users form-inline my-2 my-lg-0"
+            id="navbarSupportedContent"
+          >
+            {/* <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search for users.."
+              aria-label="Search"
+            ></input>
+            <button
+              className="mr-5 btn btn-outline-info"
+              id="nav-search-button"
+            >
+              Search
+            </button> */}
+            <input
+              type="search"
+              class="form-control mr-sm-2"
+              placeholder="Search users"
+              aria-label="Search"
+              onChange={(event) => setFind(event.target.value)}
+            ></input>
+            <button className="mr-5 btn btn-outline-info"
+              id="nav-search-button" onClick={handleFormSubmit}>Search</button>
+          </form>
+        </div>
+        {/* <form className="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search for users.." aria-label="Search"></input>
+                        <button className="btn btn-outline-info" id="nav-search-button" >Search</button>
+                    </form> */}
+
+        {/* <a className="nav-link" href="#home">Profile</a>
+                    <a className="nav-link" href="#map">Map</a>
+                </div>
+                <input id="nav-searchbar" placeholder="Search users"></input>
+                <button id="nav-search-button" >Search</button>
+
+                <button id="nav-profile-button">Profile</button>
+                <button id="nav-map-button">Map</button> */}
+        {/* <AuthNav /> */}
+      </nav>
     </div>
   );
 }

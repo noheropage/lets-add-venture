@@ -18,13 +18,13 @@ const LoginButton = () => {
       href='/profile'
       onClick={() => loginWithRedirect(
         {
-        redirectUri:'http://localhost:3000/profile',
-        onRedirectCallback: {onRedirectCallback}
-      }
+          redirectUri: 'http://localhost:3000/profile',
+          onRedirectCallback: { onRedirectCallback }
+        }
       )
-    }
+      }
     >
-      Log In
+      <b>Log In</b>
     </Button>
   );
 };

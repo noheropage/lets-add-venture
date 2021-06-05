@@ -11,7 +11,8 @@ import AuthenticationButton from "../../components/authentication-button";
 function Home() {
   return (
     <div>
-      <div id="home-jumbo">
+  
+      <div className="pt-5" id="home-jumbo">
         <img src={logo} className="logo" />
         <img id="logo-lettering" src={logoLettering} />
         <br />
@@ -20,12 +21,12 @@ function Home() {
           Connect with others to enjoy and explore the great outdoors!
         </p>
         <AuthenticationButton />
-        
+
         <SignupButton />
-        
+
       </div>
     </div>
-  );
+  )
 }
 
 export default Home;
