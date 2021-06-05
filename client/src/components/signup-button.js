@@ -18,7 +18,7 @@ const SignupButton = () => {
       href='/questions'
       onClick={() =>
         loginWithRedirect({
-          redirectUri: 'http://localhost:3000/questions',
+          redirectUri: 'https://lets-add-venture.netlify.app/questions',
           onRedirectCallback: { onRedirectCallback },
           screen_hint: "signup",
         })

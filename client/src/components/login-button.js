@@ -18,7 +18,7 @@ const LoginButton = () => {
       href='/profile'
       onClick={() => loginWithRedirect(
         {
-          redirectUri: 'http://localhost:3000/profile',
+          redirectUri: 'https://lets-add-venture.netlify.app/profile',
           onRedirectCallback: { onRedirectCallback }
         }
       )
