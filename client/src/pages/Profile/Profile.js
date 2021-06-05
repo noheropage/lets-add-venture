@@ -24,7 +24,7 @@ const Profile = () => {
   
 
   const { getAccessTokenSilently, user } = useAuth0();
-  const auth0id = user.sub.split('|', 2)[1]
+  const auth0id = user.sub.split("|", 2)[1];
 
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
@@ -184,10 +184,10 @@ const Profile = () => {
     try {
       await fetch("http://localhost:3001/api/images/upload", {
         method: "POST",
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           data: base64EncodedImage,
-          user_id: profile.user_id
-         }),
+          user_id: profile.user_id,
+        }),
         headers: { "Content-type": "application/json" },
       });
       setFileInputState("");
@@ -227,10 +227,10 @@ const Profile = () => {
             <Button
               hidden={!fileInputState}
               variant="success"
-              className='mt-2'
+              className="mt-2"
               type="submit"
               value="submit"
-              size='sm'
+              size="sm"
               onClick={handleSubmitFile}
             >
               Submit

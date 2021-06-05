@@ -6,15 +6,15 @@ const baseUrl = "http://localhost:3001";
 
 export default {
   //get users
-  getUsers: function () {
-    return axios.get("https://dev-dwofmg2f.us.auth0.com/api/v2/users");
+  postUsers: function (name) {
+    console.log(name);
+    return axios.post(baseUrl + "/api/profiles/search/", name);
   },
 
   //get single user
   getUser: function (id) {
     return axios.get(baseUrl + "/api/users/" + id);
   },
-
   //saving user data
   saveUser: function (userData) {
     return axios.post(baseUrl + "/api/users/", userData);

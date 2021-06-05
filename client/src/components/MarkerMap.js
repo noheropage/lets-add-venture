@@ -1,22 +1,35 @@
-import React from 'react'
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import { useState, useEffect } from 'react'
+import React from "react";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import { useState, useEffect } from "react";
 import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
 
-import usePlacesAutoComplete, { getGeoCode, getLatLng } from "use-places-autocomplete";
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
+import usePlacesAutoComplete, {
+  getGeoCode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
 
 import MapStyles from "../mapStyles";
-import mapStyles from '../mapStyles';
+import mapStyles from "../mapStyles";
 import "../App.css";
 const axios = require("axios");
 
-
-const libraries = ["places"]
+const libraries = ["places"];
 const mapContainerStyle = {
-    width: "100vw",
-    height: "80vh",
+  width: "100vw",
+  height: "80vh",
 };
 
 function MarkerMap(props) {
