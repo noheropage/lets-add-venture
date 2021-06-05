@@ -125,7 +125,7 @@ function ProfileQuestions() {
               className="mb-2"
               onChange={(e) => setPronoun(e.target.value)}
             >
-              <label className="labels" for="inputUsername">Preferred Pronoun:</label>
+              <label className="labels" for="pronouns">Preferred Pronoun:</label>
               <Form.Check
                 value="He / Him / His"
                 label="He | Him | His"
@@ -161,64 +161,65 @@ function ProfileQuestions() {
             </div>
           </div>
 
-          <Row className="form-group pb-4">
-            <Col size="12">
-              <h5 className="question-header">
-                How would you rate your climbing intensity?
+          <div className="form-group pb-4">
+
+            <h5 className="question-header">
+              How would you rate your climbing intensity?
               </h5>
-              <h6 className="question-header">(5 being the most intense)</h6>
-              <div
-                className="mb-2"
-                onChange={(e) => setIntensity(e.target.value)}
-              >
-                <Form.Check
-                  inline
-                  value="1"
-                  label="1"
-                  name="intensity"
-                  type="radio"
-                  id="lowest_intensity"
-                  checked={'1' == intensity}
-                />
-                <Form.Check
-                  inline
-                  value="2"
-                  label="2"
-                  name="intensity"
-                  type="radio"
-                  id="low_intensity"
-                  checked={'2' == intensity}
-                />
-                <Form.Check
-                  inline
-                  value="3"
-                  label="3"
-                  name="intensity"
-                  type="radio"
-                  id="mid_intensity"
-                  checked={'3' == intensity}
-                />
-                <Form.Check
-                  inline
-                  value="4"
-                  label="4"
-                  name="intensity"
-                  type="radio"
-                  id="high_intensity"
-                  checked={'4' == intensity}
-                />
-                <Form.Check
-                  inline
-                  value="5"
-                  label="5"
-                  name="intensity"
-                  type="radio"
-                  id="highest_intensity"
-                  checked={'5' == intensity}
-                />
-              </div>
-            </Col>
-          </Row>
+            <h6 className="pb-3 question-header">(5 being the most intense)</h6>
+            <div
+              className="mb-2"
+              onChange={(e) => setIntensity(e.target.value)}
+            >
+
+              <Form.Check
+                inline
+                value="1"
+                label="1"
+                name="intensity"
+                type="radio"
+                id="lowest_intensity"
+                checked={'1' == intensity}
+              />
+              <Form.Check
+                inline
+                value="2"
+                label="2"
+                name="intensity"
+                type="radio"
+                id="low_intensity"
+                checked={'2' == intensity}
+              />
+              <Form.Check
+                inline
+                value="3"
+                label="3"
+                name="intensity"
+                type="radio"
+                id="mid_intensity"
+                checked={'3' == intensity}
+              />
+              <Form.Check
+                inline
+                value="4"
+                label="4"
+                name="intensity"
+                type="radio"
+                id="high_intensity"
+                checked={'4' == intensity}
+              />
+              <Form.Check
+                inline
+                value="5"
+                label="5"
+                name="intensity"
+                type="radio"
+                id="highest_intensity"
+                checked={'5' == intensity}
+              />
+            </div>
+
+          </div>
 
           <Row className="form-group pb-4">
             <Col size="12">
