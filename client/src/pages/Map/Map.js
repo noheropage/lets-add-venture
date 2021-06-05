@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Geocode from "react-geocode";
 import "./Map.css";
+import MapContainer from "../../components/MapContainer";
 require("dotenv").config();
 
 // coordinates : 47.026822, -119.964855
@@ -23,6 +24,7 @@ function Map() {
   const [loadingClimbs, setLoadingClimbs] = useState(false);
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setPostsPerPage] = useState(20);
+  const [latLngArray, setLatLngArray] = useState([])
 
   useEffect(() => {
     const  fetchPosts = async () => {
@@ -36,6 +38,19 @@ function Map() {
     }
     fetchPosts()
   },[geoCode])
+
+  useEffect(() => {
+    const getLatLng = (climbs) => {
+        console.log('getting lat long array');
+        // latLngArray = { lat: 47, lng: -110 }
+        const array = climbs.map((climb) => ({
+            lat: climb.lat, lng: climb.lng
+        }))
+        console.log(latLngArray);
+        setLatLngArray(array)
+    }
+    getLatLng(climbData)
+  }, [climbData])
 
   Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API_KEY);
   Geocode.setLanguage("en");
@@ -67,15 +82,18 @@ function Map() {
         {" "}
         Where Will you go? <FaMapMarkerAlt />
       </div>
-      <div className="map-page">
+      <MapContainer className="map-page"
+      allResults={climbData}>
         {/* embed map - you can move it!*/}
-        <div className="map-section">
-            <MarkerMap 
-            mapLat={parseInt(geoCode.lat)}
-            mapLng={parseInt(geoCode.lng)}
+        <div className="map-section" >
+            {/* <MarkerMap 
+            mapLat={44.41987529561508}
+            mapLng={-110.58557078625142}
             
-            />
+            /> */}
+            
         </div>
+        </MapContainer>
         {/* forms */}
         <div className="justify-content-center search-bar pt-4 row">
           <Col xs={8} sm={8} md={6}>
@@ -150,7 +168,7 @@ function Map() {
         </div>) : (
         <h4></h4>
         )}
-        </div>
+        
 <br/>
 <br/>
 <br/>

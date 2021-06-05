@@ -5,7 +5,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
 
@@ -35,8 +35,9 @@ const mapContainerStyle = {
 function MarkerMap(props) {
     const [currentPosition, setCurrentPosition] = useState({lat:37.8651 , lng:-119.5383 });
     const [loading, setLoading] = useState(false);
-    const [markers, setMarkers] = React.useState([]);
-    const [selected, setSelected] = React.useState(null);
+    const [markers, setMarkers] = useState([]);
+    const [selected, setSelected] = useState(null);
+    const [allClimbs, setAllClimbs] = useState(props.allResults)
 
     const options = {
         //separate js file - avocado snazzy map
@@ -51,20 +52,32 @@ function MarkerMap(props) {
         libraries,
     });
 
+    useEffect(() => {
+      setAllClimbs(props.allResults)
+      console.log(props.allResults);
+      setMarkers(current => [...current, {
+        lat: props.mapLat,
+        lng: props.mapLng,
+        time: new Date()
+      }])
+      console.log(markers);
+    }, [props])
 
+    
 
     //when you click on the map, places a climb svg
-    // const onMapClick = React.useCallback((event) => {
-    //     setMarkers(current => [...current, {
-    //         lat: event.latLng.lat(),
-    //         lng: event.latLng.lng(),
-    //         time: new Date(),
-    //     }]);
-    // }, []);
+    const onMapClick = useCallback((event) => {
+      console.log(event);
+        setMarkers(current => [...current, {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+            time: new Date(),
+        }]);
+    }, []);
 
     // passed in when the map loads, gives us the map that we can assign to the ref for use later without causing re-renders
-    const mapRef = React.useRef();
-    const onMapLoad = React.useCallback((map) => {
+    const mapRef = useRef();
+    const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, []);
 
@@ -76,10 +89,10 @@ function MarkerMap(props) {
             <h3 className="climb-title-map"> Lets+Venture <span role="img" aria-label="tent">🏔‍</span></h3>
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
-                zoom={10}
+                zoom={9}
                 center={{lat: props.mapLat, lng: props.mapLng}}
                 options={options}
-                // onClick={onMapClick}
+                onClick={onMapClick}
                 onLoad={onMapLoad}>
 
                 {markers.map((marker) => (

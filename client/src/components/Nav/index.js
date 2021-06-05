@@ -61,17 +61,17 @@ function Nav() {
       {/* </Navbar> */}
 
       <nav
-        class="navbar navbar-expand-lg navbar-dark bg-dark"
+        className="navbar navbar-expand-lg navbar-dark bg-dark"
         bg="dark"
         variant="dark"
         id="navbar"
       >
-        <a class="ml-5 navbar-brand" href="/">
+        <a className="ml-5 navbar-brand" href="/">
           Lets+Venture
         </a>
 
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -79,18 +79,18 @@ function Nav() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/map">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <a className="nav-link" href="/map">
                 Map
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/profile">
+            <li className="nav-item">
+              <a className="nav-link" href="/profile">
                 Profile
               </a>
             </li>
@@ -100,20 +100,20 @@ function Nav() {
             id="navbarSupportedContent"
           >
             {/* <input
-              class="form-control mr-sm-2"
+              className="form-control mr-sm-2"
               type="search"
               placeholder="Search for users.."
               aria-label="Search"
             ></input>
             <button
-              className="mr-5 btn btn-outline-info"
+              classNameName="mr-5 btn btn-outline-info"
               id="nav-search-button"
             >
               Search
             </button> */}
             <input
               type="search"
-              class="form-control mr-sm-2"
+              className="form-control mr-sm-2"
               placeholder="Search users"
               aria-label="Search"
               onChange={(event) => setFind(event.target.value)}
