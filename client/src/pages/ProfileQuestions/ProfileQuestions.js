@@ -6,22 +6,23 @@ import axios from 'axios'
 import API from '../../utils/API'
 import { useAuth0 } from '@auth0/auth0-react'
 require('dotenv').config();
+import Nav from "../../components/Nav/index";
 
 function ProfileQuestions() {
-    const { getAccessTokenSilently, user } = useAuth0();
-    const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
-    
+  const { getAccessTokenSilently, user } = useAuth0();
+  const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
+
 
   const [username, setUsername] = useState();
   const [pronoun, setPronoun] = useState();
   const [intensity, setIntensity] = useState();
   const [climbAbility, setClimbAbility] = useState();
   const [boulderAbility, setBoulderAbility] = useState();
-//   const [climbHistory, setClimbHistory] = useState();
+  //   const [climbHistory, setClimbHistory] = useState();
 
-const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState({});
 
-useEffect(() => {
+  useEffect(() => {
     const getUser = async () => {
       console.log("user id:", user.sub);
       const auth0id = user.sub.split('|', 2)[1]
@@ -44,18 +45,18 @@ useEffect(() => {
 
         });
         console.log(res.data);
-        
-        
+
+
         setProfile(res.data[0]);
         setUsername(res.data[0].profile.user_name);
         setPronoun(res.data[0].profile.user_pronoun)
         setIntensity(res.data[0].profile.user_intensity)
         setClimbAbility(res.data[0].profile.climbing_ability)
         setBoulderAbility(res.data[0].profile.bouldering_ability)
-        
+
         console.log(profile);
         // console.log(accessToken);
-        
+
       } catch (error) {
         console.log(error.message);
       }
@@ -66,7 +67,7 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // will need way to assign the logged_in user's user_id to the profile
     try {
       const accessToken = await getAccessTokenSilently({
@@ -86,38 +87,37 @@ useEffect(() => {
         bouldering_ability: boulderAbility,
         user_id: profile.id
       });
-      
+
     } catch (error) {
       console.error(error)
     }
 
-    document.location='/profile'
+    document.location = '/profile'
   };
 
 
   return (
+
     <div className="profile-q-background">
+      <Nav />
       <MtnLogo />
       <div className="mt-3 mb-5">
-        <h2>Tell us more about you...</h2>
+        <h2 className="tell-us-more">Tell us more about you...</h2>
       </div>
 
       {/*Form for input areas for the questions  */}
 
       <Form onSubmit={handleSubmit}>
-        <Container className="mt-2 px-5">
-          <Row className="form-group pb-4">
-            <Col size="12">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Pick a username (required)"
-                name="user-name"
-                onChange={(e) => setUsername(e.target.value)}
-                defaultValue={username}
-              />
-            </Col>
-          </Row>
+        <div className="form-group mt-2 px-5">
+          <label for="inputUsername">Username</label>
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Username (required)"
+            name="user-name"
+            onChange={(e) => setUsername(e.target.value)}
+            defaultValue={username}
+          />
 
           <Row className="form-group pb-4">
             <Col size="12">
@@ -261,7 +261,7 @@ useEffect(() => {
           <Button type="submit" className="home-buttons" disabled={!username}>
             Submit
           </Button>
-        </Container>
+        </div>
       </Form>
     </div>
   );
