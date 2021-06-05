@@ -1,79 +1,83 @@
-import React from 'react'
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import { useState, useEffect } from 'react'
+import React from "react";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
 
-import usePlacesAutoComplete, { getGeoCode, getLatLng } from "use-places-autocomplete";
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
+import usePlacesAutoComplete, {
+  getGeoCode,
+  getLatLng,
+} from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
 
 import MapStyles from "../mapStyles";
-import mapStyles from '../mapStyles';
+import mapStyles from "../mapStyles";
 import "../App.css";
 const axios = require("axios");
 
-
-const libraries = ["places"]
+const libraries = ["places"];
 const mapContainerStyle = {
-    width: "100vw",
-    height: "80vh",
+  width: "100vw",
+  height: "60vh",
 };
 
 function MarkerMap(props) {
-    const [currentPosition, setCurrentPosition] = useState({});
-
-    //when the page loads, land on your current position
-    const success = position => {
-        const currentPosition = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        }
-        setCurrentPosition(currentPosition);
-    };
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition
-            (success);
-        console.log(currentPosition)
-        axios.get("https://climb-api.openbeta.io/geocode/v1/climbs?latlng=36.135626%2C-115.428135")
-            // axios.get(`https://climb-api.openbeta.io/geocode/v1/sectors?latlng=${currentPosition.lat}${currentPosition.lng}?radius=100`)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    })
+    const [currentPosition, setCurrentPosition] = useState({lat:37.8651 , lng:-119.5383 });
+    const [loading, setLoading] = useState(false);
+    const [markers, setMarkers] = useState([]);
+    const [selected, setSelected] = useState(null);
+    const [allClimbs, setAllClimbs] = useState(props.allResults)
 
     const options = {
         //separate js file - avocado snazzy map
         styles: mapStyles,
-        //disable some of the default google maps UI we don't need
-        disableDefaultUI: true,
+        
         //keep zoom buttons tho
         zoomControl: true,
     }
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBRcAglui0WEbZB4Gc1UAFNkc5-VyGACVQ',
+        googleMapsApiKey: '',
         libraries,
     });
 
-    const [markers, setMarkers] = React.useState([]);
-    const [selected, setSelected] = React.useState(null);
+    useEffect(() => {
+      setAllClimbs(props.allResults)
+      console.log(props.allResults);
+      setMarkers(current => [...current, {
+        lat: props.mapLat,
+        lng: props.mapLng,
+        time: new Date()
+      }])
+      console.log(markers);
+    }, [props])
+
+    
 
     //when you click on the map, places a climb svg
-    // const onMapClick = React.useCallback((event) => {
-    //     setMarkers(current => [...current, {
-    //         lat: event.latLng.lat(),
-    //         lng: event.latLng.lng(),
-    //         time: new Date(),
-    //     }]);
-    // }, []);
+    const onMapClick = useCallback((event) => {
+      console.log(event);
+        setMarkers(current => [...current, {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+            time: new Date(),
+        }]);
+    }, []);
 
     // passed in when the map loads, gives us the map that we can assign to the ref for use later without causing re-renders
-    const mapRef = React.useRef();
-    const onMapLoad = React.useCallback((map) => {
+    const mapRef = useRef();
+    const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, []);
 
@@ -82,19 +86,18 @@ function MarkerMap(props) {
 
     return (
         <div>
-            <h3 className="climb-title-map"> Lets+Venture <span role="img" aria-label="tent">🏔‍</span></h3>
-            <Search />
+            {/* <h3 className="climb-title-map"> Lets+Venture <span role="img" aria-label="tent">🏔‍</span></h3> */}
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
-                zoom={10}
-                center={currentPosition}
+                zoom={9}
+                center={{lat: props.mapLat, lng: props.mapLng}}
                 options={options}
-                // onClick={onMapClick}
+                onClick={onMapClick}
                 onLoad={onMapLoad}>
 
                 {markers.map((marker) => (
                     <Marker key={marker.time.toISOString()}
-                        position={{ lat: props.lat, lng: props.lng }}
+                        position={{ lat: props.climbLat, lng: props.climbLng }}
                         // position={{ lat: marker.lat, lng: marker.lng }}
                         icon={{
                             url: '/climbing.svg',
@@ -110,40 +113,51 @@ function MarkerMap(props) {
                     />
                 ))}
 
-                {selected ? (<InfoWindow position={{ lat: selected.lat, lng: selected.lng }}
-                    //set the selected marker back to null
-                    onCloseClick={() => {
-                        setSelected(null);
-                    }}>
-                    <div>
-                        <h2>You've Climbed!</h2>
-                        <p>When {formatRelative(selected.time, new Date())}</p>
-                    </div>
-                </InfoWindow>
-                ) : null}
+               
             </GoogleMap>
         </div>
     )
 }
 
 //Can we make this to the lat/lng of user?
-function Search() {
-    const {
-        ready,
-        value,
-        suggestions: { status, data },
-        setValue,
-        clearSuggestion,
-    } = usePlacesAutoComplete({
-        requestOptions: {
-            location: { lat: () => 61.24677, lng: () => -149.92566 },
-            radius: 200 * 1000,
-        },
-    });
+    function Search() {
+        const {
+            ready,
+            value,
+            suggestions: { status, data },
+            setValue,
+            clearSuggestion,
+        } = usePlacesAutoComplete({
+            requestOptions: {
+                location: { lat: () => 61.24677, lng: () => -149.92566 },
+                radius: 200 * 1000,
+            },
+        });
 
-    return (
-        <div className="search">
-            <Combobox onSelect={(address) => {
+        return (
+            <div className="search">
+                
+            </div>
+        );
+    }
+
+export default MarkerMap
+
+
+
+// {selected ? (<InfoWindow position={{ lat: selected.lat, lng: selected.lng }}
+//     //set the selected marker back to null
+//     onCloseClick={() => {
+//         setSelected(null);
+//     }}>
+//     <div>
+//         <h2>You've Climbed!</h2>
+//         <p>When {formatRelative(selected.time, new Date())}</p>
+//     </div>
+// </InfoWindow>
+// ) : null}
+
+{/* <Combobox onSelect={(address) => {
                 console.log(address);
             }}
             >
@@ -162,9 +176,4 @@ function Search() {
                         />
                     ))}
                 </ComboboxPopover>
-            </Combobox>
-        </div>
-    );
-}
-
-export default MarkerMap
+            </Combobox> */}

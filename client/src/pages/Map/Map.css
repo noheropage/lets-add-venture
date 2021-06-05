@@ -9,8 +9,13 @@
 }
 
 /* requires this css on a container wrapped around, in order not to take on the css of another page*/
+
 .map-background {
   background-color: darkslategray;
   min-height: 100vh;
   min-width: 100%;
+}
+
+.map-render {
+  align-items: center;
 }

@@ -17,15 +17,16 @@ User.hasOne(Profile, {
 
 User.belongsToMany(User, {
     through: Friend,
-    as: 'friends',
-    foreignKey: 'friend_display'
+    as: 'sender',
+    foreignKey: 'sender'
 });
 
 User.belongsToMany(User, {
     through: Friend,
-    as: 'friend_connect',
-    foreignKey: 'friend_connect'
+    as: 'receiver',
+    foreignKey: 'receiver'
 });
+
 
 User.hasMany(PastClimbs, {
     foreignKey: 'user_id',

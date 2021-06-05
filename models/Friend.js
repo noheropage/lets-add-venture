@@ -13,7 +13,7 @@ Friend.init(
             autoIncrement: true
         },
        // this is the user id that will be displayed as a friend
-        friend_display: {
+        sender: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -23,7 +23,7 @@ Friend.init(
             }
         },
         //This is the user id that will reference the data
-        friend_connect: {
+        receiver: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -41,8 +41,6 @@ Friend.init(
                 min:0,
                 max: 2,
             }
-
-
         }
     },
     {

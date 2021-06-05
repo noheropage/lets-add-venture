@@ -11,7 +11,7 @@ PastClimbs.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        climb_name:{
+        climb_name: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -25,6 +25,9 @@ PastClimbs.init(
             }
         },
         rating:{
+            type:DataTypes.STRING
+        },
+        api_id: {
             type:DataTypes.STRING
         }
     },

@@ -12,14 +12,14 @@ import Map from "./pages/Map/Map";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "./components/loading";
 import ProtectedRoute from "./auth/protected-route";
-import ExternalApi from './utils/external-api'
-import SimpleMap from './components/SimpleMap/SimpleMap';
+import ExternalApi from "./utils/external-api";
+import SimpleMap from "./components/SimpleMap/SimpleMap";
 
 function App() {
   const { isLoading } = useAuth0;
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -35,11 +35,10 @@ function App() {
           <Route exact path="/login">
             <LogIn />
           </Route>
-          <Route exact path='/external-api'>
+          <Route exact path="/external-api">
             <ExternalApi />
           </Route>
-          <ProtectedRoute exact path="/profile" component={Profile}>
-          </ProtectedRoute>
+          <ProtectedRoute path={["/profile", "/profile/:id"]} component={Profile} />
           <ProtectedRoute exact path="/map" component={Map}>
           </ProtectedRoute>
           <ProtectedRoute exact path="/questions" component={ProfileQuestions}>

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+require("dotenv").config();
 
-const MapContainer = () => {
+const MapContainer = (props) => {
     const [currentPosition, setCurrentPosition] = useState({});
+
+    const [allClimbs, setAllClimbs] = useState([{ meta_mp_route_id: 1, lat: 0, lng: 0 }])
 
     const success = position => {
         const currentPosition = {
@@ -14,13 +17,30 @@ const MapContainer = () => {
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(success);
-    })
+    }, [])
+
+    useEffect(() => {
+        setAllClimbs(props.allResults)
+        console.log(props.allResults);
+        // getLatLng(props.allResults);
+    }, [props])
+
+    // const getLatLng = (apiClimbs) => {
+    //     console.log('getting lat long array');
+    //     // latLngArray = { lat: 47, lng: -110 }
+    //     latLngArray = apiClimbs.map((climb) => ({
+    //         lat: climb.lat, lng: climb.lng
+    //     }))
+    //     console.log(latLngArray);
+    // }
 
     const onMarkerDragEnd = (e) => {
         const lat = e.latLng.lat();
         const lng = e.latLng.lng();
         setCurrentPosition({ lat, lng })
     };
+
+    const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
     const mapStyles = {
         height: "50vh",
@@ -33,7 +53,7 @@ const MapContainer = () => {
 
     return (
         <LoadScript
-            googleMapsApiKey='AIzaSyBRcAglui0WEbZB4Gc1UAFNkc5-VyGACVQ'>
+            googleMapsApiKey={googleMapsApiKey}>
             <GoogleMap
                 mapContainerStyle={mapStyles}
                 zoom={13}
@@ -42,9 +62,20 @@ const MapContainer = () => {
                     currentPosition.lat ?
                         <Marker
                             position={currentPosition}
+                            title='Home'
                             onDragEnd={(e) => onMarkerDragEnd(e)}
                             draggable={true} /> :
                         null
+                }
+                
+                {
+                    allClimbs.map((climb) => (
+                        <Marker key={climb.meta_mp_route_id}
+                            position={{ lat: climb.lat, lng: climb.lng }}
+                            name={climb.name}
+                            /> 
+                    )) 
+                    
                 }
             </GoogleMap>
         </LoadScript>

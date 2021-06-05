@@ -49,6 +49,21 @@
   height: 50px;
   list-style: none;
 }
+<<<<<<< HEAD
 .page-item:nth-child(7) {
   margin-right: 0px;
 }
+=======
+
+.page-item:nth-child(7) {
+  margin-right: 0px;
+}
+
+.logout-button {
+  margin: 5px;
+  width: 195px;
+  border: none !important;
+  margin-bottom: 35px;
+  height: 47px;
+}
+>>>>>>> b7d56b5bd1183878f58942aaf23ce2ba15586481
