@@ -63,7 +63,7 @@ function Map() {
 
   return (
     <div className="container map-background">
-      <div className="title">
+      <div className="pt-5 title">
         {" "}
         Where Will you go? <FaMapMarkerAlt />
       </div>
@@ -80,7 +80,7 @@ function Map() {
         <div className="justify-content-center search-bar pt-4 row">
           <Col xs={8} sm={8} md={6}>
             <input
-              className="ml-5 form-control"
+              className=" form-control"
               type="text"
               placeholder="Search for a climb!"
               onChange={(event) => setQuery(event.target.value)}
@@ -88,6 +88,7 @@ function Map() {
               <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label></Form.Label>
                 <Form.Control placeholder= "search with a radius of... km" as="select" onChange={(event) => setDistance(event.target.value)}>
+                  <option>search with a radius of...km</option>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -105,8 +106,8 @@ function Map() {
           <div>
             <div className="search-bar pt-4 row">
               <Col xs={8} sm={8} md={6}>
-                <input
-                  className="ml-5 form-control"
+                <select
+                  className="select ml-5 form-control"
                   type="text"
                   placeholder="Filter climb by difficulty"
                   onChange={(event) => setFilterYSP(event.target.value)}
@@ -115,7 +116,7 @@ function Map() {
             </div>
 
             {filterYSP.length ? (
-              <div className="container row" loading="lazy">
+              <div className="map-render container row" loading="lazy">
                 {climbData
                   .filter((newClimbs) => newClimbs.yds === filterYSP)
                   .map((climb) => (
