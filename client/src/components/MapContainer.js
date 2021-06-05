@@ -5,7 +5,7 @@ require("dotenv").config();
 const MapContainer = (props) => {
     const [currentPosition, setCurrentPosition] = useState({});
 
-    const [allClimbs, setAllClimbs] = useState([{ meta_mp_route_id: 1, lat: 47, lng: -110 }])
+    const [allClimbs, setAllClimbs] = useState([{ meta_mp_route_id: 1, lat: 0, lng: 0 }])
 
     const success = position => {
         const currentPosition = {
@@ -17,7 +17,7 @@ const MapContainer = (props) => {
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(success);
-    })
+    }, [])
 
     useEffect(() => {
         setAllClimbs(props.allResults)

@@ -29,7 +29,7 @@ const axios = require("axios");
 const libraries = ["places"];
 const mapContainerStyle = {
   width: "100vw",
-  height: "80vh",
+  height: "60vh",
 };
 
 function MarkerMap(props) {
@@ -86,7 +86,7 @@ function MarkerMap(props) {
 
     return (
         <div>
-            <h3 className="climb-title-map"> Lets+Venture <span role="img" aria-label="tent">🏔‍</span></h3>
+            {/* <h3 className="climb-title-map"> Lets+Venture <span role="img" aria-label="tent">🏔‍</span></h3> */}
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={9}
