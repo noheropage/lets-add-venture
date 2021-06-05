@@ -9,10 +9,15 @@
     padding-left: 10px;
 } */
 
-form {
+.questions-form {
     background-color: aliceblue;
+    border-radius: 10px 10px 10px 10px;
 }
 
-/* .tell-us-more {
-    color: aliceblue ;
-} */
+.tell-us-more {
+    color: aliceblue;
+}
+
+.labels {
+    font-size: 1.4em;
+}

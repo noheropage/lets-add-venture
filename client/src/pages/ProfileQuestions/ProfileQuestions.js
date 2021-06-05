@@ -107,9 +107,10 @@ function ProfileQuestions() {
 
       {/*Form for input areas for the questions  */}
 
-      <Form onSubmit={handleSubmit}>
-        <div className="form-group mt-2 px-5">
-          <label for="inputUsername">Username</label>
+      <Form className="questions-form" onSubmit={handleSubmit}>
+
+        <div className="form-group mt-2 px-5 pt-5">
+          <label className="labels" for="inputUsername">Username</label>
           <input
             className="form-control"
             type="text"
@@ -119,49 +120,46 @@ function ProfileQuestions() {
             defaultValue={username}
           />
 
-          <Row className="form-group pb-4">
-            <Col size="12">
-              <h5 className="question-header">Preferred pronouns:</h5>
-
-              <div
-                className="mb-2"
-                onChange={(e) => setPronoun(e.target.value)}
-              >
-                <Form.Check
-                  value="He/Him/His"
-                  label="He/Him/His"
-                  name="pronouns"
-                  type="radio"
-                  id="masculine_pronouns"
-                  checked={"He/Him/His" === pronoun}
-                />
-                <Form.Check
-                  value="She/Her/Hers"
-                  label="She/Her/Hers"
-                  name="pronouns"
-                  type="radio"
-                  id="feminine_pronouns"
-                  checked={"She/Her/Hers" === pronoun}
-                />
-                <Form.Check
-                  value="They/Them/Theirs"
-                  label="They/Them/Theirs"
-                  name="pronouns"
-                  type="radio"
-                  id="neutral_pronouns"
-                  checked={"They/Them/Theirs" === pronoun}
-                />
-                <Form.Check
-                  value="Prefer not to disclose"
-                  label="Prefer not to disclose"
-                  name="pronouns"
-                  type="radio"
-                  id="na_pronouns"
-                  checked={"Prefer not to disclose" === pronoun}
-                />
-              </div>
-            </Col>
-          </Row>
+          <div className="form-group mt-2 px-5 pt-4 pb-4">
+            <div
+              className="mb-2"
+              onChange={(e) => setPronoun(e.target.value)}
+            >
+              <label className="labels" for="inputUsername">Preferred Pronoun:</label>
+              <Form.Check
+                value="He / Him / His"
+                label="He | Him | His"
+                name="pronouns"
+                type="radio"
+                id="masculine_pronouns"
+                checked={"He/Him/His" === pronoun}
+              />
+              <Form.Check
+                value="She/Her/Hers"
+                label="She | Her | Hers"
+                name="pronouns"
+                type="radio"
+                id="feminine_pronouns"
+                checked={"She/Her/Hers" === pronoun}
+              />
+              <Form.Check
+                value="They/Them/Theirs"
+                label="They | Them | Theirs"
+                name="pronouns"
+                type="radio"
+                id="neutral_pronouns"
+                checked={"They/Them/Theirs" === pronoun}
+              />
+              <Form.Check
+                value="Prefer not to disclose"
+                label="Prefer not to disclose"
+                name="pronouns"
+                type="radio"
+                id="na_pronouns"
+                checked={"Prefer not to disclose" === pronoun}
+              />
+            </div>
+          </div>
 
           <Row className="form-group pb-4">
             <Col size="12">
