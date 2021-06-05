@@ -1,9 +1,9 @@
 # Lets+Venture  
-![logo](client/src/images/logo.png)
+<!-- ![logo](client/src/images/logo.png) -->
 An Adventure application allowing people to keep track of there trips, skills and like-friends
-## TO DO 
-add screenshot images 
-add team emails- please send to me 
+
+![Example Screenshot](client/src/images/home.png)
+
 #
 # Table of Contents
 * [Description](#Description)
@@ -14,6 +14,11 @@ add team emails- please send to me
 * [Contributors](#Contributors)
 ## Description 
 As rock climber I am frequently looking for new challenges and new friends to climb with. This is an app to help users connect to like-minded, similarly-skilled climbers and find each other meet for climbs and socialize.
+
+![Example Screenshot](client/src/images/questions.png =100x60)
+
+![Example Screenshot](client/src/images/profile.png)
+
 #
 ## Features
 - Ability to save recent climbs to a favorites list
@@ -24,6 +29,10 @@ As rock climber I am frequently looking for new challenges and new friends to cl
     * Recent Climbs
 - View friends profile
 - Update Climbs with achievements 
+<br>
+
+![Example Screenshot](client/src/images/mappic.png)
+
 #
 ## Technologies
 - Axios
