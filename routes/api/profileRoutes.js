@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Op } = require("sequelize");
 const { User, Friend, Profile, Photo } = require("../../models");
 const jwtCheck = require("../../utils/jwt");
 
@@ -7,13 +8,15 @@ const jwtCheck = require("../../utils/jwt");
 router.post("/search", async (req, res) => {
   try {
     console.log(req.body);
-    const profileData = await Profile.findAll({
+    const profileData = await Profile.findOne({
       where: {
-        first_name: req.body.first_name,
+        user_name: {
+            [Op.like]: '%'+req.body.user_name+'%'
+        }
       },
     });
     if (!profileData) {
-      res.status(400).json({ message: "We were unable to find anything" });
+      res.status(200).json(null);
     }
     res.status(200).json(profileData);
   } catch (err) {

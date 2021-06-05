@@ -6,7 +6,7 @@
         "user_intensity":3,
         "climbing_ability":"5.11a",
         "bouldering_ability":"V3",
-        "first_name": "Tuan"
+        
     },
     {
         "user_name":"Johanna512",
@@ -15,7 +15,7 @@
         "user_intensity":4,
         "climbing_ability":"5.12c",
         "bouldering_ability":"V5+",
-        "first_name": "Johanna"
+        
 
     },
     {
@@ -25,7 +25,7 @@
         "user_intensity":2,
         "climbing_ability":"5.10a",
         "bouldering_ability":"V1",
-        "first_name": "Yordy"
+        
 
     },
     {

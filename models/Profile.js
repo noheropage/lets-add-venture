@@ -14,6 +14,7 @@ Profile.init(
     user_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -23,9 +24,6 @@ Profile.init(
         key: "id",
         unique: true,
       },
-    },
-    first_name: {
-      type: DataTypes.STRING,
     },
 
     user_pronoun: {

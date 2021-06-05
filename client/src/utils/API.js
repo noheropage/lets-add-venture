@@ -1,6 +1,4 @@
 import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
-// import getToken from './APIconfig'
 
 const baseUrl = "http://localhost:3001";
 

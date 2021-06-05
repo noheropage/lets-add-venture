@@ -14,10 +14,16 @@ function Nav() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(find);
-    const query = { first_name: find };
+    const query = { user_name: find };
     const searchResult = await API.postUsers(query);
-    console.log(searchResult.data[0].id);
-    const userId = searchResult.data[0].id;
+    let userId;
+    if (!searchResult) {
+      userId=-1
+    } else {
+      console.log(searchResult.data.id);
+      userId = searchResult.data.id;
+    }
+    
     document.location.replace("/profile/" + userId);
   };
 
