@@ -15,7 +15,7 @@ export default function ClimbCard(props) {
     image: " ",
     climb_name: " ",
     rating: " ",
-    crag: " ",
+    wall: " ",
     firstAscent: " ",
     description: " ",
   });
@@ -32,7 +32,7 @@ export default function ClimbCard(props) {
     image: props.image,
     name: props.climbTitle,
     rating: props.difficulty,
-    crag: props.crag,
+    wall: props.wall,
     firstAscent: props.FrAsc,
     description: props.description,
   };
@@ -84,7 +84,7 @@ export default function ClimbCard(props) {
         <Card.Body className="font-weight-light">
           Rating: {props.difficulty}
           <br />
-          Crag: {props.crag}
+          Wall: {props.wall}
           <br />
           First Ascent: {props.FrAsc}
           <br />

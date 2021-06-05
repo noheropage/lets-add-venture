@@ -1,14 +1,24 @@
-import React from 'react'
+
 import SimpleMap from '../../components/SimpleMap/SimpleMap';
-import MapForm from "../../components/MapForm/MapForm";
+import MapContainer from "../../components/MapContainer";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import MarkerMap from "../../components/MarkerMap";
+
 
 
 function MapTester() {
     return (
         <div>
-            <SimpleMap />
-            <MapForm />
-        </div>
+            <MarkerMap />
+            {/* one */}
+            {/* <MapContainer />
+            <br />
+            <SearchBar /> */}
+
+            {/* two */}
+            {/* <SimpleMap />
+            <MapForm /> */}
+        </div >
     )
 }
 
