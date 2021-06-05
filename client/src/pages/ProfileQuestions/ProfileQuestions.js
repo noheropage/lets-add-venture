@@ -24,9 +24,7 @@ function ProfileQuestions() {
 
   useEffect(() => {
     const getUser = async () => {
-      console.log("user id:", user.sub);
       const auth0id = user.sub.split('|', 2)[1]
-      console.log(auth0id);
 
 
       try {
@@ -34,7 +32,7 @@ function ProfileQuestions() {
           audience: `${audience}`,
         });
 
-        const url = "http://localhost:3001/api/users/";
+        const url = "https://lets-add-venture.herokuapp.com/api/users/";
 
         const res = await axios.post(url, {
           headers: {
@@ -44,8 +42,6 @@ function ProfileQuestions() {
           email: user.email
 
         });
-        console.log(res.data);
-
 
         setProfile(res.data[0]);
         setUsername(res.data[0].profile.user_name);
@@ -54,7 +50,6 @@ function ProfileQuestions() {
         setClimbAbility(res.data[0].profile.climbing_ability)
         setBoulderAbility(res.data[0].profile.bouldering_ability)
 
-        console.log(profile);
         // console.log(accessToken);
 
       } catch (error) {
