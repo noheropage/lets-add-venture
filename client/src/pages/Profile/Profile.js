@@ -35,17 +35,17 @@ const Profile = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        
+
         if (!res.data.profile) {
-          document.location='/questions'
-          return; 
+          document.location = '/questions'
+          return;
         }
 
         setProfile(res.data.profile);
         console.log(res.data.profile);
         const photoLength = res.data.photos.length
         if (photoLength) {
-          setPreviewSource(res.data.photos[photoLength -1].url)
+          setPreviewSource(res.data.photos[photoLength - 1].url)
         }
 
       } catch (error) {
@@ -87,10 +87,10 @@ const Profile = () => {
     try {
       await fetch("http://localhost:3001/api/images/upload", {
         method: "POST",
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           data: base64EncodedImage,
           user_id: profile.user_id
-         }),
+        }),
         headers: { "Content-type": "application/json" },
       });
       setFileInputState("");
@@ -141,18 +141,18 @@ const Profile = () => {
           </div>
         </div>
         <div className="username">
-          <h1> {profile.user_name}</h1>
-          <h6> {profile.user_pronoun} </h6>
-          <Button href='/questions' variant='outline-info' size='sm'>
+          <Button className="mb-5" href='/questions' variant='outline-info' size='sm'>
             Edit Profile
           </Button>
+          <h1 className="pb-2"> {profile.user_name}</h1>
+          <h5 className="pb-4"> {profile.user_pronoun} </h5>
         </div>
-        <div className="list">
-          <ListGroup variant="flush">
+        <div className=" pt-5 list">
+          <ListGroup className="list-group-flush" variant="flush">
             <ListGroup.Item>Preferred Intensity: {profile.user_intensity}</ListGroup.Item>
             <ListGroup.Item>Climbing Ability: {profile.climbing_ability}</ListGroup.Item>
             <ListGroup.Item>Bouldering Ability: {profile.bouldering_ability}</ListGroup.Item>
-          <ListGroup.Item>Climbing History: {profile.past_climbs}</ListGroup.Item>
+            <ListGroup.Item>Climbing History: {profile.past_climbs}</ListGroup.Item>
           </ListGroup>
         </div>
       </div>

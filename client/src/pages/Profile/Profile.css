@@ -1,7 +1,7 @@
 .sky {
-  background-image: linear-gradient(rgb(3, 3, 95), rgb(62, 62, 143), rgb(167, 230, 230));
+  background-image: linear-gradient(rgb(1, 1, 43), rgb(62, 62, 143), rgb(167, 230, 230));
   min-height: 100vh;
-    min-width: 100%;
+  min-width: 100%;
 }
 
 .userImg {
@@ -25,13 +25,19 @@
 }
 
 .list-group-item {
-    background-color: inherit !important;
-    color: white !important;
-    text-align: left;
-    font-size: 18px !important;
-    /* margin-left: 5%; */
+  background-color: inherit !important;
+  color: white !important;
+  text-align: left;
+  font-size: 18px !important;
+  /* margin-left: 5%; */
 }
 
 .list {
-    margin-top: 10px;
+  margin-top: 10px;
+}
+
+.list-group-flush {
+  align-items: center;
+  font-weight: 600;
+  font-size: xx-large;
 }
