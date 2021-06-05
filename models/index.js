@@ -27,11 +27,11 @@ User.belongsToMany(User, {
     foreignKey: 'receiver'
 });
 
+
 User.hasMany(PastClimbs, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 })
-
 PastClimbs.belongsTo(User,{
     foreignKey: 'user_id'
 

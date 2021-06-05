@@ -4,6 +4,9 @@ import Button from "react-bootstrap/Button";
 
 function AddFriendButton(props) {
     const isHome = props.ownProfile
+    console.log(isHome);
+    const friendStatus = props.friendStatus
+    const hideButton = (isHome || friendStatus != 'add friend');
     
     const [button, setButton] = useState({
         variant: 'primary',
@@ -22,7 +25,7 @@ function AddFriendButton(props) {
             auth0_id:props.auth0_id,
             receiver:props.receiver,
             status:1
-        })
+        })        
     } ,[props])
 
     
@@ -52,9 +55,10 @@ function AddFriendButton(props) {
         })
     }
 
+    console.log(hideButton);
     return (
         <Button
-        hidden={isHome}
+        hidden={hideButton}
         onClick={handleClick}
         variant={button.variant}
         disabled= {button.disabled}

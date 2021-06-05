@@ -6,7 +6,8 @@ import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import AddFriendButton from '../../components/add-friend-button'
+import AddFriendButton from '../../components/send-friend-request-btn'
+import AcceptFriendButton from '../../components/accept-friend-request-btn'
 import { propTypes } from "react-bootstrap/esm/Image";
 require('dotenv').config();
 import { useParams, useLocation, Link, Redirect } from 'react-router-dom'
@@ -29,30 +30,26 @@ const Profile = () => {
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState(placeholder);
 
-  const [profile, setProfile] = useState({
-    // user_name: '',
-    // user_pronoun: '',
-    // user_intensity: '',
-    // climbing_ability: '',
-    // bouldering_ability: '',
-    // past_climbs: '',
-    // user_id: ''
-  });
+  const [profile, setProfile] = useState({});
   const [isHome, setIsHome] = useState(false)
+  const [friendStatusId, setFriendStatusId] = useState('0')
+  const [isFriend, setIsFriend] = useState(false)
+  const [isPending, setIsPending] = useState(false)
 
   useEffect(() => {
     getUser();
   }, []);
+
+  let loggedIn;
 
   const getUser = async () => {
     const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
     if (!id) {
       id = auth0id
       setIsHome(true)
-      console.log('No id, you home: ' + id);
+      // console.log('No id, you home: ' + id);
     } 
     
-
     try {
       const accessToken = await getAccessTokenSilently({
         audience: `${audience}`,
@@ -65,31 +62,63 @@ const Profile = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      
-      if (!res.data) {
+      // console.log(res.data);
+      if (!res.data && isHome) {
         return <Redirect to='/questions'></Redirect>; 
       }
 
+      let loggedInData;
+      if (!isHome) {
+        const authUrl = `http://localhost:3001/api/users/profile/${auth0id}`
+        loggedInData = await axios.get(authUrl, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        loggedIn = loggedInData.data
+        // console.log("This is my info: " + loggedIn.profile);
+        // console.log(loggedIn.profile);
+      }
       setProfile({
-        user_name: res.data.profile.user_name,
-        user_pronoun: res.data.profile.user_pronoun,
-        user_intensity: res.data.profile.user_intensity,
-        climbing_ability: res.data.profile.climbing_ability,
-        bouldering_ability: res.data.profile.bouldering_ability,
-        past_climbs: res.data.profile.past_climbs,
-        user_id: res.data.profile.user_id
+        username: res.data.profile.user_name,
+        pronoun: res.data.profile.user_pronoun,
+        intensity: res.data.profile.user_intensity,
+        climbingAbility: res.data.profile.climbing_ability,
+        boulderingAbility: res.data.profile.bouldering_ability,
+        pastClimbs: res.data.profile.past_climbs,
+        userId: res.data.id
       });
       
-      console.log(res.data.profile);
+      // console.log(res.data);
 
 
-      if (id === auth0id) {
-      } else if (res.data.auth0_id === auth0id) {
-        console.log('you are looking at your own id, weirdo');
+      if (res.data.auth0_id === auth0id && !isHome) {
+        // console.log('you are looking at your own id, weirdo');
         setIsHome(true)
       } else {
-        console.log('Not your profile');
+        // console.log('Not your profile');
         setIsHome(false)
+        const friendsList = getFriends(res.data)
+        const friendsStatus = getFriendStatus(friendsList)
+
+        if (friendsStatus.status === 2) {
+          // console.log("you're friends");
+          setFriendStatusId('friends')
+          setIsFriend(true)
+        } else if (friendsStatus.status === 1) {
+         if (friendsStatus.receiver === loggedIn.id) {
+          // console.log('accept?');
+          setFriendStatusId('accept request')
+         } else {
+            // console.log('pending');
+            setFriendStatusId('pending request')
+            setIsPending(true)
+          }
+       } else {
+         console.log("you're not friends");
+         setFriendStatusId('add friend')
+       }
       }
 
       
@@ -103,6 +132,23 @@ const Profile = () => {
     }
   };
 
+  const getFriendStatus = (list) => {
+    // pull up my data
+    console.log(loggedIn);
+    const friends = list.filter(el => el.id === loggedIn.id);
+    if (friends.length > 0) {
+      return friends[0].friend
+    }
+    else {
+      return 0
+    }
+  }
+
+  const getFriends = (data) => {
+    const friendsList = data.sender.concat(data.receiver)
+    console.log(friendsList);
+    return friendsList
+  }
 
   const fileUploader = useRef(null);
 
@@ -192,27 +238,37 @@ const Profile = () => {
           </div>
         </div>
         <div className="username">
-          <h1> {profile.user_name}</h1>
-          <h6> {profile.user_pronoun} </h6>
+          <h1> {profile.username}</h1>
+          <h6> {profile.pronoun} </h6>
 
           <Button href='/questions' variant='outline-info' size='sm' hidden={!isHome}>
             Edit Profile
           </Button>
 
           <AddFriendButton
-          
-          receiver={profile.user_id}
-          ownProfile={isHome}
-          auth0_id={auth0id}
+            receiver={profile.userId}
+            ownProfile={isHome}
+            auth0_id={auth0id}
+            friendStatus={friendStatusId}
           ></AddFriendButton>
+
+          <AcceptFriendButton
+            sender={profile.userId}
+            ownProfile={isHome}
+            auth0_id={auth0id}
+            friendStatus={friendStatusId}
+          ></AcceptFriendButton>
+
+          <Button variant='success' disabled hidden={!isFriend}>Friend</Button>
+          <Button variant='success' disabled hidden={!isPending}>Pending...</Button>
 
         </div>
         <div className="list">
           <ListGroup variant="flush">
-            <ListGroup.Item>Preferred Intensity: {profile.user_intensity}</ListGroup.Item>
-            <ListGroup.Item>Climbing Ability: {profile.climbing_ability}</ListGroup.Item>
-            <ListGroup.Item>Bouldering Ability: {profile.bouldering_ability}</ListGroup.Item>
-          <ListGroup.Item>Climbing History: {profile.past_climbs}</ListGroup.Item>
+            <ListGroup.Item>Preferred Intensity: {profile.intensity}</ListGroup.Item>
+            <ListGroup.Item>Climbing Ability: {profile.climbingAbility}</ListGroup.Item>
+            <ListGroup.Item>Bouldering Ability: {profile.boulderingAbility}</ListGroup.Item>
+          <ListGroup.Item>Saved Climbs: {profile.past_climbs}</ListGroup.Item>
           </ListGroup>
         </div>
       </div>

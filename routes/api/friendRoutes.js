@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/send', async (req, res) => {
     try {
         const singleUser = await User.findOne({
             where: {
@@ -26,11 +26,39 @@ router.post('/', async (req, res) => {
           }
           const friendData = await Friend.findOrCreate({
               where: {
-                  sender: singleUser.id,
                   receiver: req.body.receiver,
+                  sender: singleUser.id,
                   status: req.body.status
               }
           })
+          res.status(200).json(friendData)
+    } catch (error) {
+        res.status(500).json(error)
+        console.error(error)
+    }
+})
+
+router.put('/accept', async (req, res) => {
+    try {
+        const singleUser = await User.findOne({
+            where: {
+              auth0_id: req.body.auth0_id,
+            },
+          })
+          console.log(singleUser);
+          if (!singleUser) {
+              res.status(400).json({ message: 'No user found'})
+          }
+          const friendData = await Friend.update({
+              status: 2
+            },
+            {
+                where: {
+                    sender: req.body.sender,
+                    receiver: singleUser.id
+                }
+            }
+          )
           res.status(200).json(friendData)
     } catch (error) {
         res.status(500).json(error)

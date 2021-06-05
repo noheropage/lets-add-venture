@@ -30,14 +30,29 @@ router.get("/profile/:id", jwtCheck, async (req, res) => {
         {
           model: Photo,
         },
+        {
+            model: PastClimbs,
+        },
+        {
+            model: User,
+            as: 'sender'
+        },
+        {
+            model: User,
+            as: 'receiver'
+        }
+        
       ],
     });
 
     if (!singleUser) {
       res.status(400).json({ message: "there is no user with that ID" });
     }
+
     console.log(singleUser);
+    
     res.status(200).json(singleUser);
+    // res.status(200).json(friendData)
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -46,24 +61,27 @@ router.get("/profile/:id", jwtCheck, async (req, res) => {
 //gets single user's friends by the user id
 router.get("/friends/:id", async (req, res) => {
   try {
-    const singleUser = await User.findOne({
-      where: {
-        auth0_id: req.params.id,
-      },
-      include: [
-        {
-          model: User,
-          through: Friend,
-          //the alias for this field is friends
-          as: "friends",
+    const friendList = await User.findAll({
+        where: {
+            // [Op.or]: [
+                 id: req.params.id 
+                // { id: req.params.id }
+            // ]
         },
-      ],
+        include: [{
+            model: User, 
+            as: 'sender',
+        },
+        {
+            model: User,
+            as: 'receiver'
+        }],
     });
 
-    if (!singleUser) {
+    if (!friendList) {
       res.status(400).json({ message: "there is no user with that ID" });
     }
-    res.status(200).json(singleUser);
+    res.status(200).json(friendList);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
