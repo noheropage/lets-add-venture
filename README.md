@@ -15,7 +15,7 @@ An Adventure application allowing people to keep track of there trips, skills an
 ## Description 
 As rock climber I am frequently looking for new challenges and new friends to climb with. This is an app to help users connect to like-minded, similarly-skilled climbers and find each other meet for climbs and socialize.
 
-![Example Screenshot](client/src/images/questions.png =100x60)
+![Example Screenshot](client/src/images/questions.png)
 
 ![Example Screenshot](client/src/images/profile.png)
 
