@@ -187,7 +187,7 @@ const Profile = () => {
         method: "POST",
         body: JSON.stringify({
           data: base64EncodedImage,
-          user_id: profile.user_id,
+          user_id: profile.userId,
         }),
         headers: { "Content-type": "application/json" },
       });

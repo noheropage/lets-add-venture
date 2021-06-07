@@ -15,7 +15,7 @@ const SignupButton = () => {
   return (
     <Button
       className="home-buttons"
-      href='/questions'
+      // href='/questions'
       onClick={() =>
         loginWithRedirect({
           redirectUri: 'https://lets-add-venture.netlify.app/questions',
