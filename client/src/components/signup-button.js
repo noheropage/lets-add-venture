@@ -13,7 +13,7 @@ const SignupButton = () => {
   };
 
   return (
-    <Button
+    <Button size="lg"
       className="home-buttons"
       // href='/questions'
       onClick={() =>

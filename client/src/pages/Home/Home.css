@@ -1,11 +1,17 @@
-#home-jumbo {
-  background-image: url("../../images/dark-grey-terrazzo.png");
-  color: white;
-  min-width: 100%;
-  min-height: 100vh;
-}
+/* #home-jumbo {
+  /* background-image: url("../../images/dark-grey-terrazzo.png"); */
 
-#home-img {
+/* color: white;
+  min-width: 180%;
+  min-height: 170vh; */
+
+/* background-repeat: no-repeat;
+  background-size: cover; */
+
+/* background-color: #212931;
+} */
+
+/* #home-img {
   margin-top: 40px;
   height: 800px;
   width: 800px;
@@ -15,6 +21,7 @@
   margin: 20px;
   font-size: x-large;
   font-weight: 800;
+  text-align: center;
 }
 
 .home-buttons {
@@ -25,8 +32,26 @@
   border: none !important;
   margin-bottom: 55px;
   font-size: x-large;
-}
+} */
 
+/* 
 .logo {
   height: 55px;
+} */
+
+.home-page-background {
+  background-color: #212931;
+  min-width: 100%;
+  min-height: 100vh;
+}
+
+.homepage-pic {
+  height: 60%;
+}
+
+#home-p {
+  color: aliceblue;
+  font-weight: bold;
+  padding-top: 25px;
+  font-size: 30px;
 }
