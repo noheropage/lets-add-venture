@@ -34,7 +34,7 @@ function Home() {
                 />
                 <Carousel.Caption>
 
-                  <h5>Get outside! Search and find climbs anywhere in the world.</h5>
+                  <h6>Search climbs anywhere in the world.</h6>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
@@ -46,7 +46,7 @@ function Home() {
 
                 <Carousel.Caption>
 
-                  <h5>Go Explore Yourself!</h5>
+                  <h6>Go Explore!</h6>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
@@ -57,7 +57,7 @@ function Home() {
                 />
 
                 <Carousel.Caption>
-                  <h5>Or Meet up with similarly skilled climbers based on their skill set listed on their profile!</h5>
+                  <h6>Meet up with similarly skilled climbers based on their skill set listed on their profile!</h6>
 
                 </Carousel.Caption>
               </Carousel.Item>

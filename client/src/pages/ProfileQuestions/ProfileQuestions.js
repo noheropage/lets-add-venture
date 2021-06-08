@@ -95,20 +95,20 @@ function ProfileQuestions() {
 
     <div className="profile-q-background">
       <Container fluid>
-        <Nav className="pb-2" />
+        <Nav className="" />
 
-        <Row className=" mt-3 mb-2">
-          <h1 className="pt-2 pb-2 tell-us-more">Tell us more about you...</h1>
+        <Row className="mb-2">
+          <h6 className="tell-us-more">Tell us more about you...</h6>
         </Row>
 
         {/*Form for input areas for the questions  */}
         <Row className="pl-2 pr-2">
-          <Form className="questions-form text-center" onSubmit={handleSubmit}>
+          <Form className="questions-form text-center mb-5" onSubmit={handleSubmit}>
 
-            <div className="form-group mt-2 px-5 pt-5">
+            <div className="form-group mt-2 px-5 pt-1">
               <label className="labels" for="inputUsername">Username</label>
               <input
-                className="form-control"
+                className="pb-1 form-control"
                 type="text"
                 placeholder="Username (required)"
                 name="user-name"
@@ -116,7 +116,7 @@ function ProfileQuestions() {
                 defaultValue={username}
               />
 
-              <div className="form-group mt-2 px-5 pt-4 pb-4">
+              <div className="form-group mt-2 px-5">
                 <div
                   className="mb-2"
                   onChange={(e) => setPronoun(e.target.value)}
@@ -158,14 +158,14 @@ function ProfileQuestions() {
                 </div>
               </div>
 
-              <div className="form-group pb-4">
+              <div className="form-group ">
 
-                <h3 className="question-header">
+                <label className="labels question-header">
                   How would you rate your climbing intensity?
-              </h3>
-                <h4 className="pb-3 question-header">(5 being the most intense)</h4>
+              </label>
+                <label className=" labels question-header">(5 being the most intense)</label>
                 <div
-                  className="mb-2"
+                  className="mb-1"
                   onChange={(e) => setIntensity(e.target.value)}
                 >
 
@@ -218,10 +218,10 @@ function ProfileQuestions() {
 
               </div>
 
-              <Row className="form-group pb-4">
+              <Row className="form-group">
                 <Col size="12">
                   <label>Climbing Ability:</label>
-                  <textarea
+                  <input
                     className="form-control"
                     type="text"
                     placeholder="Climbing Ability (<5.9 - 5.13+)"
@@ -231,10 +231,10 @@ function ProfileQuestions() {
                   />
                 </Col>
               </Row>
-              <Row className="form-group pb-4">
+              <Row className="form-group">
                 <Col size="12">
                   <label>Bouldering Ability:</label>
-                  <textarea
+                  <input
                     className="form-control"
 
                     type="text"
