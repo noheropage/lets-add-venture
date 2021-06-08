@@ -102,7 +102,7 @@ function ProfileQuestions() {
         </Row>
 
         {/*Form for input areas for the questions  */}
-        <Row className="pl-5 pr-5">
+        <Row className="pl-2 pr-2">
           <Form className="questions-form text-center" onSubmit={handleSubmit}>
 
             <div className="form-group mt-2 px-5 pt-5">

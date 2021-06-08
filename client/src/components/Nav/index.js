@@ -30,7 +30,7 @@ function Nav() {
 
   return (
 
-    <Navbar className="nav-text " bg="dark" variant="dark" expand="lg">
+    <Navbar className="nav-text" variant="dark" expand="lg">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">Lets+Venture</a>
 
