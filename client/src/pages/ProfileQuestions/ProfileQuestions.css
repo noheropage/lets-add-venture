@@ -5,13 +5,16 @@
     min-height: 100vh;
 }
 
-.radio-inline {
+/* .radio-inline {
     padding-left: 10px;
-}
+} */
 
 .questions-form {
     background-color: aliceblue;
     border-radius: 10px 10px 10px 10px;
+    padding-left: 6px;
+    display: flex;
+    justify-content: center;
 }
 
 .tell-us-more {
@@ -21,3 +24,5 @@
 .labels {
     font-size: 1.4em;
 }
+
+Form {}

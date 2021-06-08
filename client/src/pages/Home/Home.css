@@ -40,7 +40,7 @@
 } */
 
 .home-page-background {
-  background-color: #212931;
+  background-color: #2b3742;
   min-width: 100%;
   min-height: 100vh;
 }
@@ -53,5 +53,5 @@
   color: aliceblue;
   font-weight: bold;
   padding-top: 25px;
-  font-size: 30px;
+  font-size: 18px;
 }

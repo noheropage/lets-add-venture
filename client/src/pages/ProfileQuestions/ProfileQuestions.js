@@ -94,153 +94,158 @@ function ProfileQuestions() {
   return (
 
     <div className="profile-q-background">
-      <Nav />
-      <MtnLogo />
-      <div className="mt-3 mb-5">
-        <h2 className="tell-us-more">Tell us more about you...</h2>
-      </div>
+      <Container fluid>
+        <Nav className="pb-2" />
 
-      {/*Form for input areas for the questions  */}
+        <Row className=" mt-3 mb-2">
+          <h1 className="pt-2 pb-2 tell-us-more">Tell us more about you...</h1>
+        </Row>
 
-      <Form className="questions-form" onSubmit={handleSubmit}>
+        {/*Form for input areas for the questions  */}
+        <Row className="pl-5 pr-5">
+          <Form className="questions-form text-center" onSubmit={handleSubmit}>
 
-        <div className="form-group mt-2 px-5 pt-5">
-          <label className="labels" for="inputUsername">Username</label>
-          <input
-            className="form-control"
-            type="text"
-            placeholder="Username (required)"
-            name="user-name"
-            onChange={(e) => setUsername(e.target.value)}
-            defaultValue={username}
-          />
-
-          <div className="form-group mt-2 px-5 pt-4 pb-4">
-            <div
-              className="mb-2"
-              onChange={(e) => setPronoun(e.target.value)}
-            >
-              <label className="labels" for="pronouns">Preferred Pronoun:</label>
-              <Form.Check
-                value="He/Him/His"
-                label="He | Him | His"
-                name="pronouns"
-                type="radio"
-                id="masculine_pronouns"
-                checked={"He/Him/His" === pronoun}
-              />
-              <Form.Check
-                value="She/Her/Hers"
-                label="She | Her | Hers"
-                name="pronouns"
-                type="radio"
-                id="feminine_pronouns"
-                checked={"She/Her/Hers" === pronoun}
-              />
-              <Form.Check
-                value="They/Them/Theirs"
-                label="They | Them | Theirs"
-                name="pronouns"
-                type="radio"
-                id="neutral_pronouns"
-                checked={"They/Them/Theirs" === pronoun}
-              />
-              <Form.Check
-                value="Prefer not to disclose"
-                label="Prefer not to disclose"
-                name="pronouns"
-                type="radio"
-                id="na_pronouns"
-                checked={"Prefer not to disclose" === pronoun}
-              />
-            </div>
-          </div>
-
-          <div className="form-group pb-4">
-
-            <h5 className="question-header">
-              How would you rate your climbing intensity?
-              </h5>
-            <h6 className="pb-3 question-header">(5 being the most intense)</h6>
-            <div
-              className="mb-2"
-              onChange={(e) => setIntensity(e.target.value)}
-            >
-
-              <Form.Check
-                inline
-                value="1"
-                label="1"
-                name="intensity"
-                type="radio"
-                id="lowest_intensity"
-                checked={'1' == intensity}
-              />
-              <Form.Check
-                inline
-                value="2"
-                label="2"
-                name="intensity"
-                type="radio"
-                id="low_intensity"
-                checked={'2' == intensity}
-              />
-              <Form.Check
-                inline
-                value="3"
-                label="3"
-                name="intensity"
-                type="radio"
-                id="mid_intensity"
-                checked={'3' == intensity}
-              />
-              <Form.Check
-                inline
-                value="4"
-                label="4"
-                name="intensity"
-                type="radio"
-                id="high_intensity"
-                checked={'4' == intensity}
-              />
-              <Form.Check
-                inline
-                value="5"
-                label="5"
-                name="intensity"
-                type="radio"
-                id="highest_intensity"
-                checked={'5' == intensity}
-              />
-            </div>
-
-          </div>
-
-          <Row className="form-group pb-4">
-            <Col size="12">
+            <div className="form-group mt-2 px-5 pt-5">
+              <label className="labels" for="inputUsername">Username</label>
               <input
                 className="form-control"
                 type="text"
-                placeholder="Climbing Ability (<5.9 - 5.13+)"
-                name="climb-ability"
-                onChange={(e) => setClimbAbility(e.target.value)}
-                defaultValue={climbAbility}
+                placeholder="Username (required)"
+                name="user-name"
+                onChange={(e) => setUsername(e.target.value)}
+                defaultValue={username}
               />
-            </Col>
-          </Row>
-          <Row className="form-group pb-4">
-            <Col size="12">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Bouldering Ability (V0 - V10+)"
-                name="boulder-ability"
-                onChange={(e) => setBoulderAbility(e.target.value)}
-                defaultValue={boulderAbility}
-              />
-            </Col>
-          </Row>
-          {/* <Row className="form-group pb-4">
+
+              <div className="form-group mt-2 px-5 pt-4 pb-4">
+                <div
+                  className="mb-2"
+                  onChange={(e) => setPronoun(e.target.value)}
+                >
+                  <label className="labels" for="pronouns">Preferred Pronoun:</label>
+                  <Form.Check
+                    inline
+                    value="He/Him/His"
+                    label="He | Him | His"
+                    name="pronouns"
+                    type="radio"
+                    id="masculine_pronouns"
+                    checked={"He/Him/His" === pronoun}
+                  />
+                  <Form.Check
+                    value="She/Her/Hers"
+                    label="She | Her | Hers"
+                    name="pronouns"
+                    type="radio"
+                    id="feminine_pronouns"
+                    checked={"She/Her/Hers" === pronoun}
+                  />
+                  <Form.Check
+                    value="They/Them/Theirs"
+                    label="They | Them | Theirs"
+                    name="pronouns"
+                    type="radio"
+                    id="neutral_pronouns"
+                    checked={"They/Them/Theirs" === pronoun}
+                  />
+                  <Form.Check
+                    value="Prefer not to disclose"
+                    label="Prefer not to disclose"
+                    name="pronouns"
+                    type="radio"
+                    id="na_pronouns"
+                    checked={"Prefer not to disclose" === pronoun}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group pb-4">
+
+                <h3 className="question-header">
+                  How would you rate your climbing intensity?
+              </h3>
+                <h4 className="pb-3 question-header">(5 being the most intense)</h4>
+                <div
+                  className="mb-2"
+                  onChange={(e) => setIntensity(e.target.value)}
+                >
+
+                  <Form.Check
+                    inline
+                    value="1"
+                    label="1"
+                    name="intensity"
+                    type="radio"
+                    id="lowest_intensity"
+                    checked={'1' == intensity}
+                  />
+                  <Form.Check
+                    inline
+                    value="2"
+                    label="2"
+                    name="intensity"
+                    type="radio"
+                    id="low_intensity"
+                    checked={'2' == intensity}
+                  />
+                  <Form.Check
+                    inline
+                    value="3"
+                    label="3"
+                    name="intensity"
+                    type="radio"
+                    id="mid_intensity"
+                    checked={'3' == intensity}
+                  />
+                  <Form.Check
+                    inline
+                    value="4"
+                    label="4"
+                    name="intensity"
+                    type="radio"
+                    id="high_intensity"
+                    checked={'4' == intensity}
+                  />
+                  <Form.Check
+                    inline
+                    value="5"
+                    label="5"
+                    name="intensity"
+                    type="radio"
+                    id="highest_intensity"
+                    checked={'5' == intensity}
+                  />
+                </div>
+
+              </div>
+
+              <Row className="form-group pb-4">
+                <Col size="12">
+                  <label>Climbing Ability:</label>
+                  <textarea
+                    className="form-control"
+                    type="text"
+                    placeholder="Climbing Ability (<5.9 - 5.13+)"
+                    name="climb-ability"
+                    onChange={(e) => setClimbAbility(e.target.value)}
+                    defaultValue={climbAbility}
+                  />
+                </Col>
+              </Row>
+              <Row className="form-group pb-4">
+                <Col size="12">
+                  <label>Bouldering Ability:</label>
+                  <textarea
+                    className="form-control"
+
+                    type="text"
+                    placeholder="Bouldering Ability (V0 - V10+)"
+                    name="boulder-ability"
+                    onChange={(e) => setBoulderAbility(e.target.value)}
+                    defaultValue={boulderAbility}
+                  />
+                </Col>
+              </Row>
+              {/* <Row className="form-group pb-4">
             <Col size="12">
               <input
                 className="form-control climb-history"
@@ -252,11 +257,13 @@ function ProfileQuestions() {
             </Col>
           </Row> */}
 
-          <Button type="submit" className="home-buttons" disabled={!username}>
-            Submit
+              <Button type="submit" className="home-buttons" disabled={!username}>
+                Submit
           </Button>
-        </div>
-      </Form>
+            </div>
+          </Form>
+        </Row>
+      </Container>
     </div>
   );
 }
