@@ -20,7 +20,7 @@ function Nav() {
     let userId;
     if (searchResult.data) {
       console.log(searchResult.data);
-      userId = searchResult.data.id;
+      userId = searchResult.data.user_id;
     } else {
       userId = -1;
     }
@@ -118,8 +118,13 @@ function Nav() {
               aria-label="Search"
               onChange={(event) => setFind(event.target.value)}
             ></input>
-            <button className="mr-5 btn btn-outline-info"
-              id="nav-search-button" onClick={handleFormSubmit}>Search</button>
+            <button
+              className="mr-5 btn btn-outline-info"
+              id="nav-search-button"
+              onClick={handleFormSubmit}
+            >
+              Search
+            </button>
           </form>
         </div>
         {/* <form className="form-inline my-2 my-lg-0">
