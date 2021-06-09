@@ -95,9 +95,9 @@ function ProfileQuestions() {
 
     <div className="profile-q-background">
       <Container fluid>
-
         <Row className="mb-2">
-          <h6 className="tell-us-more">Tell us more about you...</h6>
+          <MtnLogo/>
+          <h6 className="mt-1 tell-us-more">Tell us more about you...</h6>
         </Row>
 
         {/*Form for input areas for the questions  */}
