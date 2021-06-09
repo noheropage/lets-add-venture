@@ -3,16 +3,13 @@ const { Op } = require("sequelize");
 const { User, Friend, Profile, Photo } = require("../../models");
 const jwtCheck = require("../../utils/jwt");
 
-// /api/profiles ->
-
 router.post("/search", async (req, res) => {
   try {
-    console.log(req.body);
     const profileData = await Profile.findOne({
       where: {
         user_name: {
-            [Op.like]: '%'+req.body.user_name+'%'
-        }
+          [Op.like]: "%" + req.body.user_name + "%",
+        },
       },
     });
     if (!profileData) {
@@ -41,7 +38,6 @@ router.post("/", async (req, res) => {
         return Profile.create(req.body);
       }
     });
-    console.log(profileData);
     res.status(200).json(profileData);
   } catch (err) {
     res.status(500).json(err);

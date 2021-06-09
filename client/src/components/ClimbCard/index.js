@@ -5,11 +5,11 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import API from "../../utils/API";
 import { useAuth0 } from "@auth0/auth0-react";
-require('dotenv').config();
+require("dotenv").config();
 
 export default function ClimbCard(props) {
   const { getAccessTokenSilently, user } = useAuth0();
-  const auth0id = user.sub.split('|', 2)[1]
+  const auth0id = user.sub.split("|", 2)[1];
 
   const [climb, setClimb] = useState({
     image: " ",
@@ -19,14 +19,11 @@ export default function ClimbCard(props) {
     firstAscent: " ",
     description: " ",
   });
-  const [isDisabled, setDisabled] = useState(false)
-
-  // const [climber, setClimber] = useState({})
-  // const [climbed, setClimbed] = useState(false)
+  const [isDisabled, setDisabled] = useState(false);
 
   const handleExist = () => {
-    setDisabled(true)
-  }
+    setDisabled(true);
+  };
 
   const climbData = {
     image: props.image,
@@ -37,33 +34,12 @@ export default function ClimbCard(props) {
     description: props.description,
   };
 
-  // useEffect(() => {
-  //   // handleCheck()
-  // }, [])
-
-  // function getClimber() {
-  //   API.getPastClimbs(auth0id).then(res => {
-  //     setClimber(res.data)
-  //     console.log(res.data);
-  //   }).catch(err => console.error(err))
-
-  //   console.log(props.api_id)
-  //   const result = climber.pastClimbs.filter(element === props.api_id)
-  //   console.log(result);
-
-  //   if (result) {
-  //     setClimbed(true);
-  //   }    
-  // }
-
   function handleClick(e) {
-    console.log("This is the save button");
     setClimb({
       ...climb,
       climbData,
     });
-    handleExist()
-    console.log(climbData);
+    handleExist();
     postToApi();
   }
 
@@ -72,8 +48,10 @@ export default function ClimbCard(props) {
       climb_name: props.climbTitle,
       rating: props.difficulty,
       auth0_id: auth0id,
-      api_id: props.api_id
-    }).then(res=> console.log(res.data)).catch((err) => console.log(err));
+      api_id: props.api_id,
+    })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -89,12 +67,7 @@ export default function ClimbCard(props) {
           First Ascent: {props.FrAsc}
           <br />
           {props.description}
-          <Button
-            // onClick={() => setClimb({ ...climb, name: props.climbTitle })}
-            onClick={handleClick}
-            disabled={isDisabled}
-            id={props.api_id}
-          >
+          <Button onClick={handleClick} disabled={isDisabled} id={props.api_id}>
             Save
           </Button>
         </Card.Body>
@@ -102,22 +75,3 @@ export default function ClimbCard(props) {
     </Col>
   );
 }
-
-// ======================================
-
-// =========================
-//  function handleClick(event) {
-//   const { name, value } = event.target;
-//   setClimb({ ...climb, [name]: value }).then(
-//     API.saveClimb({
-//       image: props.image,
-//       name: props.climbTitle,
-//       rating: props.difficulty,
-//       crag: props.crag,
-//       firstAscent: props.FrAsc,
-//       description: props.description,
-//     })
-//       .then(console.log(climb))
-//       .catch((err) => console.log(err))
-//   );
-// }

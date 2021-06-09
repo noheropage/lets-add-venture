@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-// import { Navbar } from "react-bootstrap";
 import "./style.css";
-// import AuthNav from "../auth-nav";
 import API from "../../utils/API";
-// import { Navbar, Form, FormControl, Button } from "react-bootstrap";
 
 function Nav() {
   const [find, setFind] = useState("");
@@ -14,12 +11,10 @@ function Nav() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(find);
     const query = { user_name: find };
     const searchResult = await API.postUsers(query);
     let userId;
     if (searchResult.data) {
-      console.log(searchResult.data);
       userId = searchResult.data.user_id;
     } else {
       userId = -1;
@@ -28,38 +23,8 @@ function Nav() {
     document.location.replace("/profile/" + userId);
   };
 
-  // return (
-  //   <div>
-  //     <Navbar id="navbar">
-  //       <input
-  //         type="text"
-  //         placeholder="Search users"
-  //         onChange={(event) => setFind(event.target.value)}
-  //       ></input>
-  //       <button onClick={handleFormSubmit}>Search</button>
-  //     </Navbar>
-  //     <Navbar id="navbar">
-  //       <button id="nav-profile-button">Profile</button>
-  //       <button id="nav-map-button">Map</button>
-  //       <AuthNav />
-  //     </Navbar>
-  //   </div>
-  // );
-
   return (
     <div>
-      {/* <Navbar bg="dark" variant="dark">
-                <a class="navbar-brand" href="#home">Lets+Venture</a>
-                <div className="mr-auto">
-                    <a className="nav-link" href="#home">Profile</a>
-                    <a className="nav-link" href="#features">Map</a>
-                </div> */}
-      {/* <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-info">Search Users</Button>
-                </Form> */}
-      {/* </Navbar> */}
-
       <nav
         className="navbar navbar-expand-lg navbar-dark bg-dark"
         bg="dark"
@@ -99,18 +64,6 @@ function Nav() {
             className="search-users form-inline my-2 my-lg-0"
             id="navbarSupportedContent"
           >
-            {/* <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search for users.."
-              aria-label="Search"
-            ></input>
-            <button
-              classNameName="mr-5 btn btn-outline-info"
-              id="nav-search-button"
-            >
-              Search
-            </button> */}
             <input
               type="search"
               className="form-control mr-sm-2"
@@ -127,20 +80,6 @@ function Nav() {
             </button>
           </form>
         </div>
-        {/* <form className="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search for users.." aria-label="Search"></input>
-                        <button className="btn btn-outline-info" id="nav-search-button" >Search</button>
-                    </form> */}
-
-        {/* <a className="nav-link" href="#home">Profile</a>
-                    <a className="nav-link" href="#map">Map</a>
-                </div>
-                <input id="nav-searchbar" placeholder="Search users"></input>
-                <button id="nav-search-button" >Search</button>
-
-                <button id="nav-profile-button">Profile</button>
-                <button id="nav-map-button">Map</button> */}
-        {/* <AuthNav /> */}
       </nav>
     </div>
   );
