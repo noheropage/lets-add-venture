@@ -13,8 +13,8 @@ const SignupButton = () => {
   };
 
   return (
-    <Button
-      className="home-buttons"
+    <Button size="lg"
+      className="mt-2 home-buttons"
       // href='/questions'
       onClick={() =>
         loginWithRedirect({

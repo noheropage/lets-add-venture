@@ -13,7 +13,7 @@ const LoginButton = () => {
   };
 
   return (
-    <Button
+    <Button size="lg"
       className="home-buttons"
       // href='/profile'
       onClick={() => loginWithRedirect(

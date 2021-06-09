@@ -33,10 +33,10 @@ function Signup() {
   // };
 
   return (
-    <div className="login-background">
+    <div className="container login-background">
       <MtnLogo />
-      <div className="mt-4">
-        <h2>Enter your email and password to Login!</h2>
+      <div className="row text-center mt-4">
+        <h4>Enter your email and password to Login!</h4>
       </div>
       <form onSubmit={handleSubmit}>
         <Container className="mt-3 px-5">

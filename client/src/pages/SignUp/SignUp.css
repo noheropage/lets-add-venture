@@ -18,7 +18,8 @@ form {
 /* requires this css on a container wrapped around, in order not to take on the css of another page*/
 
 .signup-background {
-  background-color: #d6d5d5;
+  background-color: #2b3742;
+  color: aliceblue;
   min-height: 100vh;
   min-width: 100%;
 }

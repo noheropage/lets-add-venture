@@ -5,6 +5,7 @@ import MapTester from "./pages/MapTest/MapTest";
 import LogIn from "./pages/LogIn/LogIn";
 import React from "react";
 import Home from "./pages/Home/Home";
+import HomeTest from "./pages/HomeTest";
 // import Upload from './components/Upload/upload'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
@@ -38,6 +39,9 @@ function App() {
           <Route exact path="/external-api">
             <ExternalApi />
           </Route>
+          {/* <Route exact path="/hometest">
+            <HomeTest />
+          </Route> */}
           <ProtectedRoute path={["/profile", "/profile/:id"]} component={Profile} />
           <ProtectedRoute exact path="/map" component={Map}>
           </ProtectedRoute>

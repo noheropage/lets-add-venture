@@ -6,7 +6,7 @@ import "../App.css";
 const LogoutButton = () => {
   const { logout } = useAuth0();
   return (
-    <Button
+    <Button size="lg"
       className="logout-button btn-info"
       onClick={() =>
         logout({
