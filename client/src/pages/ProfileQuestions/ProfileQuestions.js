@@ -6,7 +6,7 @@ import axios from 'axios'
 import API from '../../utils/API'
 import { useAuth0 } from '@auth0/auth0-react'
 require('dotenv').config();
-import Nav from "../../components/Nav/index";
+
 
 function ProfileQuestions() {
   const { getAccessTokenSilently, user } = useAuth0();
@@ -95,7 +95,6 @@ function ProfileQuestions() {
 
     <div className="profile-q-background">
       <Container fluid>
-        <Nav className="" />
 
         <Row className="mb-2">
           <h6 className="tell-us-more">Tell us more about you...</h6>

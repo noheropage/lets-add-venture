@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { ListGroup, Button, Form, Image } from "react-bootstrap";
 import placeholder from "../../images/profile_placeholder.png";
 import "./Profile.css";
-import Nav from "../../components/Nav";
+import NavCom from "../../components/NavCom";
 import API from "../../utils/API";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
@@ -17,11 +17,11 @@ import SavedClimbs from '../../components/saved-climbs'
 const Profile = () => {
   const location = useLocation()
   const testUrl = location.pathname.split('/')
-      // const urlArrayLength = testUrl.pathname.split('/')
-      let id = parseInt(testUrl[2]) || 0
-      
-      // console.log(urlArrayLength);
-  
+  // const urlArrayLength = testUrl.pathname.split('/')
+  let id = parseInt(testUrl[2]) || 0
+
+  // console.log(urlArrayLength);
+
 
   const { getAccessTokenSilently, user } = useAuth0();
   const auth0id = user.sub.split("|", 2)[1];
@@ -50,8 +50,8 @@ const Profile = () => {
       id = auth0id
       setIsHome(true)
       // console.log('No id, you home: ' + id);
-    } 
-    
+    }
+
     try {
       const accessToken = await getAccessTokenSilently({
         audience: `${audience}`,
@@ -66,7 +66,7 @@ const Profile = () => {
       });
       // console.log(res.data);
       if (!res.data && isHome) {
-        document.location = '/questions'; 
+        document.location = '/questions';
       }
 
       let loggedInData;
@@ -91,7 +91,7 @@ const Profile = () => {
         pastClimbs: res.data.pastClimbs,
         userId: res.data.id
       });
-      
+
       setClimbArray(res.data.pastClimbs);
       // console.log(climbArray);
 
@@ -110,23 +110,23 @@ const Profile = () => {
           setFriendStatusId('friends')
           setIsFriend(true)
         } else if (friendsStatus.status === 1) {
-         if (friendsStatus.receiver === loggedIn.id) {
-          // console.log('accept?');
-          setFriendStatusId('accept request')
-         } else {
+          if (friendsStatus.receiver === loggedIn.id) {
+            // console.log('accept?');
+            setFriendStatusId('accept request')
+          } else {
             // console.log('pending');
             setFriendStatusId('pending request')
             setIsPending(true)
           }
-       } else {
-         setFriendStatusId('add friend')
-       }
+        } else {
+          setFriendStatusId('add friend')
+        }
       }
 
-      
+
       const photoLength = res.data.photos.length
       if (photoLength) {
-        setPreviewSource(res.data.photos[photoLength -1].url)
+        setPreviewSource(res.data.photos[photoLength - 1].url)
       }
 
     } catch (error) {
@@ -199,7 +199,7 @@ const Profile = () => {
 
   return (
     <div className="sky">
-      <Nav />
+      <NavCom />
       <div>
         <div>
           <Form>
@@ -215,7 +215,7 @@ const Profile = () => {
           </Form>
           <div className="userImg">
             {previewSource && (
-              <Image
+              <Image className="mt-5"
                 onClick={handleClick}
                 src={previewSource}
                 alt="picture to be uploaded"
@@ -269,15 +269,15 @@ const Profile = () => {
             <ListGroup.Item>Preferred Intensity: {profile.intensity}</ListGroup.Item>
             <ListGroup.Item>Climbing Ability: {profile.climbingAbility}</ListGroup.Item>
             <ListGroup.Item>Bouldering Ability: {profile.boulderingAbility}</ListGroup.Item>
-          <ListGroup.Item>Saved Climbs: {climbArray.map((climb) => (
-            <SavedClimbs
-              key={climb.api_id}
-              climbTitle={climb.climb_name}
-              difficulty={climb.rating}
-            >
+            <ListGroup.Item>Saved Climbs: {climbArray.map((climb) => (
+              <SavedClimbs
+                key={climb.api_id}
+                climbTitle={climb.climb_name}
+                difficulty={climb.rating}
+              >
 
-            </SavedClimbs>
-          ))}</ListGroup.Item>
+              </SavedClimbs>
+            ))}</ListGroup.Item>
           </ListGroup>
         </div>
       </div>

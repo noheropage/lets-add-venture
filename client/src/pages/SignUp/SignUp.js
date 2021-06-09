@@ -5,7 +5,7 @@ import Row from "../../components/Row/Row";
 import Container from "../../components/Container/Container";
 import "./SignUp.css";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
-import Nav from "../../components/Nav";
+import Nav from "../../components/NavCom";
 import API from "../../utils/API";
 
 // import GoogleLogin from 'react-google-login'
