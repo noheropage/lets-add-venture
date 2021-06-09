@@ -20,7 +20,7 @@ function Nav() {
     let userId;
     if (searchResult.data) {
       console.log(searchResult.data);
-      userId = searchResult.data.id;
+      userId = searchResult.data.user_id;
     } else {
       userId = -1;
     }
@@ -41,6 +41,37 @@ function Nav() {
               <a className="nav-link" href="/map">Map</a>
             </li>
           </ul>
+          <form
+            className="search-users form-inline my-2 my-lg-0"
+            id="navbarSupportedContent"
+          >
+            {/* <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search for users.."
+              aria-label="Search"
+            ></input>
+            <button
+              classNameName="mr-5 btn btn-outline-info"
+              id="nav-search-button"
+            >
+              Search
+            </button> */}
+            <input
+              type="search"
+              className="form-control mr-sm-2"
+              placeholder="Search users"
+              aria-label="Search"
+              onChange={(event) => setFind(event.target.value)}
+            ></input>
+            <button
+              className="mr-5 btn btn-outline-info"
+              id="nav-search-button"
+              onClick={handleFormSubmit}
+            >
+              Search
+            </button>
+          </form>
         </div>
       </div>
     </Navbar>
