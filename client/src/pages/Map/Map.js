@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Geocode from "react-geocode";
-import Nav from "../../components/Nav/index";
+import NavCom from "../../components/NavCom/index";
 import "./Map.css";
 import MapContainer from "../../components/MapContainer";
 require("dotenv").config();
@@ -79,7 +79,7 @@ function Map() {
 
   return (
     <div className="container map-background">
-      <Nav />
+      <NavCom />
       <div className="pt-5 title">
         {" "}
         Where Will you go? <FaMapMarkerAlt />

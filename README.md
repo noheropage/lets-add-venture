@@ -2,7 +2,7 @@
 <!-- ![logo](client/src/images/logo.png) -->
 An Adventure application allowing people to keep track of there trips, skills and like-friends
 
-![Example Screenshot](client/src/images/home.png)
+![Example Screenshot](client/src/images/Let's-Venture.gif)
 
 #
 # Table of Contents
@@ -17,7 +17,10 @@ As rock climber I am frequently looking for new challenges and new friends to cl
 
 ![Example Screenshot](client/src/images/questions.png)
 
-![Example Screenshot](client/src/images/profile.png)
+<br>
+<br>
+
+![Example Screenshot](client/src/images/profile1.png)
 
 #
 ## Features
@@ -31,7 +34,7 @@ As rock climber I am frequently looking for new challenges and new friends to cl
 - Update Climbs with achievements 
 <br>
 
-![Example Screenshot](client/src/images/mappic.png)
+![Example Screenshot](client/src/images/map.png)
 
 #
 ## Technologies
