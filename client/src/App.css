@@ -5,6 +5,7 @@
 .home-buttons {
   margin: 5px;
   width: 150px !important;
+  height: 47px;
   background-color: #295939 !important;
   border: none !important;
   margin-bottom: 55px;
@@ -55,9 +56,9 @@
 }
 
 .logout-button {
-  margin: 5px;
-  width: 195px;
+  width: 190px;
   border: none !important;
-  margin-bottom: 35px;
+  padding-bottom: 2px;
+  margin-bottom: 45px;
   height: 47px;
 }

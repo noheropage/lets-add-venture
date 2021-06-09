@@ -1,9 +1,10 @@
-#navbar {
+/* #navbar {
   background-color: black;
-  height: 30px;
-}
+  /* height: 30px; */
 
-#nav-searchbar {
+/* } */
+
+/* #nav-searchbar {
   height: 28px;
   margin-left: auto;
 }
@@ -31,4 +32,8 @@
   background-color: #295939;
   border: none;
   color: white;
+} */
+
+.nav-link {
+  text-decoration: none;
 }

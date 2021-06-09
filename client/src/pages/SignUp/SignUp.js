@@ -41,7 +41,7 @@ function Signup() {
     <div className="signup-background">
       <MtnLogo />
       <div className="mt-4">
-        <h2>Create an account to save your progress.</h2>
+        <h4>Create an account to save your progress.</h4>
       </div>
       <form>
         <Container className="mt-3 px-5">
