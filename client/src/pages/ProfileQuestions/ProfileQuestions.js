@@ -2,30 +2,27 @@ import "./ProfileQuestions.css";
 import React, { useState, useEffect, useRef } from "react";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
 import { Button, Form, Col, Row, Container } from "react-bootstrap";
-import axios from 'axios'
-import API from '../../utils/API'
-import { useAuth0 } from '@auth0/auth0-react'
-require('dotenv').config();
+import axios from "axios";
+import API from "../../utils/API";
+import { useAuth0 } from "@auth0/auth0-react";
+require("dotenv").config();
 import Nav from "../../components/Nav/index";
 
 function ProfileQuestions() {
   const { getAccessTokenSilently, user } = useAuth0();
   const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
-
   const [username, setUsername] = useState();
   const [pronoun, setPronoun] = useState();
   const [intensity, setIntensity] = useState();
   const [climbAbility, setClimbAbility] = useState();
   const [boulderAbility, setBoulderAbility] = useState();
-  //   const [climbHistory, setClimbHistory] = useState();
 
   const [profile, setProfile] = useState({});
 
   useEffect(() => {
     const getUser = async () => {
-      const auth0id = user.sub.split('|', 2)[1]
-
+      const auth0id = user.sub.split("|", 2)[1];
 
       try {
         const accessToken = await getAccessTokenSilently({
@@ -39,19 +36,15 @@ function ProfileQuestions() {
             Authorization: `Bearer ${accessToken}`,
           },
           auth0_id: auth0id,
-          email: user.email
-
+          email: user.email,
         });
 
         setProfile(res.data[0]);
         setUsername(res.data[0].profile.user_name);
-        setPronoun(res.data[0].profile.user_pronoun)
-        setIntensity(res.data[0].profile.user_intensity)
-        setClimbAbility(res.data[0].profile.climbing_ability)
-        setBoulderAbility(res.data[0].profile.bouldering_ability)
-
-        // console.log(accessToken);
-
+        setPronoun(res.data[0].profile.user_pronoun);
+        setIntensity(res.data[0].profile.user_intensity);
+        setClimbAbility(res.data[0].profile.climbing_ability);
+        setBoulderAbility(res.data[0].profile.bouldering_ability);
       } catch (error) {
         console.log(error.message);
       }
@@ -62,8 +55,6 @@ function ProfileQuestions() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // will need way to assign the logged_in user's user_id to the profile
     try {
       const accessToken = await getAccessTokenSilently({
         audience: `${audience}`,
@@ -80,19 +71,16 @@ function ProfileQuestions() {
         user_intensity: intensity,
         climbing_ability: climbAbility,
         bouldering_ability: boulderAbility,
-        user_id: profile.id
+        user_id: profile.id,
       });
-
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
 
-    document.location = '/profile'
+    document.location = "/profile";
   };
 
-
   return (
-
     <div className="profile-q-background">
       <Container fluid>
         <Nav className="" />
@@ -103,10 +91,14 @@ function ProfileQuestions() {
 
         {/*Form for input areas for the questions  */}
         <Row className="pl-2 pr-2">
-          <Form className="questions-form text-center mb-5" onSubmit={handleSubmit}>
-
+          <Form
+            className="questions-form text-center mb-5"
+            onSubmit={handleSubmit}
+          >
             <div className="form-group mt-2 px-5 pt-1">
-              <label className="labels" for="inputUsername">Username</label>
+              <label className="labels" for="inputUsername">
+                Username
+              </label>
               <input
                 className="pb-1 form-control"
                 type="text"
@@ -121,7 +113,9 @@ function ProfileQuestions() {
                   className="mb-2"
                   onChange={(e) => setPronoun(e.target.value)}
                 >
-                  <label className="labels" for="pronouns">Preferred Pronoun:</label>
+                  <label className="labels" for="pronouns">
+                    Preferred Pronoun:
+                  </label>
                   <Form.Check
                     inline
                     value="He/Him/His"
@@ -159,16 +153,16 @@ function ProfileQuestions() {
               </div>
 
               <div className="form-group ">
-
                 <label className="labels question-header">
                   How would you rate your climbing intensity?
-              </label>
-                <label className=" labels question-header">(5 being the most intense)</label>
+                </label>
+                <label className=" labels question-header">
+                  (5 being the most intense)
+                </label>
                 <div
                   className="mb-1"
                   onChange={(e) => setIntensity(e.target.value)}
                 >
-
                   <Form.Check
                     inline
                     value="1"
@@ -176,7 +170,7 @@ function ProfileQuestions() {
                     name="intensity"
                     type="radio"
                     id="lowest_intensity"
-                    checked={'1' == intensity}
+                    checked={"1" == intensity}
                   />
                   <Form.Check
                     inline
@@ -185,7 +179,7 @@ function ProfileQuestions() {
                     name="intensity"
                     type="radio"
                     id="low_intensity"
-                    checked={'2' == intensity}
+                    checked={"2" == intensity}
                   />
                   <Form.Check
                     inline
@@ -194,7 +188,7 @@ function ProfileQuestions() {
                     name="intensity"
                     type="radio"
                     id="mid_intensity"
-                    checked={'3' == intensity}
+                    checked={"3" == intensity}
                   />
                   <Form.Check
                     inline
@@ -203,7 +197,7 @@ function ProfileQuestions() {
                     name="intensity"
                     type="radio"
                     id="high_intensity"
-                    checked={'4' == intensity}
+                    checked={"4" == intensity}
                   />
                   <Form.Check
                     inline
@@ -212,10 +206,9 @@ function ProfileQuestions() {
                     name="intensity"
                     type="radio"
                     id="highest_intensity"
-                    checked={'5' == intensity}
+                    checked={"5" == intensity}
                   />
                 </div>
-
               </div>
 
               <Row className="form-group">
@@ -236,7 +229,6 @@ function ProfileQuestions() {
                   <label>Bouldering Ability:</label>
                   <input
                     className="form-control"
-
                     type="text"
                     placeholder="Bouldering Ability (V0 - V10+)"
                     name="boulder-ability"
@@ -257,9 +249,13 @@ function ProfileQuestions() {
             </Col>
           </Row> */}
 
-              <Button type="submit" className="home-buttons" disabled={!username}>
+              <Button
+                type="submit"
+                className="home-buttons"
+                disabled={!username}
+              >
                 Submit
-          </Button>
+              </Button>
             </div>
           </Form>
         </Row>

@@ -6,22 +6,18 @@ import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import AddFriendButton from '../../components/send-friend-request-btn'
-import AcceptFriendButton from '../../components/accept-friend-request-btn'
+import AddFriendButton from "../../components/send-friend-request-btn";
+import AcceptFriendButton from "../../components/accept-friend-request-btn";
 import { propTypes } from "react-bootstrap/esm/Image";
-require('dotenv').config();
-import { useParams, useLocation, Link, Redirect } from 'react-router-dom'
-import SavedClimbs from '../../components/saved-climbs'
+require("dotenv").config();
+import { useParams, useLocation, Link, Redirect } from "react-router-dom";
+import SavedClimbs from "../../components/saved-climbs";
 
 // establish state for profile image and user files
 const Profile = () => {
-  const location = useLocation()
-  const testUrl = location.pathname.split('/')
-      // const urlArrayLength = testUrl.pathname.split('/')
-      let id = parseInt(testUrl[2]) || 0
-      
-      // console.log(urlArrayLength);
-  
+  const location = useLocation();
+  const testUrl = location.pathname.split("/");
+  let id = parseInt(testUrl[2]) || 0;
 
   const { getAccessTokenSilently, user } = useAuth0();
   const auth0id = user.sub.split("|", 2)[1];
@@ -31,11 +27,11 @@ const Profile = () => {
   const [previewSource, setPreviewSource] = useState(placeholder);
 
   const [profile, setProfile] = useState({});
-  const [isHome, setIsHome] = useState(false)
-  const [friendStatusId, setFriendStatusId] = useState('0')
-  const [isFriend, setIsFriend] = useState(false)
-  const [isPending, setIsPending] = useState(false)
-  const [climbArray, setClimbArray] = useState([])
+  const [isHome, setIsHome] = useState(false);
+  const [friendStatusId, setFriendStatusId] = useState("0");
+  const [isFriend, setIsFriend] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const [climbArray, setClimbArray] = useState([]);
 
   useEffect(() => {
     getUser();
@@ -43,15 +39,13 @@ const Profile = () => {
 
   let loggedIn;
 
-
   const getUser = async () => {
     const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
     if (!id) {
-      id = auth0id
-      setIsHome(true)
-      // console.log('No id, you home: ' + id);
-    } 
-    
+      id = auth0id;
+      setIsHome(true);
+    }
+
     try {
       const accessToken = await getAccessTokenSilently({
         audience: `${audience}`,
@@ -64,23 +58,20 @@ const Profile = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // console.log(res.data);
       if (!res.data && isHome) {
-        document.location = '/questions'; 
+        document.location = "/questions";
       }
 
       let loggedInData;
       if (!isHome) {
-        const authUrl = `https://lets-add-venture.herokuapp.com/api/users/profile/${auth0id}`
+        const authUrl = `https://lets-add-venture.herokuapp.com/api/users/profile/${auth0id}`;
         loggedInData = await axios.get(authUrl, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
 
-        loggedIn = loggedInData.data
-        // console.log("This is my info: " + loggedIn.profile);
-        // console.log(loggedIn.profile);
+        loggedIn = loggedInData.data;
       }
       setProfile({
         username: res.data.profile.user_name,
@@ -89,46 +80,37 @@ const Profile = () => {
         climbingAbility: res.data.profile.climbing_ability,
         boulderingAbility: res.data.profile.bouldering_ability,
         pastClimbs: res.data.pastClimbs,
-        userId: res.data.id
+        userId: res.data.id,
       });
-      
-      setClimbArray(res.data.pastClimbs);
-      // console.log(climbArray);
 
+      setClimbArray(res.data.pastClimbs);
 
       if (res.data.auth0_id === auth0id && !isHome) {
-        // console.log('you are looking at your own id, weirdo');
-        setIsHome(true)
+        setIsHome(true);
       } else {
-        // console.log('Not your profile');
-        setIsHome(false)
-        const friendsList = getFriends(res.data)
-        const friendsStatus = getFriendStatus(friendsList)
+        setIsHome(false);
+        const friendsList = getFriends(res.data);
+        const friendsStatus = getFriendStatus(friendsList);
 
         if (friendsStatus.status === 2) {
-          // console.log("you're friends");
-          setFriendStatusId('friends')
-          setIsFriend(true)
+          setFriendStatusId("friends");
+          setIsFriend(true);
         } else if (friendsStatus.status === 1) {
-         if (friendsStatus.receiver === loggedIn.id) {
-          // console.log('accept?');
-          setFriendStatusId('accept request')
-         } else {
-            // console.log('pending');
-            setFriendStatusId('pending request')
-            setIsPending(true)
+          if (friendsStatus.receiver === loggedIn.id) {
+            setFriendStatusId("accept request");
+          } else {
+            setFriendStatusId("pending request");
+            setIsPending(true);
           }
-       } else {
-         setFriendStatusId('add friend')
-       }
+        } else {
+          setFriendStatusId("add friend");
+        }
       }
 
-      
-      const photoLength = res.data.photos.length
+      const photoLength = res.data.photos.length;
       if (photoLength) {
-        setPreviewSource(res.data.photos[photoLength -1].url)
+        setPreviewSource(res.data.photos[photoLength - 1].url);
       }
-
     } catch (error) {
       console.log(error.message);
     }
@@ -136,20 +118,18 @@ const Profile = () => {
 
   const getFriendStatus = (list) => {
     // pull up my data
-    console.log(loggedIn);
-    const friends = list.filter(el => el.id === loggedIn.id);
+    const friends = list.filter((el) => el.id === loggedIn.id);
     if (friends.length > 0) {
-      return friends[0].friend
+      return friends[0].friend;
+    } else {
+      return 0;
     }
-    else {
-      return 0
-    }
-  }
+  };
 
   const getFriends = (data) => {
-    const friendsList = data.sender.concat(data.receiver)
-    return friendsList
-  }
+    const friendsList = data.sender.concat(data.receiver);
+    return friendsList;
+  };
 
   const fileUploader = useRef(null);
 
@@ -242,7 +222,12 @@ const Profile = () => {
           <h1> {profile.username}</h1>
           <h6> {profile.pronoun} </h6>
 
-          <Button href='/questions' variant='outline-info' size='sm' hidden={!isHome}>
+          <Button
+            href="/questions"
+            variant="outline-info"
+            size="sm"
+            hidden={!isHome}
+          >
             Edit Profile
           </Button>
 
@@ -260,24 +245,34 @@ const Profile = () => {
             friendStatus={friendStatusId}
           ></AcceptFriendButton>
 
-          <Button variant='success' disabled hidden={!isFriend}>Friend</Button>
-          <Button variant='success' disabled hidden={!isPending}>Pending...</Button>
-
+          <Button variant="success" disabled hidden={!isFriend}>
+            Friend
+          </Button>
+          <Button variant="success" disabled hidden={!isPending}>
+            Pending...
+          </Button>
         </div>
         <div className="list">
           <ListGroup variant="flush">
-            <ListGroup.Item>Preferred Intensity: {profile.intensity}</ListGroup.Item>
-            <ListGroup.Item>Climbing Ability: {profile.climbingAbility}</ListGroup.Item>
-            <ListGroup.Item>Bouldering Ability: {profile.boulderingAbility}</ListGroup.Item>
-          <ListGroup.Item>Saved Climbs: {climbArray.map((climb) => (
-            <SavedClimbs
-              key={climb.api_id}
-              climbTitle={climb.climb_name}
-              difficulty={climb.rating}
-            >
-
-            </SavedClimbs>
-          ))}</ListGroup.Item>
+            <ListGroup.Item>
+              Preferred Intensity: {profile.intensity}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Climbing Ability: {profile.climbingAbility}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Bouldering Ability: {profile.boulderingAbility}
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Saved Climbs:{" "}
+              {climbArray.map((climb) => (
+                <SavedClimbs
+                  key={climb.api_id}
+                  climbTitle={climb.climb_name}
+                  difficulty={climb.rating}
+                ></SavedClimbs>
+              ))}
+            </ListGroup.Item>
           </ListGroup>
         </div>
       </div>

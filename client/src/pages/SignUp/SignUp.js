@@ -8,35 +8,24 @@ import MtnLogo from "../../components/MtnLogo/MtnLogo";
 import Nav from "../../components/Nav";
 import API from "../../utils/API";
 
-// import GoogleLogin from 'react-google-login'
-
 //set the state of each thing we will ask the user
 function Signup() {
-  // const [user, SetUser] = useState([]);
   const [formObject, setFormObject] = useState({});
 
   // Handles updating component state when the user types into the input field
   function handleInputChange(event) {
-    // console.log("we are inside of handleInputChange")
     const { name, value } = event.target;
     setFormObject({ ...formObject, [name]: value });
-    // console.log("Form Object:", formObject);
   }
 
   // When the form is submitted, use the API.saveUser method to save the user data
-  //
   function handleFormSubmit(event) {
-    // console.log("we are inside of HandleFormSubmit")
-    // console.log("event:", event)
     event.preventDefault();
     if (formObject.firstName) {
-      console.log("we got the first name");
     }
     if (formObject.password) {
-      console.log("we got the password");
     }
     if (formObject.firstName && formObject.email && formObject.password) {
-      // console.log("firstName:", formObject.firstName);
       API.saveUser({
         firstName: formObject.firstName,
         lastName: formObject.lastName,
@@ -111,11 +100,7 @@ function Signup() {
           >
             Submit
           </Button>
-
-          {/* old sign up w/ google button */}
-          {/* <div className="g-signin2" data-onsuccess="Google_signIn"></div> */}
         </Container>
-        {/* <GoogleLogin /> */}
       </form>
     </div>
   );

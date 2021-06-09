@@ -5,7 +5,6 @@ const baseUrl = "https://lets-add-venture.herokuapp.com";
 export default {
   //get users
   postUsers: function (name) {
-    console.log(name);
     return axios.post(baseUrl + "/api/profiles/search/", name);
   },
 
@@ -27,11 +26,11 @@ export default {
   },
 
   sendFriendRequest: function (friend) {
-      return axios.post(baseUrl + '/api/friend/send', friend)
+    return axios.post(baseUrl + "/api/friend/send", friend);
   },
 
   acceptFriendRequest: function (friend) {
-      return axios.put(baseUrl + '/api/friend/accept', friend)
+    return axios.put(baseUrl + "/api/friend/accept", friend);
   },
 
   getClimb: function (lat, lng, dist) {
@@ -56,7 +55,6 @@ export default {
 
   //save climb
   saveToPastClimb: function (climbData) {
-    console.log(climbData);
     return axios.post(baseUrl + "/api/pastClimbs", climbData);
   },
 

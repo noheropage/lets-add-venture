@@ -7,30 +7,13 @@ import "./LogIn.css";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
 import Nav from "../../components/Nav";
 
-// import GoogleLogin from 'react-google-login'
-
 function Signup() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Hello");
   };
-
-  // Notes Taylor left in signup.js is probably applicable here:
-  // old google sign in button saving just in case
-
-  // const Google_signIn = (googleUser) => {
-  //     var profile = googleUser.getBasicProfile();
-  //     console.log('ID: ' + profile.getId());
-  //     console.log('Name: ' + profile.getName());
-  //     console.log('Image URL: ' + profile.getImageUrl());
-  //     console.log('Email: ' + profile.getEmail());
-
-  //     sessionStorage.setItem("loggedUser", profile.getEmail().toString());
-  //     document.location.href = 'home.html';
-  // };
 
   return (
     <div className="container login-background">
@@ -66,7 +49,6 @@ function Signup() {
             Submit
           </Button>
         </Container>
-        {/* <GoogleLogin /> */}
       </form>
     </div>
   );

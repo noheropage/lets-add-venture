@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 
 
 function MapForm() {
-    console.log(latitude, longitude, name, location);
     const [latitude, setLatitude] = useState();
     const [longitude, setLongitude] = useState();
     const [name, setName] = useState();
@@ -126,43 +125,9 @@ function MapForm() {
         request.send();
     }
 
-    // Focus map to the most recently-added pin.
-    // window.addEventListener("load", function () {
-    // function sendData() {
-    //     let a = location;
-    //     const geo = new google.maps.Geocoder();
-    //     geo.geocode({ "address": a }, function (result, status) {
-    //         if (status == google.maps.GeocoderStatus.OK) {
-    //             let lat = result[0].geometry.location.lat();
-    //             let lng = result[0].geometry.location.lng();
-
-    //             if (isNaN(lat) || isNaN(lng)) {
-    //                 alert("Something's gone wrong. Try entering a different location for your book.");
-    //                 return;
-    //             }
-
-    //             latitude = lat;
-    //             longitude = lng;
-
-    //             form.submit();
-    //         } else {
-    //             alert("Something's gone wrong. Try entering a different location for your book.");
-    //         }
-    //     });
-    // }
-
-
-    /** 
-     * Set up form autocomplete
-     */
-    //         let autocomplete = new google.maps.places.Autocomplete(
-    //   /** @type {!HTMLInputElement} */(document.getElementById('location')),
-    //             { types: ['geocode'] });
-
     return (
         <div>
             <Form
-            //  onSubmit={sendData()}
             >
                 <Form.Group controlId="formGroupName">
                     <Form.Label>Name</Form.Label>
@@ -186,8 +151,6 @@ function MapForm() {
             </Form>
         </div>
     )
-    // },
-    // )
 }
 
 export default MapForm;

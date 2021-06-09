@@ -6,7 +6,6 @@ import LogIn from "./pages/LogIn/LogIn";
 import React from "react";
 import Home from "./pages/Home/Home";
 import HomeTest from "./pages/HomeTest";
-// import Upload from './components/Upload/upload'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
 import Map from "./pages/Map/Map";
@@ -42,12 +41,17 @@ function App() {
           {/* <Route exact path="/hometest">
             <HomeTest />
           </Route> */}
-          <ProtectedRoute path={["/profile", "/profile/:id"]} component={Profile} />
-          <ProtectedRoute exact path="/map" component={Map}>
-          </ProtectedRoute>
-          <ProtectedRoute exact path="/questions" component={ProfileQuestions}>
-          </ProtectedRoute>
-          <Route exact path='/testmap'>
+          <ProtectedRoute
+            path={["/profile", "/profile/:id"]}
+            component={Profile}
+          />
+          <ProtectedRoute exact path="/map" component={Map}></ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/questions"
+            component={ProfileQuestions}
+          ></ProtectedRoute>
+          <Route exact path="/testmap">
             <MapTester />
           </Route>
         </Switch>
