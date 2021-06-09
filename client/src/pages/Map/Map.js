@@ -14,8 +14,6 @@ import "./Map.css";
 import MapContainer from "../../components/MapContainer";
 require("dotenv").config();
 
-// coordinates : 47.026822, -119.964855
-
 function Map() {
   const [climbData, setClimbData] = useState([]);
   const [query, setQuery] = useState("");

@@ -7,8 +7,6 @@ import "./LogIn.css";
 import MtnLogo from "../../components/MtnLogo/MtnLogo";
 import Nav from "../../components/Nav";
 
-// import GoogleLogin from 'react-google-login'
-
 function Signup() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();

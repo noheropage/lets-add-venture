@@ -65,10 +65,4 @@ router.put("/accept", async (req, res) => {
   }
 });
 
-//post route that posts each pair twice, each user needs to be submitted as friend_display and friend_connect
-// Post
-//friend_connect:1 friend_display:2
-//and also
-//friend_connect:2, friend_display: 1
-
 module.exports = router;

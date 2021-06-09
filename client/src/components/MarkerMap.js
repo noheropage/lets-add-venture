@@ -43,7 +43,6 @@ function MarkerMap(props) {
   const [allClimbs, setAllClimbs] = useState(props.allResults);
 
   const options = {
-    //separate js file - avocado snazzy map
     styles: mapStyles,
 
     zoomControl: true,
@@ -101,7 +100,6 @@ function MarkerMap(props) {
           <Marker
             key={marker.time.toISOString()}
             position={{ lat: props.climbLat, lng: props.climbLng }}
-            // position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: "/climbing.svg",
               scaledSize: new window.google.maps.Size(32, 32),
@@ -120,7 +118,6 @@ function MarkerMap(props) {
   );
 }
 
-//Can we make this to the lat/lng of user?
 function Search() {
   const {
     ready,
