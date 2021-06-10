@@ -45,7 +45,7 @@ function NavCom() {
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             </Col>
             <Col>
-              <Button variant="outline-secondary">Search</Button>
+              <Button onClick={handleFormSubmit}variant="outline-secondary">Search</Button>
             </Col>
           </Row>
         </Form>
